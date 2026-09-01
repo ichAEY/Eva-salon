@@ -1,0 +1,32 @@
+name: Stage EVA mobile cache bust
+
+on:
+  push:
+    branches: [eva-reviews-patch-stage]
+    paths:
+      - '.github/workflows/cache-bust-stage.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: eva-reviews-patch-stage
+      - name: Change only mobile bundle cache key
+        run: python tools/bust_mobile_cache_only.py
+      - name: Verify only index changed
+        run: |
+          test "$(git diff --name-only | tr -d '\r')" = "index.html"
+          grep -q 'mobile-eva-current.js?v=20260902-reviews-5x3' index.html
+      - name: Commit staged cache bust
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Stage EVA mobile cache bust only'
+          git push origin HEAD:eva-reviews-patch-stage
