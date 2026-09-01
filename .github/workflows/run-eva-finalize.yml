@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install review fetch dependency
+        run: python -m pip install --quiet requests
       - name: Apply EVA about reviews and call fixes
         run: python tools/fix_eva_about_reviews_calls.py
       - name: Final rating and review polish
