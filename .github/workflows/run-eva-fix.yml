@@ -1,0 +1,24 @@
+name: Run Eva fix
+on:
+  push:
+    branches: [main]
+    paths:
+      - tools/fix_eva_media.py
+      - .github/workflows/run-eva-fix.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python tools/fix_eva_media.py
+      - run: |
+          git config user.name tanem-template-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "Use verified Eva photos and seamless intro"
+          git push
