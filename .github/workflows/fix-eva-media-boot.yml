@@ -1,0 +1,151 @@
+name: Fix Eva media and boot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-eva-media-boot.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install browser helper
+        run: npm install --no-save playwright-core@1.55.0
+
+      - name: Collect only Eva Yandex-card photos
+        shell: bash
+        run: |
+          cat > /tmp/eva-photos.js <<'NODE'
+          const { chromium } = require('playwright-core');
+          const fs = require('fs');
+          (async()=>{
+            const executablePath = fs.existsSync('/usr/bin/google-chrome') ? '/usr/bin/google-chrome' : '/usr/bin/google-chrome-stable';
+            const browser = await chromium.launch({headless:true, executablePath, args:['--no-sandbox','--disable-dev-shm-usage']});
+            const page = await browser.newPage({viewport:{width:430,height:932}, userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1'});
+            await page.goto('https://yandex.ru/maps/org/eva/200326329284/gallery/', {waitUntil:'domcontentloaded', timeout:60000});
+            await page.waitForTimeout(3500);
+            for (let i=0;i<18;i++) {
+              await page.mouse.wheel(0, 1100);
+              await page.waitForTimeout(450);
+            }
+            const urls = await page.evaluate(()=>{
+              const all=[];
+              document.querySelectorAll('img').forEach(img=>{
+                const vals=[img.currentSrc,img.src,img.getAttribute('src'),img.getAttribute('data-src')].filter(Boolean);
+                for(const u of vals){
+                  if(u.includes('avatars.mds.yandex.net/get-altay/')) all.push(u);
+                }
+              });
+              return [...new Set(all)];
+            });
+            fs.writeFileSync('/tmp/eva-photo-urls.txt', urls.join('\n'));
+            console.log('Yandex Eva gallery URLs:', urls.length);
+            await browser.close();
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/eva-photos.js
+
+      - name: Download verified Eva photos
+        shell: python
+        run: |
+          from pathlib import Path
+          import urllib.request, re
+          out=Path('assets/eva-gallery')
+          if out.exists():
+              for p in out.iterdir():
+                  if p.is_file(): p.unlink()
+          out.mkdir(parents=True,exist_ok=True)
+          headers={'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Safari/604.1'}
+          urls=[]
+          f=Path('/tmp/eva-photo-urls.txt')
+          if f.exists():
+              for line in f.read_text().splitlines():
+                  u=line.strip().replace('\\/','/')
+                  if not u or 'get-altay' not in u: continue
+                  u=re.sub(r'/(?:XXL|XL|L|M|S|orig|XXL_height)(?:\?.*)?$', '/XXL_height', u)
+                  if u not in urls: urls.append(u)
+          # Exact main photo from this exact Eva card, used only if browser returns too little.
+          known='https://avatars.mds.yandex.net/get-altay/11908258/2a0000018e5bc631ae55a4afdfeeeb0de622/XXL_height'
+          if known not in urls: urls.insert(0,known)
+          saved=[]
+          for u in urls:
+              if len(saved)>=24: break
+              try:
+                  req=urllib.request.Request(u,headers=headers)
+                  data=urllib.request.urlopen(req,timeout=25).read()
+                  if len(data)<15000: continue
+                  ext='.jpg'
+                  p=out/f'eva-{len(saved)+1:02d}{ext}'
+                  p.write_bytes(data)
+                  saved.append(p)
+              except Exception as e:
+                  print('skip',u,e)
+          print('Saved verified Eva images:',len(saved))
+          if not saved:
+              raise SystemExit('No Eva photos downloaded')
+
+      - name: Patch gallery and eliminate old-layout flash
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          # Mobile bundle: point every visual to Eva-card media only.
+          p=Path('mobile-stluxe-current.js')
+          s=p.read_text(encoding='utf-8')
+          files=sorted(Path('assets/eva-gallery').glob('eva-*'))
+          real=[str(x).replace('\\','/') for x in files]
+          if not real: raise SystemExit('No Eva gallery files')
+          cats=['salon','salon','hair','nails','face','hair','nails','salon','face','hair','nails','other']
+          visible=real[:24]
+          items=[]
+          for i,u in enumerate(visible):
+              items.append("    {src:%r,cat:%r,alt:%r}"%(u,cats[i%len(cats)],'EVA — салон красоты'))
+          works='const works=[\n'+',\n'.join(items)+'\n  ];'
+          s=re.sub(r"const works=\[.*?\n  \];",works,s,count=1,flags=re.S)
+          # Ensure intro identity is EVA and reveal document only after the new mobile UI exists.
+          s=s.replace("document.body.appendChild(root);","document.body.appendChild(root);\n  document.documentElement.classList.remove('eva-boot');\n  document.documentElement.classList.add('eva-ready');",1)
+          p.write_text(s,encoding='utf-8')
+
+          # HTML boot screen exists before any old STLuxe markup can paint.
+          p=Path('index.html')
+          h=p.read_text(encoding='utf-8')
+          marker='<!-- EVA_MOBILE_BOOT -->'
+          boot=r'''<!-- EVA_MOBILE_BOOT -->
+<script>
+(function(){try{if(window.matchMedia&&window.matchMedia('(max-width:767px)').matches){document.documentElement.classList.add('eva-boot')}}catch(e){}})();
+</script>
+<style>
+@media(max-width:767px){
+  html.eva-boot body{margin:0!important;background:#f8f4ef!important;overflow:hidden!important;min-height:100dvh!important}
+  html.eva-boot body>*{visibility:hidden!important}
+  html.eva-boot body:before{content:'EVA';visibility:visible!important;position:fixed;z-index:2147483646;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,rgba(180,126,151,.14),transparent 36%),#f8f4ef;color:#493c42;font:500 64px/1 Georgia,'Times New Roman',serif;letter-spacing:-.045em;animation:evaBootPulse 1.2s ease-in-out infinite alternate}
+  html.eva-boot body:after{content:'САЛОН КРАСОТЫ';visibility:visible!important;position:fixed;z-index:2147483647;left:0;right:0;top:calc(50% + 48px);text-align:center;color:#8f727f;font:600 9px/1 Arial,sans-serif;letter-spacing:.24em}
+  @keyframes evaBootPulse{from{opacity:.82;transform:scale(.985)}to{opacity:1;transform:scale(1)}}
+}
+</style>'''
+          if marker not in h:
+              h=h.replace('<head>','<head>\n'+boot,1)
+          # Never let desktop fallback point at copied STLuxe image assets.
+          main=real[0]
+          h=re.sub(r'src=["\']assets/[^"\']+\.(?:webp|jpg|jpeg|png)["\']',f'src="{main}"',h,flags=re.I)
+          p.write_text(h,encoding='utf-8')
+
+      - name: Commit fixes
+        shell: bash
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Use original Eva card photos and seamless intro'
+          git push
