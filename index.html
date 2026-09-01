@@ -178,7 +178,7 @@
       <h1>EVA</h1>
       <p class="venue-kicker">Салон красоты · Мытищи</p>
       <div class="meta-row">
-        <span class="rating"><span class="violet-star">★</span> 5,0 · 92 отзыва</span>
+        <span class="rating"><span class="violet-star">★</span> 4,8 · 92 отзыва</span>
         <span>ул. Академика Каргина, 25</span>
         <span>Ежедневно 10:00–21:00</span>
       </div>
@@ -193,6 +193,7 @@
         <button class="nav-chip active" data-target="top">Фото</button>
         <button class="nav-chip" data-target="portfolio">Портфолио</button>
         <button class="nav-chip" data-target="services">Услуги</button>
+        <button class="nav-chip" data-target="about">О нас</button>
         <button class="nav-chip" data-target="team">Специалисты</button>
         <button class="nav-chip" data-target="reviews">Отзывы</button>
         <button class="nav-chip" data-target="visit">Визит</button>
@@ -291,16 +292,16 @@
 
     <section id="reviews">
       <div class="section-head"><div><h2>Отзывы</h2><p>Отзывы клиентов EVA из Яндекс Карт</p></div><a class="section-link" href="https://yandex.com/maps/org/eva/200326329284/reviews/" target="_blank" rel="noopener">Все отзывы ↗</a></div>
-      <div class="reviews-summary"><div><div class="score">5,0</div><div class="score-label">185 оценок</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">92 отзыва на Яндекс Картах</div></div></div>
-      <article class="review-card"><div class="review-top"><span class="review-name">Марина Ким</span><span class="review-stars">★★★★★</span></div><p class="review-text">Отдельно благодарит Нару за результат окрашивания и тёплую атмосферу салона.</p></article>
-      <article class="review-card"><div class="review-top"><span class="review-name">Екатерина Рэй</span><span class="review-stars">★★★★★</span></div><p class="review-text">Нарине помогла грамотно определиться с цветом; окрашивание выполнено аккуратно и быстро.</p></article>
+      <div class="reviews-summary"><div><div class="score">4,8</div><div class="score-label">185 оценок</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">92 отзыва на Яндекс Картах</div></div></div>
+      <article class="review-card"><div class="review-top"><span class="review-name">Марина Ким</span><span class="review-stars">★★★★★</span></div><p class="review-text">Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))</p></article>
+      <article class="review-card"><div class="review-top"><span class="review-name">Екатерина Рэй</span><span class="review-stars">★★★★★</span></div><p class="review-text">Большая благодарность мастеру! Обязательно обращусь сюда же</p></article>
       <article class="review-card"><div class="review-top"><span class="review-name">Клиент EVA · Зуля</span><span class="review-stars">★★★★★</span></div><p class="review-text">Отдельно благодарит Зулю за работу с бровями и рекомендует мастера.</p></article>
       <article class="review-card"><div class="review-top"><span class="review-name">Клиент EVA · Ани</span><span class="review-stars">★★★★★</span></div><p class="review-text">Отдельно отмечает работу Ани и рекомендует косметолога.</p></article>
     </section>
 
     <section id="about">
       <div class="section-head"><div><h2>О EVA</h2><p>Салон красоты в Мытищах с несколькими направлениями в одном пространстве</p></div></div>
-      <div class="about-card"><h3>Услуги красоты в одном месте</h3><p>EVA предлагает парикмахерские услуги, маникюр и педикюр, косметологию, оформление бровей и ресниц, эпиляцию и макияж. В карточке Яндекс также указаны Wi‑Fi, оплата картой и онлайн-запись.</p></div>
+      <div class="about-card"><h3>Услуги красоты в одном месте</h3><p>EVA предлагает парикмахерские услуги, маникюр и педикюр, косметологию, оформление бровей и ресниц, эпиляцию и макияж. В карточке Яндекс также указаны Wi‑Fi, оплата картой и запись по телефону.</p></div>
     </section>
 
     <section id="visit">
@@ -367,7 +368,7 @@
     }));
 
     document.querySelectorAll('.nav-chip').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth',block:'start'})}));
-    const watched=['top','portfolio','services','team','reviews','visit'];
+    const watched=['top','portfolio','services','about','team','reviews','visit'];
     const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('.nav-chip').forEach(x=>x.classList.toggle('active',x.dataset.target===entry.target.id))}})},{rootMargin:'-25% 0px -65% 0px'});
     watched.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el)});
 
