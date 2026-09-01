@@ -1,0 +1,30 @@
+name: Fix EVA three reviews per row
+
+on:
+  push:
+    branches: [eva-reviews-3-per-row-fix]
+    paths:
+      - '.github/workflows/fix-three-reviews-per-row.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch only review carousel
+        run: python tools/fix_three_reviews_per_lane.py
+      - name: Verify only mobile bundle changed
+        run: |
+          CHANGED=$(git diff --name-only)
+          test "$CHANGED" = "mobile-eva-current.js"
+      - name: Commit isolated review fix
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add mobile-eva-current.js
+          git commit -m 'Keep exactly three reviews in each EVA row'
+          git push
