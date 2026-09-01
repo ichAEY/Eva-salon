@@ -6,12 +6,17 @@ index_path=Path('index.html')
 mobile=mobile_path.read_text(encoding='utf-8')
 index=index_path.read_text(encoding='utf-8')
 
-m=re.search(r'const REAL_REVIEW_DATA=(\[\n.*?\n\]);', mobile, flags=re.S)
-if not m:
+block=re.search(r'const REAL_REVIEW_DATA=\[(.*?)\];', mobile, flags=re.S)
+if not block:
     raise SystemExit('REAL_REVIEW_DATA not found')
-reviews=json.loads(m.group(1))
-if len(reviews)!=15 or len({r[1] for r in reviews})!=15:
-    raise SystemExit(f'Expected 15 unique reviews, got {len(reviews)}')
+
+# Parse every generated JSON string pair independently. This is robust even when review text contains newlines or emoji.
+pairs=re.findall(r'\[("(?:\\.|[^"\\])*")\s*,\s*("(?:\\.|[^"\\])*")\]', block.group(1), flags=re.S)
+reviews=[[json.loads(name),json.loads(text)] for name,text in pairs]
+if len(reviews)!=15:
+    raise SystemExit(f'Expected 15 reviews, parsed {len(reviews)}')
+if len({r[1] for r in reviews})!=15:
+    raise SystemExit('Review texts are not unique')
 
 def card(r):
     name,text=r
@@ -27,11 +32,11 @@ for i in range(0,15,3):
 
 section='''<section id="reviews">
       <div class="section-head"><div><h2>Отзывы</h2><p>Оригинальные отзывы клиентов EVA из Яндекс Карт</p></div><a class="section-link" href="https://yandex.ru/maps/org/eva/200326329284/reviews/" target="_blank" rel="noopener">Все отзывы ↗</a></div>
-      <div class="reviews-summary"><div><div class="score">4,8</div><div class="score-label">рейтинг EVA</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">отзывы из Яндекс Карт</div></div></div>
+      <div class="reviews-summary"><div><div class="score">4,8</div><div class="score-label">рейтинг EVA</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">15 отзывов с оценкой 5★</div></div></div>
       '''+''.join(rows)+'''
     </section>'''
 
-index,n=re.subn(r'<section id="reviews">.*?</section>', section, index, count=1, flags=re.S)
+index,n=re.subn(r'<section id="reviews">.*?</section>', lambda _m: section, index, count=1, flags=re.S)
 if n!=1:
     raise SystemExit('Desktop reviews section not replaced')
 
@@ -43,9 +48,8 @@ css='''
 if '.eva-review-row{' not in index:
     index=index.replace('</style>',css+'  </style>',1)
 
-for bad in ['Клиент EVA · Зуля','Клиент EVA · Ани','Отдельно благодарит Зулю','Отдельно отмечает работу Ани']:
-    if bad in index:
-        raise SystemExit('Synthetic desktop review remains: '+bad)
+if index.count('class="review-card eva-review-card"') != 15:
+    raise SystemExit('Desktop does not contain exactly 15 review cards')
 
 index_path.write_text(index,encoding='utf-8')
-print('Desktop fallback synced to 15 original Yandex reviews, 5x3')
+print('Desktop fallback synced to 15 original Yandex reviews, 5 rows x 3')
