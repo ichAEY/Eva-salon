@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Prepare Eva original media and intro
+        run: python tools/fix_eva_media.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
