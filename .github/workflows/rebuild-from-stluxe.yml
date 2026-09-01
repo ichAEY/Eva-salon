@@ -1,0 +1,229 @@
+name: Rebuild Eva from STLuxe template
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rebuild-from-stluxe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout EVA
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout latest STLuxe template
+        uses: actions/checkout@v4
+        with:
+          repository: ichAEY/STLuxe
+          path: _template
+
+      - name: Copy exact STLuxe structure and adapt only client data
+        shell: bash
+        run: |
+          cp _template/index.html index.html
+          cp _template/mobile-stluxe-current.js mobile-eva-current.js
+          cp _template/mobile-stluxe-theme-current.js mobile-eva-theme-current.js
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          yandex='https://yandex.com/maps/org/eva/200326329284/'
+          yandex_ru='https://yandex.ru/maps/org/eva/200326329284/'
+          reviews_url='https://yandex.com/maps/org/eva/200326329284/reviews/'
+          phone='+79684270101'
+          phone_print='+7 (968) 427-01-01'
+          address='Мытищи, ул. Академика Каргина, 25'
+          route='https://yandex.ru/maps/?rtext=~%D0%9C%D1%8B%D1%82%D0%B8%D1%89%D0%B8%2C%20%D1%83%D0%BB.%20%D0%90%D0%BA%D0%B0%D0%B4%D0%B5%D0%BC%D0%B8%D0%BA%D0%B0%20%D0%9A%D0%B0%D1%80%D0%B3%D0%B8%D0%BD%D0%B0%2C%2025&rtt=auto'
+
+          uploaded=[
+            ('salon02.webp','salon','Интерьер EVA'),('salon03.webp','salon','Интерьер EVA'),('salon01.webp','salon','Интерьер EVA'),
+            ('nails00001.webp','nails','Маникюр EVA'),('nails00002.webp','nails','Маникюр EVA'),('nails00003.webp','nails','Маникюр EVA'),('nails00004.webp','nails','Маникюр EVA'),
+            ('hair00001.webp','hair','Работа с волосами EVA'),('hair00002.webp','hair','Работа с волосами EVA'),('hair00003.webp','hair','Работа с волосами EVA'),('hair00004.webp','hair','Работа с волосами EVA'),('hair00005.webp','hair','Работа с волосами EVA'),('hair00006.webp','hair','Работа с волосами EVA'),('hair00007.webp','hair','Работа с волосами EVA'),
+            ('brows00001.webp','brows','Брови EVA'),('brows00002.webp','brows','Брови EVA'),('brows00003.webp','brows','Брови EVA'),('brows00004.webp','brows','Брови EVA'),
+            ('lashes00001.webp','lashes','Ресницы EVA'),('lashes00002.webp','lashes','Ресницы EVA'),('lashes00003.webp','lashes','Ресницы EVA'),('lashes00004.webp','lashes','Ресницы EVA'),
+            ('lips01.webp','other','Перманентный макияж EVA'),('team01.webp','team','Команда EVA')
+          ]
+          for f,_,_ in uploaded:
+              if not Path(f).exists():
+                  raise SystemExit(f'Missing EVA upload: {f}')
+
+          base_services=[
+            ('hair','Окрашивание волос','Цена по записи'),('hair','Тонирование волос','Цена по записи'),('hair','Колорирование волос','Цена по записи'),('hair','Детская стрижка','Цена по записи'),('hair','Завивка волос','Цена по записи'),('hair','Уход за волосами','Цена по записи'),('hair','Мелирование','Цена по записи'),('hair','Причёски и укладки','Цена по записи'),('hair','Стрижка','Цена по записи'),('hair','Осветление волос','Цена по записи'),
+            ('nails','Женский маникюр','Цена по записи'),('nails','Женский педикюр','Цена по записи'),('nails','Дизайн ногтей','Цена по записи'),
+            ('face','Энзимный мягкий пилинг для всех типов кожи','2 000 ₽'),('face','Дарсонвализация','Цена по записи'),('face','Лифтинг','Цена по записи'),('face','Аппаратная косметология','Цена по записи'),('face','Уход за лицом','Цена по записи'),('face','Пилинг','Цена по записи'),('face','Чистка лица','Цена по записи'),('face','Массаж лица','Цена по записи'),
+            ('depilation','Лазерная эпиляция — классическое бикини','1 700 ₽'),('depilation','Лазерная эпиляция','Цена по записи'),('depilation','Электроэпиляция','Цена по записи'),('depilation','Шугаринг','Цена по записи'),('depilation','Восковая эпиляция','Цена по записи'),
+            ('brows','Коррекция бровей','Цена по записи'),('brows','Окрашивание бровей','Цена по записи'),('lashes','Окрашивание ресниц','Цена по записи'),('lashes','Услуги для ресниц','Цена по записи'),('other','Макияж дневной с ресницами','3 300 ₽')
+          ]
+
+          def common(s):
+              reps={
+                'https://yandex.com/maps/org/beauty_salon_stluxe/51087098664/':yandex,
+                'https://yandex.com/maps/org/beauty_salon_stluxe/51087098664/reviews/':reviews_url,
+                'https://yandex.ru/maps/org/stluxe/51087098664/':yandex_ru,
+                'https://yandex.ru/maps/org/beauty_salon_stluxe/51087098664/':yandex_ru,
+                '+79163552222':phone,
+                '+7 (916) 355-22-22':phone_print,
+                '+7 916 355-22-22':phone_print,
+                'Ивантеевка, ул. Победы, 16':address,
+                'Ивантеевка, улица Победы, 16':address,
+                'Ивантеевка · ул. Победы, 16':'Мытищи · ул. Академика Каргина, 25',
+                'ул. Победы, 16':'ул. Академика Каргина, 25',
+                'Ивантеевка':'Мытищи',
+                '4,9':'5,0','126 оценок':'185 оценок','125 оценок':'185 оценок','87 отзывов':'92 отзыва','87 отзывов на Яндекс.Картах':'92 отзыва на Яндекс.Картах',
+                '100+ услуг доступно':f'Доступно {len(base_services)} услуг',
+                'Ногти · волосы · лицо и другое':'Волосы · ногти · косметология и другое',
+              }
+              for a,b in reps.items(): s=s.replace(a,b)
+              # Template identity becomes EVA everywhere, including DOM ids and comments.
+              s=s.replace('STLUXE','EVA').replace('STLuxe','EVA').replace('stluxe','eva')
+              # No purple brand tint for EVA; keep template geometry/typography, neutralize only accent values.
+              s=s.replace('#6e2c8f','#75665e').replace('#8f4bad','#8e7b70').replace('#f4ecf8','#f2ede8')
+              s=s.replace('rgba(110,44,143,','rgba(117,102,94,')
+              s=s.replace('#d9c7e1','#d9cec7').replace('#57226f','#594d46').replace('#fbf9fc','#fbf9f6').replace('#f4eff7','#f3eee9').replace('#eee6f2','#e9e1da')
+              return s
+
+          # ---------- Desktop/template index ----------
+          idx=common(Path('_template/index.html').read_text())
+          idx=idx.replace('mobile-eva-current.js','mobile-eva-current.js').replace('mobile-eva-theme-current.js','mobile-eva-theme-current.js')
+          idx=idx.replace('mobile-stluxe-current.js','mobile-eva-current.js').replace('mobile-stluxe-theme-current.js','mobile-eva-theme-current.js')
+          idx=idx.replace('ЭВА — салон красоты в Мытищах','EVA — салон красоты в Мытищах')
+
+          img_map={
+            'assets/images/salon-reception.webp':'salon02.webp','assets/images/salon-nail-zone.webp':'salon03.webp',
+            'assets/images/nails-pink.webp':'nails00001.webp','assets/images/nails-green.webp':'nails00002.webp','assets/images/nails-light.webp':'nails00003.webp','assets/images/hair-style.webp':'hair00001.webp',
+            'salon.webp':'salon02.webp','salon2.webp':'salon03.webp','salon3.webp':'salon01.webp','salon4.webp':'salon02.webp','salon5.webp':'salon03.webp','salon6.webp':'salon01.webp','salon7.webp':'salon02.webp','salon8.webp':'salon03.webp','salon9.webp':'salon01.webp','salon10.webp':'salon02.webp','salon11.webp':'salon03.webp','salon12.webp':'salon01.webp','salon13.webp':'salon02.webp',
+            'nails.webp':'nails00001.webp','nails2.webp':'nails00002.webp','nails3.webp':'nails00003.webp','nails4.webp':'nails00004.webp','nails5.webp':'nails00001.webp','nails6.webp':'nails00002.webp','nails7.webp':'nails00003.webp','nails8.webp':'nails00004.webp','nails9.webp':'nails00001.webp','nails10.webp':'nails00002.webp','nails11.webp':'nails00003.webp','nails12.webp':'nails00004.webp',
+            'hair.webp':'hair00001.webp','hair2.webp':'hair00002.webp','hair3.webp':'hair00003.webp','hair4.webp':'hair00004.webp','hair5.webp':'hair00005.webp','hair6.webp':'hair00006.webp','hair7.webp':'hair00007.webp','hair8.webp':'hair00001.webp','res.webp':'lashes00001.webp',
+            'assets/images/eva-about-dark.svg':'team01.webp','assets/images/eva-about-logo.webp':'team01.webp'
+          }
+          for a,b in sorted(img_map.items(), key=lambda x:-len(x[0])): idx=idx.replace(a,b)
+
+          # Desktop portfolio: exact STLuxe section/classes, EVA content only, all uploaded photos.
+          filter_labels=[('all','Все работы'),('nails','Ногти'),('hair','Волосы'),('brows','Брови'),('lashes','Ресницы'),('other','Перманент'),('interior','Интерьер'),('team','Команда')]
+          cards=[]
+          label={'salon':'Интерьер','nails':'Ногти','hair':'Волосы','brows':'Брови','lashes':'Ресницы','other':'Перманент','team':'Команда'}
+          dcat={'salon':'interior','nails':'nails','hair':'hair','brows':'brows','lashes':'lashes','other':'other','team':'team'}
+          for f,c,a in uploaded:
+              cards.append(f'        <button class="work-card" data-category="{dcat[c]}" onclick="openLightbox(\'{f}\')"><img src="{f}" alt="{a}"><span class="work-tag">{label[c]}</span></button>')
+          portfolio='''    <section id="portfolio">\n      <div class="section-head">\n        <div><h2>Портфолио</h2><p>Работы и пространство EVA</p></div>\n      </div>\n      <div class="filters" id="portfolioFilters">\n'''+''.join(f'        <button class="filter {"active" if k=="all" else ""}" data-filter="{k}">{v}</button>\n' for k,v in filter_labels)+'''      </div>\n      <div class="portfolio-grid" id="portfolioGrid">\n'''+"\n".join(cards)+'''\n      </div>\n    </section>'''
+          idx=re.sub(r'    <section id="portfolio">.*?    </section>',portfolio,idx,count=1,flags=re.S)
+
+          # Desktop services in same STLuxe markup.
+          groups=[('all','Все'),('nails','Ногти'),('hair','Волосы'),('face','Косметология'),('brows','Брови'),('lashes','Ресницы'),('depilation','Эпиляция'),('other','Макияж')]
+          rows=[]
+          for i,(cat,title,price) in enumerate(base_services):
+              extra=' extra' if i>=6 else ''
+              rows.append(f'''        <div class="service{extra}" data-service-category="{cat}"><div><div class="service-name">{title}</div><div class="service-note">EVA · стоимость подтверждена только там, где указана цена</div></div><div class="service-side"><div class="price">{price}</div><button class="pick" onclick="openBooking('{title.replace("'","’")}')">Выбрать</button></div></div>''')
+          services_html='''    <section id="services">\n      <div class="section-head"><div><h2>Услуги</h2><p>Направления из карточки EVA в Яндекс Картах</p></div></div>\n      <div class="service-groups" id="serviceGroups">\n'''+''.join(f'        <button class="service-group {"active" if k=="all" else ""}" data-service-filter="{k}">{v}</button>\n' for k,v in groups)+'''      </div>\n      <div class="services" id="servicesList">\n'''+"\n".join(rows)+'''\n      </div>\n      <button class="show-more" id="servicesMore" type="button">Посмотреть ещё</button>\n    </section>'''
+          idx=re.sub(r'    <section id="services">.*?    </section>',services_html,idx,count=1,flags=re.S)
+
+          team_html='''    <section id="team">\n      <div class="section-head"><div><h2>Специалисты</h2><p>Команда EVA и направления салона</p></div></div>\n      <div class="specialists">\n        <button class="specialist" onclick="openRole('Нарине','Окрашивание волос|Тонирование|Колорирование|Стрижка|Укладка')"><span class="avatar-placeholder">Н</span><strong>Нарине</strong><span>Волосы · окрашивание</span></button>\n        <button class="specialist" onclick="openRole('Мастер маникюра','Маникюр|Педикюр|Дизайн ногтей')"><span class="avatar-placeholder">E</span><strong>Мастер маникюра</strong><span>Маникюр · педикюр</span></button>\n        <button class="specialist" onclick="openRole('Косметолог','Пилинг|Чистка лица|Аппаратная косметология|Массаж лица')"><span class="avatar-placeholder">E</span><strong>Косметолог</strong><span>Косметология</span></button>\n        <button class="specialist" onclick="openRole('Бровист / Lash-мастер','Коррекция бровей|Окрашивание бровей|Окрашивание ресниц')"><span class="avatar-placeholder">E</span><strong>Бровист / Lash-мастер</strong><span>Брови · ресницы</span></button>\n      </div>\n    </section>'''
+          idx=re.sub(r'    <section id="team">.*?    </section>',team_html,idx,count=1,flags=re.S)
+
+          reviews_html='''    <section id="reviews">\n      <div class="section-head"><div><h2>Отзывы</h2><p>Отзывы клиентов EVA из Яндекс Карт</p></div><a class="section-link" href="'''+reviews_url+'''" target="_blank" rel="noopener">Все отзывы ↗</a></div>\n      <div class="reviews-summary"><div><div class="score">5,0</div><div class="score-label">185 оценок</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">92 отзыва на Яндекс Картах</div></div></div>\n      <article class="review-card"><div class="review-top"><span class="review-name">Марина Ким</span><span class="review-stars">★★★★★</span></div><p class="review-text">Профессиональный мастер Нара; отдельно благодарит за результат окрашивания и тёплую атмосферу салона.</p></article>\n      <article class="review-card"><div class="review-top"><span class="review-name">Екатерина Рэй</span><span class="review-stars">★★★★★</span></div><p class="review-text">Отмечает Нарине как замечательного специалиста: помогла выбрать цвет, всё сделала аккуратно и быстро.</p></article>\n    </section>'''
+          idx=re.sub(r'    <section id="reviews">.*?    </section>',reviews_html,idx,count=1,flags=re.S)
+
+          about_html='''    <section id="about">\n      <div class="section-head"><div><h2>О EVA</h2><p>Салон красоты в Мытищах с несколькими направлениями в одном пространстве</p></div></div>\n      <div class="about-card"><h3>Услуги красоты в одном месте</h3><p>EVA предлагает парикмахерские услуги, маникюр и педикюр, косметологию, оформление бровей и ресниц, эпиляцию и макияж. В карточке Яндекс также указаны Wi‑Fi, оплата картой и онлайн-запись.</p></div>\n    </section>'''
+          idx=re.sub(r'    <section id="about">.*?    </section>',about_html,idx,count=1,flags=re.S)
+
+          visit_html=f'''    <section id="visit">\n      <div class="section-head"><div><h2>Визит</h2><p>Контакты EVA</p></div></div>\n      <div class="visit-card">\n        <div class="visit-row"><span class="visit-icon">⌖</span><div><strong>{address}</strong><span>Салон красоты EVA</span></div></div>\n        <div class="visit-row"><span class="visit-icon">◷</span><div><strong>Часы работы</strong><span>Актуальный статус и расписание — в Яндекс Картах</span></div></div>\n        <div class="visit-row"><span class="visit-icon">☎</span><div><strong>{phone_print}</strong><span>Запись и уточнение стоимости услуг</span></div></div>\n        <div class="visit-actions"><a class="btn" href="tel:{phone}" style="display:grid;place-items:center">Позвонить</a><a class="btn primary" href="{route}" target="_blank" rel="noopener" style="display:grid;place-items:center">Маршрут</a></div>\n      </div>\n    </section>'''
+          idx=re.sub(r'    <section id="visit">.*?    </section>',visit_html,idx,count=1,flags=re.S)
+
+          idx=idx.replace('Имя, фотография, опыт и персональные отзывы будут добавлены после подтверждения команды EVA.','Персональная информация специалиста будет дополнена после подтверждения салоном.')
+          idx=re.sub(r'<footer><strong>EVA</strong>.*?</footer>',f'<footer><strong>EVA</strong>Мытищи · ул. Академика Каргина, 25<br><span style="display:inline-block;margin-top:9px">Цифровой офис на TANEM</span></footer>',idx,count=1,flags=re.S)
+          idx=idx.replace('Запись в EVA','Запись в EVA').replace('Онлайн-ссылка салона в карточке не указана, поэтому сейчас запись ведём через прямой контакт.','Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.')
+          idx=idx.replace(f'href="tel:{phone}" style="display:grid;place-items:center">Позвонить {phone_print}',f'href="tel:{phone}" style="display:grid;place-items:center">Позвонить {phone_print}')
+
+          # Add no-flash boot before mobile template initializes; not a redesign.
+          boot='''<script>try{if(matchMedia('(max-width:767px)').matches)document.documentElement.classList.add('eva-boot')}catch(e){}</script><style>@media(max-width:767px){html.eva-boot body{margin:0;background:#f8f4ee;overflow:hidden}html.eva-boot body>*{visibility:hidden!important}html.eva-boot body:before{content:'EVA';visibility:visible!important;position:fixed;z-index:2147483647;inset:0;display:grid;place-items:center;background:#f8f4ee;color:#171513;font:500 64px/1 Georgia,serif;letter-spacing:.08em}html.eva-boot body:after{content:'САЛОН КРАСОТЫ';visibility:visible!important;position:fixed;z-index:2147483647;left:0;right:0;top:calc(50% + 52px);text-align:center;color:#75665e;font:600 9px/1 Arial,sans-serif;letter-spacing:.24em}}</style>'''
+          idx=idx.replace('<head>','<head>\n'+boot,1)
+          # Remove boot as soon as EVA mobile bundle loads.
+          idx=idx.replace('</body>','<script>window.addEventListener(\'load\',()=>setTimeout(()=>document.documentElement.classList.remove(\'eva-boot\'),80));</script>\n</body>',1)
+          Path('index.html').write_text(idx)
+
+          # ---------- Latest mobile STLuxe source, structurally unchanged ----------
+          mob=common(Path('_template/mobile-stluxe-current.js').read_text())
+          mob=mob.replace("const PHONE='+79163552222';",f"const PHONE='{phone}';")
+          mob=mob.replace("const YANDEX='https://yandex.com/maps/org/beauty_salon_eva/51087098664/';",f"const YANDEX='{yandex}';")
+          mob=mob.replace("const YANDEX_RU='https://yandex.ru/maps/org/eva/51087098664/';",f"const YANDEX_RU='{yandex_ru}';")
+          mob=mob.replace("const YANDEX_REVIEWS='https://yandex.com/maps/org/beauty_salon_eva/51087098664/reviews/';",f"const YANDEX_REVIEWS='{reviews_url}';")
+          mob=re.sub(r"const ROUTE='[^']*';",f"const ROUTE='{route}';",mob)
+
+          base_js='\n'.join("    [%r,%r,%r],"%(c,t,p) for c,t,p in base_services).rstrip(',')
+          mob=re.sub(r"  const services=\[.*?\n  \];\n\n  const works=",'  const services=[\n'+base_js+'\n  ];\n\n  const works=',mob,count=1,flags=re.S)
+          works_js='\n'.join(f"    {{src:'{f}',cat:'{c}',alt:'{a}'}}," for f,c,a in uploaded).rstrip(',')
+          mob=re.sub(r"  const works=\[.*?\n  \];\n\n  //",'  const works=[\n'+works_js+'\n  ];\n\n  //',mob,count=1,flags=re.S)
+          reviews_base="""  const reviews=[\n    {name:'Марина Ким',text:'Профессиональный мастер Нара; отдельно благодарит за результат окрашивания и тёплую атмосферу салона.'},\n    {name:'Екатерина Рэй',text:'Нарине помогла грамотно определиться с цветом и выполнила окрашивание аккуратно и быстро.'}\n  ];"""
+          mob=re.sub(r"  const reviews=\[.*?\n  \];",reviews_base,mob,count=1,flags=re.S)
+          masters_base="""  const masters=[\n    {id:'narine',name:'Нарине',category:'Волосы · окрашивание',initial:'Н',about:'Мастер EVA. Клиенты отдельно отмечают помощь в выборе цвета, аккуратность и скорость работы.',cats:['hair']},\n    {id:'nails',name:'Мастер',category:'Маникюр · педикюр',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['nails']},\n    {id:'cosmetology',name:'Мастер',category:'Косметология',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['face']},\n    {id:'look',name:'Мастер',category:'Брови · ресницы',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['brows','lashes']}\n  ];"""
+          mob=re.sub(r"  const masters=\[.*?\n  \];",masters_base,mob,count=1,flags=re.S)
+
+          # Replace refined STLuxe data model with EVA data, leave all UI/CSS/behavior below intact.
+          refined_services="""const SERVICES=[];\nconst add=(cat,title,price,desc='')=>SERVICES.push({cat,title,price,desc});\n"""+"\n".join(f"add('{ {'hair':'Волосы','nails':'Маникюр','face':'Косметология','depilation':'Эпиляция','brows':'Брови','lashes':'Ресницы','other':'Макияж'}[c] }','{t.replace("'","’")}','{p}');" for c,t,p in base_services)+"\n\n"
+          mob=re.sub(r"const SERVICES=\[\];.*?const GALLERY=\{",refined_services+'const GALLERY={',mob,count=1,flags=re.S)
+
+          gallery={
+            'Салон':['salon02.webp','salon03.webp','salon01.webp'],
+            'Ногти':['nails00001.webp','nails00002.webp','nails00003.webp','nails00004.webp'],
+            'Волосы':['hair00001.webp','hair00002.webp','hair00003.webp','hair00004.webp','hair00005.webp','hair00006.webp','hair00007.webp'],
+            'Брови':['brows00001.webp','brows00002.webp','brows00003.webp','brows00004.webp'],
+            'Ресницы':['lashes00001.webp','lashes00002.webp','lashes00003.webp','lashes00004.webp'],
+            'Перманент':['lips01.webp'],
+            'Команда':['team01.webp']
+          }
+          altmap={'Салон':'Интерьер EVA','Ногти':'Маникюр EVA','Волосы':'Работа с волосами EVA','Брови':'Брови EVA','Ресницы':'Ресницы EVA','Перманент':'Перманентный макияж EVA','Команда':'Команда EVA'}
+          g='const GALLERY={\n'+',\n'.join("'%s':[\n%s\n]"%(k,',\n'.join(" {src:'%s',alt:'%s'}"%(f,altmap[k]) for f in fs)) for k,fs in gallery.items())+'};'
+          mob=re.sub(r"const GALLERY=\{.*?\n\};\nconst PORTFOLIO=",g+'\nconst PORTFOLIO=',mob,count=1,flags=re.S)
+          preview=['salon02.webp','nails00001.webp','hair00001.webp','brows00001.webp','lashes00001.webp','lips01.webp','salon03.webp']
+          p="const PORTFOLIO=[\n"+',\n'.join(" {src:'%s',alt:'%s'}"%(f,'EVA — работа или интерьер салона') for f in preview)+'\n];'
+          mob=re.sub(r"const PORTFOLIO=\[.*?\n\];\nconst REVIEW_DATA=",p+'\nconst REVIEW_DATA=',mob,count=1,flags=re.S)
+          rd="""const REVIEW_DATA=[\n['Марина Ким','Профессиональный мастер Нара; отдельно благодарит за результат окрашивания и тёплую атмосферу салона.'],\n['Екатерина Рэй','Нарине помогла грамотно определиться с цветом и выполнила окрашивание аккуратно и быстро.']\n];"""
+          mob=re.sub(r"const REVIEW_DATA=\[.*?\n\];\nconst MASTERS=",rd+'\nconst MASTERS=',mob,count=1,flags=re.S)
+          mm="""const MASTERS=[\n{id:'narine',name:'Нарине',role:'Парикмахер-колорист',about:'Клиенты EVA отдельно отмечают помощь Нарине в выборе цвета, аккуратность и скорость окрашивания.',cats:['Волосы'],work:['hair00001.webp','hair00002.webp','hair00003.webp','hair00004.webp'],reviewNames:['Марина Ким','Екатерина Рэй']},\n{id:'nails',name:'Мастер',role:'Маникюр · педикюр',about:'Персональные данные специалиста уточняются у салона.',cats:['Маникюр'],work:['nails00001.webp','nails00002.webp','nails00003.webp','nails00004.webp'],reviewNames:[]},\n{id:'cosmetology',name:'Мастер',role:'Косметология',about:'Персональные данные специалиста уточняются у салона.',cats:['Косметология'],work:[],reviewNames:[]},\n{id:'look',name:'Мастер',role:'Брови · ресницы',about:'Персональные данные специалиста уточняются у салона.',cats:['Брови','Ресницы'],work:['brows00001.webp','lashes00001.webp'],reviewNames:[]}\n];"""
+          mob=re.sub(r"const MASTERS=\[.*?\n\];\nconst MASTER_AVATAR=",mm+'\nconst MASTER_AVATAR=',mob,count=1,flags=re.S)
+
+          # Final fallback: no inherited media references can survive.
+          for a,b in sorted(img_map.items(), key=lambda x:-len(x[0])): mob=mob.replace(a,b)
+          mob=mob.replace('Салон · ногти · волосы','Салон · ногти · волосы · брови · ресницы · перманент')
+          mob=mob.replace('Вт–Вс · 10:00–20:00','Часы работы — в Яндекс Картах').replace('Понедельник — выходной','Актуальное расписание указано в карточке EVA')
+          mob=mob.replace('Позвонить +7 916 355-22-22','Позвонить '+phone_print)
+          # Ensure mobile boot disappears immediately after actual template is appended.
+          mob=mob.replace('document.body.appendChild(root);','document.body.appendChild(root);document.documentElement.classList.remove(\'eva-boot\');',1)
+          Path('mobile-eva-current.js').write_text(mob)
+
+          theme=common(Path('_template/mobile-stluxe-theme-current.js').read_text())
+          for a,b in sorted(img_map.items(), key=lambda x:-len(x[0])): theme=theme.replace(a,b)
+          Path('mobile-eva-theme-current.js').write_text(theme)
+
+          # Index must reference renamed EVA files.
+          idx=Path('index.html').read_text().replace('mobile-eva-current.js','mobile-eva-current.js').replace('mobile-eva-theme-current.js','mobile-eva-theme-current.js')
+          Path('index.html').write_text(idx)
+
+          # Hard audit: no STLuxe identity or inherited asset paths in published source.
+          bad=['STLuxe','stluxe','STLUXE','Ивантеевка','+79163552222','51087098664','assets/images/salon-reception.webp','assets/images/nails-pink.webp']
+          for f in ['index.html','mobile-eva-current.js','mobile-eva-theme-current.js']:
+              txt=Path(f).read_text()
+              hits=[x for x in bad if x in txt]
+              if hits: raise SystemExit(f'{f}: inherited references remain: {hits}')
+          print('EVA photos:',len(uploaded),'services:',len(base_services))
+          PY
+
+          rm -rf _template
+          rm -f mobile-stluxe-current.js mobile-stluxe-theme-current.js
+          rm -f .github/workflows/rebuild-from-stluxe.yml
+
+      - name: Commit exact STLuxe-template EVA build
+        run: |
+          git config user.name tanem-template-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          git commit -m 'Rebuild Eva strictly from STLuxe template'
+          git push
