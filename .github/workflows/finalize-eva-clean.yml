@@ -1,0 +1,101 @@
+name: Finalize Eva clean build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finalize-eva-clean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Remove all non-Eva media and inherited files
+        shell: python
+        run: |
+          from pathlib import Path
+          import shutil
+
+          root=Path('.')
+          allowed={
+            'brows00001.webp','brows00002.webp','brows00003.webp','brows00004.webp',
+            'hair00001.webp','hair00002.webp','hair00003.webp','hair00004.webp','hair00005.webp','hair00006.webp','hair00007.webp',
+            'lashes00001.webp','lashes00002.webp','lashes00003.webp','lashes00004.webp',
+            'lips01.webp',
+            'nails00001.webp','nails00002.webp','nails00003.webp','nails00004.webp',
+            'salon01.webp','salon02.webp','salon03.webp','team01.webp'
+          }
+          image_ext={'.webp','.jpg','.jpeg','.png','.gif','.svg','.avif'}
+          for p in list(root.rglob('*')):
+            if not p.is_file() or '.git' in p.parts:
+              continue
+            if p.suffix.lower() in image_ext:
+              rel=p.as_posix().lstrip('./')
+              if rel not in allowed:
+                print('REMOVE MEDIA',rel)
+                p.unlink()
+
+          for rel in [
+            'mobile-stluxe-current.js',
+            'mobile-stluxe-theme-current.js',
+            '.github/workflows/apply-uploaded-media.yml',
+            '.github/workflows/eva-final-fix.yml',
+            '.github/workflows/fix-eva-media-boot.yml',
+            '.github/workflows/run-eva-fix.yml',
+            '.github/workflows/sync-stluxe.yml'
+          ]:
+            p=root/rel
+            if p.exists():
+              print('REMOVE INHERITED',rel)
+              p.unlink()
+
+          tools=root/'tools'
+          if tools.exists():
+            print('REMOVE tools/')
+            shutil.rmtree(tools)
+
+          for d in sorted([p for p in root.rglob('*') if p.is_dir() and '.git' not in p.parts],key=lambda x:len(x.parts),reverse=True):
+            try:d.rmdir()
+            except OSError:pass
+
+          present=sorted(p.name for p in root.iterdir() if p.is_file() and p.suffix.lower() in image_ext)
+          missing=sorted(allowed-set(present))
+          extra=sorted(set(present)-allowed)
+          print('MANUAL EVA MEDIA COUNT:',len(present))
+          print('FILES:',present)
+          if missing or extra or len(present)!=24:
+            raise SystemExit(f'Media allowlist mismatch. missing={missing} extra={extra} count={len(present)}')
+
+          forbidden=['stluxe','ивантеевка','победы, 16','51087098664','beauty_salon_stluxe','+79163552222','+7 916 355-22-22']
+          text_ext={'.html','.css','.js','.json','.yml','.yaml','.md','.txt','.py'}
+          hits=[]
+          for p in root.rglob('*'):
+            if not p.is_file() or '.git' in p.parts or p.name=='finalize-eva-clean.yml':
+              continue
+            if p.suffix.lower() not in text_ext and p.name!='.nojekyll':
+              continue
+            try:text=p.read_text(encoding='utf-8',errors='ignore').lower()
+            except Exception:continue
+            for word in forbidden:
+              if word in text:
+                hits.append((p.as_posix(),word))
+          if hits:
+            raise SystemExit(f'Forbidden inherited references remain: {hits}')
+
+          self_file=root/'.github/workflows/finalize-eva-clean.yml'
+          if self_file.exists():
+            self_file.unlink()
+      - name: Commit clean Eva repository
+        run: |
+          git config user.name tanem-template-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          git commit -m 'Strip inherited salon assets and keep Eva-only media'
+          git push
