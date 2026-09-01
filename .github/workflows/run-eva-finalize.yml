@@ -1,0 +1,32 @@
+name: Finalize EVA client build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-eva-finalize.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply final EVA fixes
+        run: python tools/finalize_eva_client.py
+      - name: Commit final EVA build
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html mobile-eva-current.js mobile-eva-theme-current.js
+          if git diff --cached --quiet; then
+            echo 'No changes to commit'
+          else
+            git commit -m 'Finalize EVA prices schedule reviews palette and calls'
+            git push
+          fi
