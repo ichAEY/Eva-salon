@@ -1,5 +1,4 @@
 name: Finalize EVA client build
-# retry desktop+mobile review sync v3
 
 on:
   push:
@@ -18,35 +17,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Install review fetch dependency
-        run: python -m pip install --quiet requests
       - name: Apply EVA about reviews and call fixes
         run: python tools/fix_eva_about_reviews_calls.py
       - name: Final rating and review polish
         run: python tools/polish_eva_rating_reviews.py
-      - name: Fetch 15 original five-star Yandex reviews
-        id: fetchreviews
-        continue-on-error: true
-        run: python tools/fetch_yandex_15_reviews.py
-      - name: Save Yandex diagnostic on failure
-        if: steps.fetchreviews.outcome == 'failure'
-        run: |
-          git config user.name 'tanem-template-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add yandex-fetch-debug.txt
-          git commit -m 'Save Yandex review fetch diagnostic' || true
-          git push
-      - name: Stop if Yandex fetch failed
-        if: steps.fetchreviews.outcome == 'failure'
-        run: exit 1
-      - name: Make all five review rows visible and bust cache
-        if: steps.fetchreviews.outcome == 'success'
-        run: python tools/fix_review_visibility.py
-      - name: Sync the same 15 reviews to desktop fallback
-        if: steps.fetchreviews.outcome == 'success'
-        run: python tools/sync_reviews_desktop.py
+      - name: Restore third review lane
+        run: python tools/restore_third_review_lane.py
       - name: Commit corrected EVA build
-        if: steps.fetchreviews.outcome == 'success'
         run: |
           git config user.name 'tanem-template-bot'
           git config user.email 'actions@users.noreply.github.com'
@@ -54,6 +31,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Sync five-row EVA reviews across all layouts'
+            git commit -m 'Restore EVA third review lane'
             git push
           fi

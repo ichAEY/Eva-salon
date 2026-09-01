@@ -531,48 +531,16 @@ function openMaster(id){currentMaster=MASTERS.find(m=>m.id===id);if(!currentMast
 team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.dataset.mid));teamSheet.querySelectorAll('[data-sheet-mid]').forEach(b=>b.onclick=()=>openMaster(b.dataset.sheetMid));
 
 // REVIEWS
-
-const reviewVisibilityStyle=document.createElement('style');reviewVisibilityStyle.textContent=`
-#tn13Reviews .tn30-review-stage{display:flex!important;flex-direction:column!important;gap:12px!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important}
-#tn13Reviews .tn30-lane{display:block!important;position:relative!important;height:auto!important;min-height:0!important;overflow:hidden!important}
-#tn13Reviews .tn30-track{display:flex!important;align-items:stretch!important}
-#tn13Reviews .tn30-review-card{flex:0 0 min(82vw,330px)!important;min-height:170px!important}
-#tn13Reviews .tn30-card-stars{display:flex!important;visibility:visible!important;opacity:1!important}
-`;document.head.appendChild(reviewVisibilityStyle);
-const reviewStarStyle=document.createElement('style');reviewStarStyle.textContent=`
-.tn30-card-stars{display:flex;align-items:center;gap:3px;margin:11px 0 9px;color:#c89555}
-.tn30-card-stars svg{width:13px;height:13px;display:block;fill:currentColor;stroke:none}
-`;document.head.appendChild(reviewStarStyle);
 const reviews=$('#tn13Reviews');
 const REAL_REVIEW_DATA=[
-["Александра Н.","Все отлично!! Благодарю) сама хожу в ваш салон на окрашивание, маникюр. И мужа регулярно на стрижку записываю. Все мастера настоящие профессионалы!"],
-["natalia tatarinceva","Все отлично, мастер хороший,  внимательный. 
-Все на высшем уровне. 
-Рекомендую.  
-Сейчас сложно найти салон, где сочетаются цена и качество.  Спасибо"],
-["Арина Боданова","обожаю"],
-["gugen","Хорошо стригут. Если сказать, что живёшь в этом доме (прописку не проверяют) - скидка 20%🔥"],
-["Екатерина Рэй","Была на окрашивании в один тон  у Нарине, оказалось, что она  замечательный специалист, помогла мне грамотно определиться с цветом, всё сделала аккуратно и быстро, очень рада что нашла этот салон! Большая благодарность мастеру! Обязательно обращусь сюда же в следующий раз 🌹"],
-["aaarinkooo","Сегодня ходила в этот салон на наращивание ногтей, я в восторге, очень аккуратно, красиво и быстро сделал мастер, буду ходить ещё!💅🏻🫶🏻"],
-["Алина Жукова","Подстригался сын остались очень довольны 👍 спасибо придём обязательно еще 🌸"],
-["Светлана Старчикова","Мне очень нравится этот салон! Все девушки очень приятные, записываться можно к любой - все сделают на высшем уровне!"],
-["Екатерина","Маникюр сделали быстро, качественно,"],
-["Aliya Uderbaeva","Хочу выразить огромную благодарность Наре!!!Мастер-золото!!!Попала благодаря отзывам,было немного волнения, но результат превзошел ожидания!!!!После первого посещения, осталась довольна и теперь только к ней!!!В салоне атмосфера -супер!!!В последний раз приходила с дочкой,мечтала о розовых локонах!!!Результат-ребенок счастлив!!!Всем рекомендую данный салон!!!Девочки-огонь!!!!!"],
-["Оксана Вайнбергер","Была первый раз в салоне Эва, у мастера маникюра Татев. Очень хороший мастер, все аккуратно, красиво и быстро!!! Спасибо, мастеру!♥️"],
-["Ю.В. Куликова","Мастер Елена просто чудо! Легкая рука, эпиляцию сделали мега быстро и безболезненно. С Еленой максимально комфортно взаимодействовать, интересный собеседник. Однозначно рекомендую за такой процедурой обращаться именно к Елене!"],
-["Алина С.","Что касается салона в целом: удобное расположение, приятные цены, приветливый коллектив, всегда дружелюбная атмосфера. 
-
-Отдельно хочу отметить мастера по маникюру Розу. Она замечательный профессионал своего дела и просто чуткий человек. Маникюр держится превосходно и ручки после нее выглядят потрясающе. Спасибо 🌹 
-
-Хочу дополнить отзыв: была записана на окрашивание к Нарине, как вдруг во всем доме выключили свет, но мастер не растерялась и справилась блестяще со своей работой в таких экстремальных условиях. Тут работают настоящие профессионалы!"],
-["Зарета К.","Мастер Евгения, лучшая в своём деле.Очень красиво подстригла, объяснила как делать укладку дома."],
-["Марина Ким","Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))"]
+['Марина Ким','Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))'],
+['Екатерина Рэй','Была на окрашивании в один тон у Нарине. Помогла грамотно определиться с цветом, всё сделала аккуратно и быстро.'],
+['Екатерина Рэй','Большая благодарность мастеру! Обязательно обращусь сюда же']
 ];
-const reviewFiveStars=`<span class="tn30-card-stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.35 4.77 5.27.77-3.81 3.71.9 5.24L10 13.82l-4.71 2.47.9-5.24L2.38 7.34l5.27-.77L10 1.8Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.35 4.77 5.27.77-3.81 3.71.9 5.24L10 13.82l-4.71 2.47.9-5.24L2.38 7.34l5.27-.77L10 1.8Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.35 4.77 5.27.77-3.81 3.71.9 5.24L10 13.82l-4.71 2.47.9-5.24L2.38 7.34l5.27-.77L10 1.8Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.35 4.77 5.27.77-3.81 3.71.9 5.24L10 13.82l-4.71 2.47.9-5.24L2.38 7.34l5.27-.77L10 1.8Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.8l2.35 4.77 5.27.77-3.81 3.71.9 5.24L10 13.82l-4.71 2.47.9-5.24L2.38 7.34l5.27-.77L10 1.8Z"/></svg></span>`;
 const reviewInitial=n=>([...String(n).trim()][0]||'E').toUpperCase();
 const reviewHref=r=>`${YANDEX_REVIEWS}#:~:text=${encodeURIComponent(r[1])}`;
-const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div>${reviewFiveStars}<p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
-const reviewLanes=[REAL_REVIEW_DATA.slice(0,3),REAL_REVIEW_DATA.slice(3,6),REAL_REVIEW_DATA.slice(6,9),REAL_REVIEW_DATA.slice(9,12),REAL_REVIEW_DATA.slice(12,15)];
+const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
+const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2]],[REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0]],[REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]]];
 reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>{const loop=[lane[lane.length-1],...lane,lane[0]];return `<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${loop.map(reviewCard).join('')}</div></div>`}).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 const reviewStage=reviews.querySelector('.tn30-review-stage'),reviewTracks=[...reviews.querySelectorAll('.tn30-track')];
 let reviewIndex=1,reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
