@@ -41,13 +41,14 @@
 ];
 
   const works=[
-    {src:'salon01.webp',cat:'salon',alt:'Интерьер EVA'},
-    {src:'nails00001.webp',cat:'nails',alt:'Работа мастера ногтевого сервиса EVA'},
-    {src:'hair00001.webp',cat:'hair',alt:'Работа мастера по волосам EVA'},
-    {src:'brows00001.webp',cat:'brows',alt:'Работа brow-мастера EVA'},
-    {src:'lashes00001.webp',cat:'lashes',alt:'Работа lash-мастера EVA'},
+    {src:'salon.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'nails.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'hair.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'brows00001.webp',cat:'brows',alt:'Брови EVA'},
+    {src:'lashes00001.webp',cat:'lashes',alt:'Ресницы EVA'},
     {src:'lips01.webp',cat:'other',alt:'Перманентный макияж EVA'},
-    {src:'salon2.webp',cat:'salon',alt:'Пространство EVA'},
+    {src:'salon01.webp',cat:'salon',alt:'Пространство EVA'},
+    {src:'salon2.webp',cat:'salon',alt:'Интерьер EVA'},
     {src:'salon02.webp',cat:'salon',alt:'Интерьер EVA'},
     {src:'salon03.webp',cat:'salon',alt:'Интерьер EVA'},
     {src:'salon3.webp',cat:'salon',alt:'Интерьер EVA'},
@@ -61,7 +62,7 @@
     {src:'salon11.webp',cat:'salon',alt:'Интерьер EVA'},
     {src:'salon12.webp',cat:'salon',alt:'Интерьер EVA'},
     {src:'salon13.webp',cat:'salon',alt:'Интерьер EVA'},
-    {src:'salon.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'nails00001.webp',cat:'nails',alt:'Маникюр EVA'},
     {src:'nails00002.webp',cat:'nails',alt:'Маникюр EVA'},
     {src:'nails2.webp',cat:'nails',alt:'Маникюр EVA'},
     {src:'nails00003.webp',cat:'nails',alt:'Маникюр EVA'},
@@ -76,7 +77,7 @@
     {src:'nails10.webp',cat:'nails',alt:'Маникюр EVA'},
     {src:'nails11.webp',cat:'nails',alt:'Маникюр EVA'},
     {src:'nails12.webp',cat:'nails',alt:'Маникюр EVA'},
-    {src:'nails.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'hair00001.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'hair2.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'hair00002.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'hair00003.webp',cat:'hair',alt:'Работа с волосами EVA'},
@@ -90,7 +91,6 @@
     {src:'hair00007.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'hair7.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'hair8.webp',cat:'hair',alt:'Работа с волосами EVA'},
-    {src:'hair.webp',cat:'hair',alt:'Работа с волосами EVA'},
     {src:'brows00002.webp',cat:'brows',alt:'Брови EVA'},
     {src:'brows00003.webp',cat:'brows',alt:'Брови EVA'},
     {src:'brows00004.webp',cat:'brows',alt:'Брови EVA'},
@@ -236,8 +236,8 @@
         </div>
 
         <div class="tn13-visual" aria-label="Интерьер и работы EVA">
-          <button class="tn13-visual-main" type="button" data-gallery="salon"><img src="salon01.webp" alt="Интерьер EVA"></button>
-          <button class="tn13-visual-small" type="button" data-gallery="nails"><img src="nails00001.webp" alt="Маникюр EVA"></button>
+          <button class="tn13-visual-main" type="button" data-gallery="salon"><img src="salon.webp" alt="Интерьер EVA"></button>
+          <button class="tn13-visual-small" type="button" data-gallery="nails"><img src="nails.webp" alt="Маникюр EVA"></button>
           <div class="tn13-visual-label">Мытищи · Академика Каргина, 25</div>
         </div>
 
@@ -253,7 +253,7 @@
         <div class="tn13-section-head"><div><p class="tn13-kicker">Портфолио</p><h2>Пространство<br>и работы</h2></div><p class="tn13-section-note">Реальные фотографии из карточки EVA</p></div>
       </div>
       <div class="tn13-shell tn13-reveal">
-        <div class="tn13-feature">${works.slice(0,3).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
+        <div class="tn13-feature">${works.slice(3,7).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
         <div class="tn13-work-grid">${works.slice(3,7).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
         <button class="tn13-gallery-btn" type="button" data-gallery="all"><span>Смотреть все работы</span><span>→</span></button>
       </div>
@@ -288,13 +288,13 @@
       <div class="tn13-shell tn13-reveal">
         <p class="tn13-kicker">Визит и запись</p>
         <h2>Выберите удобный<br><em>способ записи</em></h2>
-        <p class="tn13-final-copy">EVA находится в Ивантеевке на улице Победы, 16. Понедельник — выходной, со вторника по воскресенье салон работает с 10:00 до 20:00.</p>
+        <p class="tn13-final-copy">EVA находится в Мытищах на улице Академика Каргина, 25.</p>
         <div class="tn13-final-actions">
           <button class="tn13-final-cta" type="button" data-book><span>Записаться в EVA</span><span>→</span></button>
           <div class="tn13-final-secondary-row"><a class="tn13-final-secondary" href="tel:${PHONE}">Позвонить</a><a class="tn13-final-secondary" href="${YANDEX}" target="_blank" rel="noopener">Яндекс Карты</a></div>
         </div>
-        <iframe class="tn13-map" loading="lazy" src="https://yandex.ru/map-widget/v1/?text=%D0%98%D0%B2%D0%B0%D0%BD%D1%82%D0%B5%D0%B5%D0%B2%D0%BA%D0%B0%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D1%8B%2C%2016&z=16" title="Карта EVA"></iframe>
-        <div class="tn13-final-facts"><span><strong>10–20</strong><small>Вт–Вс</small></span><span><strong>4,9</strong><small>рейтинг</small></span><span><strong>17</strong><small>услуг</small></span></div>
+        <iframe class="tn13-map" loading="lazy" src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D1%8B%D1%82%D0%B8%D1%89%D0%B8%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%90%D0%BA%D0%B0%D0%B4%D0%B5%D0%BC%D0%B8%D0%BA%D0%B0%20%D0%9A%D0%B0%D1%80%D0%B3%D0%B8%D0%BD%D0%B0%2C%2025&z=16" title="Карта EVA"></iframe>
+        <div class="tn13-final-facts"><span><strong>10–20</strong><small>Вт–Вс</small></span><span><strong>${RATING}</strong><small>рейтинг</small></span><span><strong>${services.length}</strong><small>услуг</small></span></div>
       </div>
     </section>
 
@@ -302,10 +302,10 @@
 
     <div class="tn13-sticky" id="tn13Sticky"><span>Доступно <strong>${services.length} услуг</strong></span><button type="button" data-book>Записаться</button></div>
 
-    <div class="tn13-overlay" id="tn13Gallery"><div class="tn13-gallery-head"><button class="tn13-back" id="tn13GalleryClose" type="button">←</button><div class="tn13-gallery-title">Галерея EVA</div><div class="tn13-gallery-sub">Салон · ногти · волосы · брови · ресницы · брови · ресницы</div></div><div class="tn13-gallery-tabs" id="tn13GalleryTabs"></div><div class="tn13-gallery-list" id="tn13GalleryList"></div></div>
+    <div class="tn13-overlay" id="tn13Gallery"><div class="tn13-gallery-head"><button class="tn13-back" id="tn13GalleryClose" type="button">←</button><div class="tn13-gallery-title">Галерея EVA</div><div class="tn13-gallery-sub">Салон · ногти · волосы · брови · ресницы · перманент</div></div><div class="tn13-gallery-tabs" id="tn13GalleryTabs"></div><div class="tn13-gallery-list" id="tn13GalleryList"></div></div>
 
     <div class="tn13-sheet" id="tn13MasterSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13MasterClose" type="button">×</button><div id="tn13MasterBody"></div></div></div>
-    <div class="tn13-sheet" id="tn13BookSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13BookClose" type="button">×</button><p class="tn13-kicker">Запись</p><div class="tn13-master-title">EVA</div><div class="tn13-master-about">Онлайн-ссылка салона в карточке не указана. Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.</div><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="tel:${PHONE}">Позвонить +7 916 355-22-22</a><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none;background:#eee4dd;color:#57463f!important" href="${YANDEX}" target="_blank" rel="noopener">Открыть Яндекс Карты</a></div></div>
+    <div class="tn13-sheet" id="tn13BookSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13BookClose" type="button">×</button><p class="tn13-kicker">Запись</p><div class="tn13-master-title">EVA</div><div class="tn13-master-about">Онлайн-ссылка салона в карточке не указана. Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.</div><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="tel:${PHONE}">Позвонить +7 (968) 427-01-01</a><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none;background:#eee4dd;color:#57463f!important" href="${YANDEX}" target="_blank" rel="noopener">Открыть Яндекс Карты</a></div></div>
   `;
   document.body.appendChild(root);
   document.documentElement.classList.remove('eva-boot');
