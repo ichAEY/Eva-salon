@@ -21,8 +21,8 @@ jobs:
         run: python tools/fix_eva_about_reviews_calls.py
       - name: Final rating and review polish
         run: python tools/polish_eva_rating_reviews.py
-      - name: Restore third review lane
-        run: python tools/restore_third_review_lane.py
+      - name: Fetch 15 original five-star Yandex reviews
+        run: python tools/fetch_yandex_15_reviews.py
       - name: Commit corrected EVA build
         run: |
           git config user.name 'tanem-template-bot'
@@ -31,6 +31,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Restore EVA third review lane'
+            git commit -m 'Add 15 five-star EVA Yandex reviews in five rows'
             git push
           fi
