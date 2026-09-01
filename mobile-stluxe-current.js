@@ -41,13 +41,62 @@
 ];
 
   const works=[
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'salon',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'salon',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'hair',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'nails',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'face',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'hair',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'nails',alt:'EVA — салон красоты'}
+    {src:'salon01.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'nails00001.webp',cat:'nails',alt:'Работа мастера ногтевого сервиса EVA'},
+    {src:'hair00001.webp',cat:'hair',alt:'Работа мастера по волосам EVA'},
+    {src:'brows00001.webp',cat:'brows',alt:'Работа brow-мастера EVA'},
+    {src:'lashes00001.webp',cat:'lashes',alt:'Работа lash-мастера EVA'},
+    {src:'lips01.webp',cat:'other',alt:'Перманентный макияж EVA'},
+    {src:'salon2.webp',cat:'salon',alt:'Пространство EVA'},
+    {src:'salon02.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon03.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon3.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon4.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon5.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon6.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon7.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon8.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon9.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon10.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon11.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon12.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon13.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'salon.webp',cat:'salon',alt:'Интерьер EVA'},
+    {src:'nails00002.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails2.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails00003.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails3.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails00004.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails4.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails5.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails6.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails7.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails8.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails9.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails10.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails11.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails12.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'nails.webp',cat:'nails',alt:'Маникюр EVA'},
+    {src:'hair2.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00002.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00003.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair3.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00004.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair4.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair5.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00005.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00006.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair6.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair00007.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair7.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair8.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'hair.webp',cat:'hair',alt:'Работа с волосами EVA'},
+    {src:'brows00002.webp',cat:'brows',alt:'Брови EVA'},
+    {src:'brows00003.webp',cat:'brows',alt:'Брови EVA'},
+    {src:'brows00004.webp',cat:'brows',alt:'Брови EVA'},
+    {src:'lashes00002.webp',cat:'lashes',alt:'Ресницы EVA'},
+    {src:'lashes00003.webp',cat:'lashes',alt:'Ресницы EVA'},
+    {src:'lashes00004.webp',cat:'lashes',alt:'Ресницы EVA'}
   ];
 
   // Только короткие фрагменты отзывов, ранее подтверждённых по карточке EVA в Яндекс Картах.
@@ -135,7 +184,8 @@
     .tn13-service-list{border-top:1px solid rgba(255,255,255,.16)}.tn13-service-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding:17px 0;border-bottom:1px solid rgba(255,255,255,.14)}.tn13-service-name strong{display:block;font-size:13px;font-weight:500;line-height:1.35}.tn13-service-name small{display:none}.tn13-service-action{text-align:right}.tn13-service-action b{display:block;font:500 17px/1 "Cormorant Garamond",Georgia,serif}.tn13-service-action button{border:0;background:transparent;color:#d8b7aa!important;padding:6px 0 0;font-size:10.5px;border-bottom:1px solid rgba(216,183,170,.38)}
     .tn13-more{margin-top:17px;border:0;background:transparent;color:#d6c8c1!important;font-size:11px;padding:0;text-decoration:underline;text-underline-offset:5px}
 
-    .tn13-team{background:#f3ece6}.tn13-team-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tn13-master{position:relative;border:1px solid rgba(74,57,49,.1);background:rgba(255,255,255,.45);border-radius:24px;padding:16px;text-align:left;min-height:186px;overflow:hidden}.tn13-master-monogram{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#e2d6cf;color:#725d55;font:500 32px/1 "Cormorant Garamond",Georgia,serif;margin-bottom:22px}.tn13-master strong{display:block;font:500 25px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}.tn13-master span{display:block;margin-top:5px;color:#83736c;font-size:10.5px;line-height:1.35}.tn13-master-arrow{position:absolute;right:15px;top:15px;font-size:18px;color:#8f776e}
+    .tn13-team{background:#f3ece6}.tn13-team-photo{margin:0 0 18px;border-radius:24px;overflow:hidden;aspect-ratio:1.45/1;background:#ddd}.tn13-team-photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .tn13-team-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tn13-master{position:relative;border:1px solid rgba(74,57,49,.1);background:rgba(255,255,255,.45);border-radius:24px;padding:16px;text-align:left;min-height:186px;overflow:hidden}.tn13-master-monogram{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:#e2d6cf;color:#725d55;font:500 32px/1 "Cormorant Garamond",Georgia,serif;margin-bottom:22px}.tn13-master strong{display:block;font:500 25px/1 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}.tn13-master span{display:block;margin-top:5px;color:#83736c;font-size:10.5px;line-height:1.35}.tn13-master-arrow{position:absolute;right:15px;top:15px;font-size:18px;color:#8f776e}
 
     .tn13-reviews{background:#fbf8f4}.tn13-review-summary{display:flex;align-items:end;justify-content:space-between;text-decoration:none;border-bottom:1px solid var(--line);padding:0 0 18px;margin-bottom:21px}.tn13-review-summary strong{font:500 64px/.8 "Cormorant Garamond",Georgia,serif;letter-spacing:-.05em}.tn13-review-summary span{text-align:right;color:#8c766e;font-size:10px;line-height:1.7;letter-spacing:.08em;text-transform:uppercase}.tn13-review-viewport{overflow:hidden;margin:0 -24px}.tn13-review-track{display:flex;width:max-content;gap:10px;padding:0 24px;animation:tn13Reviews 125s linear infinite}.tn13-review-track.paused{animation-play-state:paused}@keyframes tn13Reviews{to{transform:translateX(-50%)}}
     .tn13-review-card{width:286px;min-height:178px;border:1px solid rgba(74,57,49,.1);border-radius:22px;background:#f5eee8;padding:18px;text-decoration:none}.tn13-review-stars{color:#9a796c;font-size:11px;letter-spacing:2px}.tn13-review-card blockquote{margin:17px 0 18px;font:500 22px/1.05 "Cormorant Garamond",Georgia,serif;letter-spacing:-.02em}.tn13-review-card small{color:#8b7b74;font-size:9.5px}
@@ -158,7 +208,7 @@
   root.id='stluxe-tanem-v13';
 
   const serviceTabs=[['all','Все'],['nails','Ногти'],['hair','Волосы'],['face','Косметология'],['brows','Брови'],['depilation','Депиляция']];
-  const galleryTabs=[['all','Все'],['salon','Салон'],['nails','Ногти'],['hair','Волосы']];
+  const galleryTabs=[['all','Все'],['salon','Салон'],['nails','Ногти'],['hair','Волосы'],['brows','Брови'],['lashes','Ресницы'],['other','Перманент']];
 
   root.innerHTML=`
     <div class="tn13-intro" id="tn13Intro"><div class="tn13-intro-inner"><div class="tn13-intro-name">EVA</div><div class="tn13-intro-line"></div><div class="tn13-intro-small">beauty salon · TANEM</div></div></div>
@@ -182,13 +232,13 @@
         <div class="tn13-hero-content">
           <div class="tn13-ticker"><div class="tn13-ticker-track"><span>Салон красоты · Мытищи · рейтинг 4,9 · ногти · волосы · косметология</span><span>Салон красоты · Мытищи · рейтинг 4,9 · ногти · волосы · косметология</span></div></div>
           <h1>Салон красоты <em>EVA</em></h1>
-          <p class="tn13-hero-copy">Ногти, волосы, косметология и другие направления — в одном пространстве на улице Победы.</p>
+          <p class="tn13-hero-copy">Ногти, волосы, косметология и другие направления — в одном пространстве на улице Академика Каргина.</p>
         </div>
 
         <div class="tn13-visual" aria-label="Интерьер и работы EVA">
-          <button class="tn13-visual-main" type="button" data-gallery="salon"><img src="assets/images/salon-reception.webp" alt="Интерьер EVA"></button>
-          <button class="tn13-visual-small" type="button" data-gallery="nails"><img src="assets/images/nails-pink.webp" alt="Маникюр EVA"></button>
-          <div class="tn13-visual-label">Мытищи · Победы, 16</div>
+          <button class="tn13-visual-main" type="button" data-gallery="salon"><img src="salon01.webp" alt="Интерьер EVA"></button>
+          <button class="tn13-visual-small" type="button" data-gallery="nails"><img src="nails00001.webp" alt="Маникюр EVA"></button>
+          <div class="tn13-visual-label">Мытищи · Академика Каргина, 25</div>
         </div>
 
         <div class="tn13-hero-bottom">
@@ -203,9 +253,9 @@
         <div class="tn13-section-head"><div><p class="tn13-kicker">Портфолио</p><h2>Пространство<br>и работы</h2></div><p class="tn13-section-note">Реальные фотографии из карточки EVA</p></div>
       </div>
       <div class="tn13-shell tn13-reveal">
-        <div class="tn13-feature">${works.slice(0,2).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
-        <div class="tn13-work-grid">${works.slice(2,5).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
-        <button class="tn13-gallery-btn" type="button" data-gallery="all"><span>Открыть всю галерею</span><span>→</span></button>
+        <div class="tn13-feature">${works.slice(0,3).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
+        <div class="tn13-work-grid">${works.slice(3,7).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
+        <button class="tn13-gallery-btn" type="button" data-gallery="all"><span>Смотреть все работы</span><span>→</span></button>
       </div>
     </section>
 
@@ -221,6 +271,7 @@
     <section class="tn13-section tn13-team" id="tn13Team">
       <div class="tn13-shell tn13-reveal">
         <div class="tn13-section-head"><div><p class="tn13-kicker">Команда</p><h2>Мастера<br>EVA</h2></div><p class="tn13-section-note">Персональные страницы специалистов</p></div>
+        <div class="tn13-team-photo" data-gallery="salon"><img src="team01.webp" alt="Команда EVA"></div>
         <div class="tn13-team-grid">${masters.map(m=>`<button class="tn13-master" type="button" data-master="${m.id}"><span class="tn13-master-arrow">↗</span><div class="tn13-master-monogram">${m.initial}</div><strong>${m.name}</strong><span>${m.category}</span></button>`).join('')}</div>
       </div>
     </section>
@@ -251,7 +302,7 @@
 
     <div class="tn13-sticky" id="tn13Sticky"><span>Доступно <strong>${services.length} услуг</strong></span><button type="button" data-book>Записаться</button></div>
 
-    <div class="tn13-overlay" id="tn13Gallery"><div class="tn13-gallery-head"><button class="tn13-back" id="tn13GalleryClose" type="button">←</button><div class="tn13-gallery-title">Галерея EVA</div><div class="tn13-gallery-sub">Салон · ногти · волосы</div></div><div class="tn13-gallery-tabs" id="tn13GalleryTabs"></div><div class="tn13-gallery-list" id="tn13GalleryList"></div></div>
+    <div class="tn13-overlay" id="tn13Gallery"><div class="tn13-gallery-head"><button class="tn13-back" id="tn13GalleryClose" type="button">←</button><div class="tn13-gallery-title">Галерея EVA</div><div class="tn13-gallery-sub">Салон · ногти · волосы · брови · ресницы</div></div><div class="tn13-gallery-tabs" id="tn13GalleryTabs"></div><div class="tn13-gallery-list" id="tn13GalleryList"></div></div>
 
     <div class="tn13-sheet" id="tn13MasterSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13MasterClose" type="button">×</button><div id="tn13MasterBody"></div></div></div>
     <div class="tn13-sheet" id="tn13BookSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13BookClose" type="button">×</button><p class="tn13-kicker">Запись</p><div class="tn13-master-title">EVA</div><div class="tn13-master-about">Онлайн-ссылка салона в карточке не указана. Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.</div><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="tel:${PHONE}">Позвонить +7 916 355-22-22</a><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none;background:#eee4dd;color:#57463f!important" href="${YANDEX}" target="_blank" rel="noopener">Открыть Яндекс Карты</a></div></div>
@@ -402,7 +453,7 @@ const GALLERY={
  {src:'salon11.webp',alt:'Интерьер салона EVA'},
  {src:'salon12.webp',alt:'Интерьер салона EVA'},
  {src:'salon13.webp',alt:'Интерьер салона EVA'},
- {src:'assets/images/salon-reception.webp',alt:'Интерьер EVA'}
+ {src:'salon01.webp',alt:'Интерьер EVA'}
 ],
 'Ногти':[
  {src:'nails.webp',alt:'Маникюр EVA'},
@@ -417,7 +468,7 @@ const GALLERY={
  {src:'nails10.webp',alt:'Маникюр EVA'},
  {src:'nails11.webp',alt:'Маникюр EVA'},
  {src:'nails12.webp',alt:'Маникюр EVA'},
- {src:'assets/images/nails-pink.webp',alt:'Маникюр EVA'},
+ {src:'nails00001.webp',alt:'Маникюр EVA'},
  {src:'assets/images/nails-green.webp',alt:'Дизайн ногтей EVA'},
  {src:'assets/images/nails-light.webp',alt:'Маникюр EVA'}
 ],
@@ -510,7 +561,7 @@ const book=()=>{const s=$('#tn13BookSheet');if(s){s.classList.add('open');docume
 
 // HERO
 const hero=$('#tn13Top');
-hero.innerHTML=`<div class="tn22-top"><a class="tn22-brand" href="#tn13Top">EVA</a><button class="tn22-menu" type="button" aria-label="Меню"><i></i><i></i><i></i></button></div><button class="tn22-media" type="button" aria-label="Открыть галерею салона"><span class="tn22-slide active"><img src="assets/images/salon-reception.webp" alt="Интерьер EVA"></span><span class="tn22-slide"><img src="assets/images/salon-nail-zone.webp" alt="Зона салона EVA"></span><span class="tn22-dots"><i class="active"></i><i></i></span></button><div class="tn22-card"><h1 class="tn22-title">EVA</h1><div class="tn22-sub">Салон красоты</div><p class="tn22-copy">Место, где стиль становится<br>вашей естественной красотой.</p><div class="tn37-hero-info"><div class="tn37-info"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5v5l3.2 2"></path></svg></span><span class="tn37-info-copy tn50-hero-status"><strong class="tn50-hero-status-main">Проверяем</strong><span class="tn50-hero-status-sub">режим работы</span></span></div><span class="tn37-info-divider" aria-hidden="true"></span><div class="tn37-info tn37-location"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5.2-7 10-7 10s-7-4.8-7-10a7 7 0 1 1 14 0Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg></span><span class="tn37-info-copy"><strong>Мытищи,</strong>ул. Победы, 16</span></div></div><button class="tn22-cta" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.2"></rect><path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16h.01M12 16h.01"></path></svg><span>Записаться</span></button><a class="tn22-worklink" href="#tn13Portfolio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 .9 3.1L16 7l-3.1.9L12 11l-.9-3.1L8 7l3.1-.9L12 3ZM6 13l.7 2.3L9 16l-2.3.7L6 19l-.7-2.3L3 16l2.3-.7L6 13ZM17.5 12l.8 2.7 2.7.8-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7Z"></path></svg><span>Смотреть работы</span></a></div>`;
+hero.innerHTML=`<div class="tn22-top"><a class="tn22-brand" href="#tn13Top">EVA</a><button class="tn22-menu" type="button" aria-label="Меню"><i></i><i></i><i></i></button></div><button class="tn22-media" type="button" aria-label="Открыть галерею салона"><span class="tn22-slide active"><img src="salon01.webp" alt="Интерьер EVA"></span><span class="tn22-slide"><img src="assets/images/salon-nail-zone.webp" alt="Зона салона EVA"></span><span class="tn22-dots"><i class="active"></i><i></i></span></button><div class="tn22-card"><h1 class="tn22-title">EVA</h1><div class="tn22-sub">Салон красоты</div><p class="tn22-copy">Место, где стиль становится<br>вашей естественной красотой.</p><div class="tn37-hero-info"><div class="tn37-info"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5v5l3.2 2"></path></svg></span><span class="tn37-info-copy tn50-hero-status"><strong class="tn50-hero-status-main">Проверяем</strong><span class="tn50-hero-status-sub">режим работы</span></span></div><span class="tn37-info-divider" aria-hidden="true"></span><div class="tn37-info tn37-location"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5.2-7 10-7 10s-7-4.8-7-10a7 7 0 1 1 14 0Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg></span><span class="tn37-info-copy"><strong>Мытищи,</strong>ул. Победы, 16</span></div></div><button class="tn22-cta" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.2"></rect><path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16h.01M12 16h.01"></path></svg><span>Записаться</span></button><a class="tn22-worklink" href="#tn13Portfolio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 .9 3.1L16 7l-3.1.9L12 11l-.9-3.1L8 7l3.1-.9L12 3ZM6 13l.7 2.3L9 16l-2.3.7L6 19l-.7-2.3L3 16l2.3-.7L6 13ZM17.5 12l.8 2.7 2.7.8-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7Z"></path></svg><span>Смотреть работы</span></a></div>`;
 hero.querySelector('.tn22-cta').addEventListener('click',()=>{window.location.href='tel:'+PHONE});
 const menuButton=hero.querySelector('.tn22-menu');
 const navPop=document.createElement('nav');navPop.className='tn22-navpop';navPop.innerHTML='<a href="#tn13Portfolio">Портфолио</a><a href="#tn13Services">Услуги и цены</a><a href="#tn38About">О салоне</a><a href="#tn13Team">Команда</a><a href="#tn13Reviews">Отзывы</a><a href="#tn13Visit">Контакты</a>';hero.querySelector('.tn22-top').appendChild(navPop);menuButton.addEventListener('click',e=>{e.stopPropagation();navPop.classList.toggle('open')});navPop.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navPop.classList.remove('open')));document.addEventListener('pointerdown',e=>{if(!e.target.closest('.tn22-top'))navPop.classList.remove('open')});
