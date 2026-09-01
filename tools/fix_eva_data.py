@@ -160,7 +160,7 @@ for photo in photos:
 forbidden = [
     'Ивантеевка','улице Победы','Победы, 16','51087098664','+79163552222',
     'Татьяна','Алёна','Ольга К.','Оксана Семина','Дарья К.','Надежда Донеско','Галина Б.',
-    'Londa','Barex','Luxio','OPI','Brazilian Blowout','Selective',
+    'Londa','Barex','Luxio','OPI','Selective',
     'salon10.webp','nails10.webp','hair8.webp','res.webp','assets/images/'
 ]
 for file in [INDEX, MOBILE, Path('mobile-eva-theme-current.js')]:
