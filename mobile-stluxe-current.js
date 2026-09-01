@@ -42,12 +42,7 @@
 
   const works=[
     {src:'assets/eva-gallery/eva-01.jpg',cat:'salon',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-02.jpg',cat:'salon',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-03.jpg',cat:'hair',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-04.jpg',cat:'nails',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'face',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'hair',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-01.jpg',cat:'nails',alt:'EVA — салон красоты'}
+    {src:'assets/eva-gallery/eva-02.jpg',cat:'salon',alt:'EVA — салон красоты'}
   ];
 
   // Только короткие фрагменты отзывов, ранее подтверждённых по карточке EVA в Яндекс Картах.
@@ -257,6 +252,7 @@
     <div class="tn13-sheet" id="tn13BookSheet"><div class="tn13-panel"><button class="tn13-close" id="tn13BookClose" type="button">×</button><p class="tn13-kicker">Запись</p><div class="tn13-master-title">EVA</div><div class="tn13-master-about">Онлайн-ссылка салона в карточке не указана. Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.</div><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="tel:${PHONE}">Позвонить +7 916 355-22-22</a><a class="tn13-sheet-cta" style="display:flex;align-items:center;justify-content:center;text-decoration:none;background:#eee4dd;color:#57463f!important" href="${YANDEX}" target="_blank" rel="noopener">Открыть Яндекс Карты</a></div></div>
   `;
   document.body.appendChild(root);
+  document.documentElement.classList.remove('eva-boot');
 
   const $=(s,c=root)=>c.querySelector(s);const $$=(s,c=root)=>Array.from(c.querySelectorAll(s));
 
