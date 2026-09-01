@@ -17,16 +17,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply final EVA fixes
-        run: python tools/finalize_eva_client.py
-      - name: Commit final EVA build
+      - name: Apply EVA about reviews and call fixes
+        run: python tools/fix_eva_about_reviews_calls.py
+      - name: Commit corrected EVA build
         run: |
           git config user.name 'tanem-template-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add index.html mobile-eva-current.js mobile-eva-theme-current.js
+          git add index.html mobile-eva-current.js
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Finalize EVA prices schedule reviews palette and calls'
+            git commit -m 'Fix EVA about reviews rating navigation and calls'
             git push
           fi
