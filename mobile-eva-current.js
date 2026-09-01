@@ -12,36 +12,33 @@
   const RATINGS_COUNT=185;
 
   const services=[
-    ['hair','Окрашивание волос','Цена по записи'],
-    ['hair','Тонирование волос','Цена по записи'],
-    ['hair','Колорирование волос','Цена по записи'],
-    ['hair','Детская стрижка','Цена по записи'],
-    ['hair','Завивка волос','Цена по записи'],
-    ['hair','Уход за волосами','Цена по записи'],
-    ['hair','Мелирование','Цена по записи'],
-    ['hair','Причёски и укладки','Цена по записи'],
-    ['hair','Стрижка','Цена по записи'],
-    ['hair','Осветление волос','Цена по записи'],
-    ['nails','Женский маникюр','Цена по записи'],
-    ['nails','Женский педикюр','Цена по записи'],
-    ['nails','Дизайн ногтей','Цена по записи'],
+    ['hair','Стрижка женская — короткие волосы','1 300 ₽'],
+    ['hair','Стрижка женская — средние волосы','1 500 ₽'],
+    ['hair','Стрижка женская — длинные волосы','1 700 ₽'],
+    ['hair','Стрижка женская — очень длинные волосы','2 000 ₽'],
+    ['hair','Стрижка детская','1 000 ₽'],
+    ['hair','Стрижка модельная мужская','1 500 ₽'],
+    ['hair','Укладка','1 000 ₽'],
+    ['hair','Уход за волосами','1 000 ₽'],
+    ['hair','Окрашивание волос в один тон','3 600 ₽'],
+    ['hair','Окрашивание корней','3 500 ₽'],
+    ['hair','Тонирование волос','3 600 ₽'],
+    ['hair','Сложное окрашивание','7 000 ₽'],
+    ['hair','Мелирование прикорневое','3 000 ₽'],
+    ['nails','Маникюр аппаратный / комбинированный / классический','1 000 ₽'],
+    ['nails','Маникюр с покрытием гель-лак / гель / укрепление','2 000 ₽'],
     ['face','Энзимный мягкий пилинг для всех типов кожи','2 000 ₽'],
-    ['face','Дарсонвализация','Цена по записи'],
-    ['face','Лифтинг','Цена по записи'],
     ['face','Аппаратная косметология','Цена по записи'],
-    ['face','Уход за лицом','Цена по записи'],
-    ['face','Пилинг','Цена по записи'],
     ['face','Чистка лица','Цена по записи'],
     ['face','Массаж лица','Цена по записи'],
+    ['brows','Архитектура бровей','1 500 ₽'],
+    ['brows','Ламинирование бровей','2 500 ₽'],
+    ['lashes','Ламинирование ресниц','2 500 ₽'],
     ['depilation','Лазерная эпиляция — классическое бикини','1 700 ₽'],
     ['depilation','Лазерная эпиляция','Цена по записи'],
     ['depilation','Электроэпиляция','Цена по записи'],
     ['depilation','Шугаринг','Цена по записи'],
     ['depilation','Восковая эпиляция','Цена по записи'],
-    ['brows','Коррекция бровей','Цена по записи'],
-    ['brows','Окрашивание бровей','Цена по записи'],
-    ['lashes','Окрашивание ресниц','Цена по записи'],
-    ['lashes','Услуги для ресниц','Цена по записи'],
     ['other','Макияж дневной с ресницами','3 300 ₽']
   ];
 
@@ -177,7 +174,7 @@
   const root=document.createElement('div');
   root.id='eva-tanem-v13';
 
-  const serviceTabs=[['all','Все'],['nails','Ногти'],['hair','Волосы'],['face','Косметология'],['brows','Брови'],['lashes','Ресницы'],['depilation','Эпиляция'],['other','Макияж']];
+  const serviceTabs=[['hair','Волосы'],['nails','Маникюр'],['face','Косметология'],['brows','Брови'],['lashes','Ресницы'],['depilation','Эпиляция'],['other','Макияж']];
   const galleryTabs=[['all','Все'],['salon','Салон'],['nails','Ногти'],['hair','Волосы'],['brows','Брови'],['lashes','Ресницы'],['other','Перманент'],['team','Команда']];
 
   root.innerHTML=`
@@ -285,7 +282,7 @@
   $$('#tn13Menu a').forEach(a=>a.addEventListener('click',()=>{menuBtn.classList.remove('open');menu.classList.remove('open')}));
   document.addEventListener('pointerdown',e=>{if(!e.target.closest('.tn13-menu-wrap')){menuBtn.classList.remove('open');menu.classList.remove('open')}});
 
-  let serviceCat='all',expanded=false;
+  let serviceCat='hair',expanded=false;
   function renderServices(){const all=services.filter(s=>serviceCat==='all'||s[0]===serviceCat);const shown=expanded?all:all.slice(0,6);$('#tn13ServiceList').innerHTML=shown.map(s=>`<article class="tn13-service-row"><div class="tn13-service-name"><strong>${s[1]}</strong><small>${s[2]}</small></div><div class="tn13-service-action"><b>${s[2]}</b><button type="button" data-book>Записаться →</button></div></article>`).join('');const more=$('#tn13More');more.style.display=all.length>6?'block':'none';more.textContent=expanded?'Свернуть услуги':'Показать ещё '+Math.max(0,all.length-6)+' услуг';bindBook();}
   renderServices();
   $$('#tn13ServiceTabs [data-service-cat]').forEach(b=>b.addEventListener('click',()=>{serviceCat=b.dataset.serviceCat;expanded=false;$$('#tn13ServiceTabs .tn13-tab').forEach(x=>x.classList.toggle('active',x===b));renderServices()}));
@@ -330,42 +327,42 @@ const root=document.getElementById('eva-tanem-v13'); if(!root)return;
 const YANDEX='https://yandex.com/maps/org/eva/200326329284/';
 const YANDEX_RU='https://yandex.ru/maps/org/eva/200326329284/';
 const YANDEX_REVIEWS='https://yandex.com/maps/org/eva/200326329284/reviews/';
-const ROUTE='https://yandex.ru/maps/?rtext=~%D0%9C%D1%8B%D1%82%D0%B8%D1%89%D0%B8%2C%20%D1%83%D0%BB.%20%D0%90%D0%BA%D0%B0%D0%B4%D0%B5%D0%BC%D0%B8%D0%BA%D0%B0%20%D0%9A%D0%B0%D1%80%D0%B3%D0%B8%D0%BD%D0%B0%2C%2025&rtt=auto';
+const ROUTE='https://yandex.ru/maps/?rtext=~55.918782%2C37.779988&rtt=auto';
 const PHONE='+79684270101';
 
 const SERVICES=[];
 const add=(cat,title,price,desc='')=>SERVICES.push({cat,title,price,desc});
-add('Волосы','Окрашивание волос','Цена по записи');
-add('Волосы','Тонирование волос','Цена по записи');
-add('Волосы','Колорирование волос','Цена по записи');
-add('Волосы','Детская стрижка','Цена по записи');
-add('Волосы','Завивка волос','Цена по записи');
-add('Волосы','Уход за волосами','Цена по записи');
-add('Волосы','Мелирование','Цена по записи');
-add('Волосы','Причёски и укладки','Цена по записи');
-add('Волосы','Стрижка','Цена по записи');
-add('Волосы','Осветление волос','Цена по записи');
-add('Маникюр','Женский маникюр','Цена по записи');
-add('Маникюр','Женский педикюр','Цена по записи');
-add('Маникюр','Дизайн ногтей','Цена по записи');
-add('Косметология','Энзимный мягкий пилинг для всех типов кожи','2 000 ₽');
-add('Косметология','Дарсонвализация','Цена по записи');
-add('Косметология','Лифтинг','Цена по записи');
-add('Косметология','Аппаратная косметология','Цена по записи');
-add('Косметология','Уход за лицом','Цена по записи');
-add('Косметология','Пилинг','Цена по записи');
-add('Косметология','Чистка лица','Цена по записи');
-add('Косметология','Массаж лица','Цена по записи');
-add('Эпиляция','Лазерная эпиляция — классическое бикини','1 700 ₽');
-add('Эпиляция','Лазерная эпиляция','Цена по записи');
-add('Эпиляция','Электроэпиляция','Цена по записи');
-add('Эпиляция','Шугаринг','Цена по записи');
-add('Эпиляция','Восковая эпиляция','Цена по записи');
-add('Брови','Коррекция бровей','Цена по записи');
-add('Брови','Окрашивание бровей','Цена по записи');
-add('Ресницы','Окрашивание ресниц','Цена по записи');
-add('Ресницы','Услуги для ресниц','Цена по записи');
-add('Макияж','Макияж дневной с ресницами','3 300 ₽');
+
+[
+['Волосы','Стрижка женская — короткие волосы','1 300 ₽'],
+['Волосы','Стрижка женская — средние волосы','1 500 ₽'],
+['Волосы','Стрижка женская — длинные волосы','1 700 ₽'],
+['Волосы','Стрижка женская — очень длинные волосы','2 000 ₽'],
+['Волосы','Стрижка детская','1 000 ₽'],
+['Волосы','Стрижка модельная мужская','1 500 ₽'],
+['Волосы','Укладка','1 000 ₽'],
+['Волосы','Уход за волосами','1 000 ₽'],
+['Волосы','Окрашивание волос в один тон','3 600 ₽'],
+['Волосы','Окрашивание корней','3 500 ₽'],
+['Волосы','Тонирование волос','3 600 ₽'],
+['Волосы','Сложное окрашивание','7 000 ₽'],
+['Волосы','Мелирование прикорневое','3 000 ₽'],
+['Маникюр','Маникюр аппаратный / комбинированный / классический','1 000 ₽'],
+['Маникюр','Маникюр с покрытием гель-лак / гель / укрепление','2 000 ₽'],
+['Косметология','Энзимный мягкий пилинг для всех типов кожи','2 000 ₽'],
+['Косметология','Аппаратная косметология','Цена по записи'],
+['Косметология','Чистка лица','Цена по записи'],
+['Косметология','Массаж лица','Цена по записи'],
+['Брови','Архитектура бровей','1 500 ₽'],
+['Брови','Ламинирование бровей','2 500 ₽'],
+['Ресницы','Ламинирование ресниц','2 500 ₽'],
+['Эпиляция','Лазерная эпиляция — классическое бикини','1 700 ₽'],
+['Эпиляция','Лазерная эпиляция','Цена по записи'],
+['Эпиляция','Электроэпиляция','Цена по записи'],
+['Эпиляция','Шугаринг','Цена по записи'],
+['Эпиляция','Восковая эпиляция','Цена по записи'],
+['Макияж','Макияж дневной с ресницами','3 300 ₽']
+].forEach(x=>add(x[0],x[1],x[2],x[3]||''));
 
 const GALLERY={
 'Салон':[
@@ -407,13 +404,13 @@ const GALLERY={
  {src:'team01.webp',alt:'Команда EVA'}
 ]};
 const PORTFOLIO=[
- {src:'salon02.webp',alt:'EVA — работа или интерьер салона'},
- {src:'nails00001.webp',alt:'EVA — работа или интерьер салона'},
- {src:'hair00001.webp',alt:'EVA — работа или интерьер салона'},
- {src:'brows00001.webp',alt:'EVA — работа или интерьер салона'},
- {src:'lashes00001.webp',alt:'EVA — работа или интерьер салона'},
- {src:'lips01.webp',alt:'EVA — работа или интерьер салона'},
- {src:'salon03.webp',alt:'EVA — работа или интерьер салона'}
+ {src:'hair00001.webp',alt:'Работа с волосами EVA'},
+ {src:'nails00001.webp',alt:'Маникюр EVA'},
+ {src:'brows00001.webp',alt:'Брови EVA'},
+ {src:'lashes00001.webp',alt:'Ресницы EVA'},
+ {src:'lips01.webp',alt:'Перманентный макияж EVA'},
+ {src:'hair00002.webp',alt:'Работа с волосами EVA'},
+ {src:'nails00002.webp',alt:'Маникюр EVA'}
 ];
 const REVIEW_DATA=[
 ['Марина Ким','Профессиональный мастер Нара; отдельно благодарит за результат окрашивания и тёплую атмосферу салона.'],
@@ -464,8 +461,7 @@ const book=()=>{const s=$('#tn13BookSheet');if(s){s.classList.add('open');docume
 
 // HERO
 const hero=$('#tn13Top');
-hero.innerHTML=`<div class="tn22-top"><a class="tn22-brand" href="#tn13Top">EVA</a><button class="tn22-menu" type="button" aria-label="Меню"><i></i><i></i><i></i></button></div><button class="tn22-media" type="button" aria-label="Открыть галерею салона"><span class="tn22-slide active"><img src="salon02.webp" alt="Интерьер EVA"></span><span class="tn22-slide"><img src="salon03.webp" alt="Зона салона EVA"></span><span class="tn22-dots"><i class="active"></i><i></i></span></button><div class="tn22-card"><h1 class="tn22-title">EVA</h1><div class="tn22-sub">Салон красоты</div><p class="tn22-copy">Место, где стиль становится<br>вашей естественной красотой.</p><div class="tn37-hero-info"><div class="tn37-info"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5v5l3.2 2"></path></svg></span><span class="tn37-info-copy tn50-hero-status"><strong class="tn50-hero-status-main">Проверяем</strong><span class="tn50-hero-status-sub">режим работы</span></span></div><span class="tn37-info-divider" aria-hidden="true"></span><div class="tn37-info tn37-location"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5.2-7 10-7 10s-7-4.8-7-10a7 7 0 1 1 14 0Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg></span><span class="tn37-info-copy"><strong>Мытищи,</strong>ул. Академика Каргина, 25</span></div></div><button class="tn22-cta" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.2"></rect><path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16h.01M12 16h.01"></path></svg><span>Записаться</span></button><a class="tn22-worklink" href="#tn13Portfolio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 .9 3.1L16 7l-3.1.9L12 11l-.9-3.1L8 7l3.1-.9L12 3ZM6 13l.7 2.3L9 16l-2.3.7L6 19l-.7-2.3L3 16l2.3-.7L6 13ZM17.5 12l.8 2.7 2.7.8-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7Z"></path></svg><span>Смотреть работы</span></a></div>`;
-hero.querySelector('.tn22-cta').addEventListener('click',()=>{window.location.href='tel:'+PHONE});
+hero.innerHTML=`<div class="tn22-top"><a class="tn22-brand" href="#tn13Top">EVA</a><button class="tn22-menu" type="button" aria-label="Меню"><i></i><i></i><i></i></button></div><button class="tn22-media" type="button" aria-label="Открыть галерею салона"><span class="tn22-slide active"><img src="salon02.webp" alt="Интерьер EVA"></span><span class="tn22-slide"><img src="salon03.webp" alt="Зона салона EVA"></span><span class="tn22-dots"><i class="active"></i><i></i></span></button><div class="tn22-card"><h1 class="tn22-title">EVA</h1><div class="tn22-sub">Салон красоты</div><p class="tn22-copy">Место, где стиль становится<br>вашей естественной красотой.</p><div class="tn37-hero-info"><div class="tn37-info"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5v5l3.2 2"></path></svg></span><span class="tn37-info-copy tn50-hero-status"><strong class="tn50-hero-status-main">Проверяем</strong><span class="tn50-hero-status-sub">режим работы</span></span></div><span class="tn37-info-divider" aria-hidden="true"></span><div class="tn37-info tn37-location"><span class="tn37-info-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5.2-7 10-7 10s-7-4.8-7-10a7 7 0 1 1 14 0Z"></path><circle cx="12" cy="10" r="2.2"></circle></svg></span><span class="tn37-info-copy"><strong>Мытищи,</strong>ул. Академика Каргина, 25</span></div></div><a class="tn22-cta" href="tel:${PHONE}"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.2"></rect><path d="M8 3.5v4M16 3.5v4M4 9.5h16M8 13h.01M12 13h.01M16 13h.01M8 16h.01M12 16h.01"></path></svg><span>Записаться</span></a><a class="tn22-worklink" href="#tn13Portfolio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 .9 3.1L16 7l-3.1.9L12 11l-.9-3.1L8 7l3.1-.9L12 3ZM6 13l.7 2.3L9 16l-2.3.7L6 19l-.7-2.3L3 16l2.3-.7L6 13ZM17.5 12l.8 2.7 2.7.8-2.7.8-.8 2.7-.8-2.7-2.7-.8 2.7-.8.8-2.7Z"></path></svg><span>Смотреть работы</span></a></div>`;
 const menuButton=hero.querySelector('.tn22-menu');
 const navPop=document.createElement('nav');navPop.className='tn22-navpop';navPop.innerHTML='<a href="#tn13Portfolio">Портфолио</a><a href="#tn13Services">Услуги и цены</a><a href="#tn38About">О салоне</a><a href="#tn13Team">Команда</a><a href="#tn13Reviews">Отзывы</a><a href="#tn13Visit">Контакты</a>';hero.querySelector('.tn22-top').appendChild(navPop);menuButton.addEventListener('click',e=>{e.stopPropagation();navPop.classList.toggle('open')});navPop.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navPop.classList.remove('open')));document.addEventListener('pointerdown',e=>{if(!e.target.closest('.tn22-top'))navPop.classList.remove('open')});
 let slide=0; const slides=[...hero.querySelectorAll('.tn22-slide')],dots=[...hero.querySelectorAll('.tn22-dots i')];
@@ -508,11 +504,11 @@ function updateSectionNav(){navRaf=0;const heroPassed=hero.getBoundingClientRect
 window.addEventListener('scroll',()=>{if(!navRaf)navRaf=requestAnimationFrame(updateSectionNav)},{passive:true});window.addEventListener('resize',updateSectionNav,{passive:true});requestAnimationFrame(updateSectionNav);
 
 // PORTFOLIO
-const port=$('#tn13Portfolio');port.innerHTML=`<div class="tn22-port"><p class="tn22-kicker">Портфолио</p><h2>Наши работы</h2><div class="tn22-port-grid">${PORTFOLIO.map((x,i)=>`<button class="tn22-photo" type="button" data-pi="${i}"><img src="${x.src}" alt="${x.alt}"></button>`).join('')}</div><button class="tn22-port-all" type="button">Смотреть все работы <span>→</span></button></div>`;port.querySelectorAll('[data-pi]').forEach(b=>b.onclick=()=>openViewer(PORTFOLIO,+b.dataset.pi));port.querySelector('.tn22-port-all').onclick=()=>openGallery('Салон');
+const port=$('#tn13Portfolio');port.innerHTML=`<div class="tn22-port"><p class="tn22-kicker">Портфолио</p><h2>Наши работы</h2><div class="tn22-port-grid">${PORTFOLIO.map((x,i)=>`<button class="tn22-photo" type="button" data-pi="${i}"><img src="${x.src}" alt="${x.alt}"></button>`).join('')}</div><button class="tn22-port-all" type="button">Смотреть все работы <span>→</span></button></div>`;port.querySelectorAll('[data-pi]').forEach(b=>b.onclick=()=>openViewer(PORTFOLIO,+b.dataset.pi));port.querySelector('.tn22-port-all').onclick=()=>openGallery('Волосы');
 
 // SERVICES
-const serv=$('#tn13Services');let serviceCat='Маникюр',servicesExpanded=false;
-const SERVICE_CATS=['Маникюр',...[...new Set(SERVICES.map(s=>s.cat))].filter(c=>c!=='Маникюр')];
+const serv=$('#tn13Services');let serviceCat='Волосы',servicesExpanded=false;
+const SERVICE_CATS=['Волосы','Маникюр','Косметология','Брови','Ресницы','Эпиляция','Макияж'];
 serv.innerHTML=`<div class="tn31-services"><p class="tn22-kicker">Услуги</p><h2>Наши услуги</h2><div class="tn31-cats-wrap"><div class="tn31-cats"></div></div><div class="tn31-service-list"></div><button class="tn31-service-more" type="button"><span class="tn31-more-text"></span><span aria-hidden="true">↓</span></button></div>`;
 const scats=serv.querySelector('.tn31-cats'),slist=serv.querySelector('.tn31-service-list'),sMore=serv.querySelector('.tn31-service-more');
 function splitServiceTitle(raw){const parts=String(raw).split(' — ');const main=parts.shift()||raw;let detail=parts.join(' — ');if(!detail&&main.length>48){const m=main.match(/^(.*?)(\s\([^)]{5,}\)|\sBrazilian Blowout)$/i);if(m)return {main:m[1],detail:m[2].trim()}}return {main,detail}}
@@ -536,17 +532,21 @@ team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.datase
 // REVIEWS
 const reviews=$('#tn13Reviews');
 const REAL_REVIEW_DATA=[
-['Марина Ким','Профессиональный мастер Нара; благодарит за результат окрашивания и армянский кофе.'],
-['Екатерина Рэй','Нарине помогла грамотно определиться с цветом и выполнила окрашивание аккуратно и быстро.']
+['Марина Ким','Отдельно благодарит Нару за результат окрашивания и тёплую атмосферу салона.'],
+['Марина Ким','В отзыве отмечает профессионализм мастера и армянский кофе.'],
+['Екатерина Рэй','Нарине помогла грамотно определиться с цветом.'],
+['Екатерина Рэй','Окрашивание выполнено аккуратно и быстро.'],
+['Клиент EVA · Зуля','Отдельно благодарит Зулю за работу с бровями и рекомендует мастера.'],
+['Клиент EVA · Ани','Отдельно отмечает работу Ани и рекомендует косметолога.']
 ];
 const reviewInitial=n=>([...String(n).trim()][0]||'E').toUpperCase();
 const reviewHref=r=>`${YANDEX_REVIEWS}#:~:text=${encodeURIComponent(r[1])}`;
 const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
-const reviewBase=REAL_REVIEW_DATA;const reviewLanes=[0,1,2].map(row=>Array.from({length:5},(_,i)=>reviewBase[(row*5+i)%reviewBase.length]));
+const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]],[REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[3]],[REAL_REVIEW_DATA[4],REAL_REVIEW_DATA[5]]];
 reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>5,0</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>{const loop=[lane[lane.length-1],...lane,lane[0]];return `<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${loop.map(reviewCard).join('')}</div></div>`}).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 const reviewStage=reviews.querySelector('.tn30-review-stage'),reviewTracks=[...reviews.querySelectorAll('.tn30-track')];
 let reviewIndex=1,reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
-const reviewGap=12,reviewDuration=780,reviewGroupCount=5;
+const reviewGap=12,reviewDuration=780,reviewGroupCount=2;
 function reviewMetrics(){const lane=reviews.querySelector('.tn30-lane'),card=reviews.querySelector('.tn30-review-card');const width=card?card.getBoundingClientRect().width:0;return {step:width+reviewGap,edge:lane?Math.max(0,(lane.clientWidth-width)/2):26}}
 function paintReviewTracks(animated,drag=0){const {step,edge}=reviewMetrics();reviewTracks.forEach(t=>{t.style.transition=animated?`transform ${reviewDuration}ms cubic-bezier(.22,.66,.24,1)`:'none';t.style.transform=`translate3d(${edge-reviewIndex*step+drag}px,0,0)`})}
 function scheduleReviews(){clearTimeout(reviewPauseTimer);reviewPauseTimer=setTimeout(()=>moveReviews(reviewIndex+1),4000)}
@@ -561,9 +561,24 @@ reviewStage.addEventListener('pointerup',finishReviewDrag);reviewStage.addEventL
 
 // VISIT
 const visit=$('#tn13Visit');const pin=`<svg viewBox="0 0 24 24"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>`,ph=`<svg viewBox="0 0 24 24"><path d="M7.3 3.5 10 7.3 8.2 9.1c1.5 3 3.8 5.3 6.8 6.8l1.8-1.8 3.8 2.7c.2.2.3.5.2.8-.5 1.8-2 3-3.9 3C10 20.6 3.4 14 3.4 7.1c0-1.9 1.2-3.4 3-3.9.3-.1.7 0 .9.3Z"/></svg>`,clock=`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 1.8"/></svg>`;
-visit.innerHTML=`<div class="tn22-visit"><div class="tn22-visit-head"><p class="tn22-kicker">Контакты</p><span class="tn22-status" id="tn22Status">${clock}<span class="tn22-status-text"></span></span></div><h2>Ждём вас</h2><div class="tn22-contact-grid"><a class="tn22-contact" href="${YANDEX_RU}" target="_blank" rel="noopener">${pin}<span><strong>Мытищи, ул. Академика Каргина, 25</strong><span>Московская область · открыть в Яндекс Картах</span></span></a><a class="tn22-contact" href="tel:${PHONE}">${ph}<span><strong>+7 (968) 427-01-01</strong><span>Нажмите, чтобы позвонить</span></span></a><a class="tn22-contact" href="${YANDEX_RU}" target="_blank" rel="noopener">${clock}<span><strong>Часы работы</strong><span>Актуальное расписание — в Яндекс Картах</span></span></a></div><div class="tn22-mapwrap"><div class="tn22-map-skeleton">Загружаем карту…</div><iframe title="Карта EVA" loading="eager" src="https://yandex.ru/map-widget/v1/?mode=search&text=%D0%9C%D1%8B%D1%82%D0%B8%D1%89%D0%B8%2C%20%D1%83%D0%BB.%20%D0%90%D0%BA%D0%B0%D0%B4%D0%B5%D0%BC%D0%B8%D0%BA%D0%B0%20%D0%9A%D0%B0%D1%80%D0%B3%D0%B8%D0%BD%D0%B0%2C%2025&z=16"></iframe></div><div class="tn22-visit-actions"><a class="tn22-visit-btn tn22-call" href="tel:${PHONE}">Позвонить</a><a class="tn22-visit-btn tn22-route" href="${ROUTE}" target="_blank" rel="noopener">Построить маршрут</a></div><a class="tn22-footer" href="https://tanem.ru/" target="_blank" rel="noopener"><strong>TANEM.ru</strong><span>Цифровой офис для салонов красоты</span></a></div>`;
+visit.innerHTML=`<div class="tn22-visit"><div class="tn22-visit-head"><p class="tn22-kicker">Контакты</p><span class="tn22-status" id="tn22Status">${clock}<span class="tn22-status-text"></span></span></div><h2>Ждём вас</h2><div class="tn22-contact-grid"><a class="tn22-contact" href="${YANDEX_RU}" target="_blank" rel="noopener">${pin}<span><strong>Мытищи, ул. Академика Каргина, 25</strong><span>Московская область · открыть в Яндекс Картах</span></span></a><a class="tn22-contact" href="tel:${PHONE}">${ph}<span><strong>+7 (968) 427-01-01</strong><span>Нажмите, чтобы позвонить</span></span></a><div class="tn22-contact">${clock}<span><strong>Ежедневно 10:00–21:00</strong><span>Без выходных</span></span></div></div><div class="tn22-mapwrap"><div class="tn22-map-skeleton">Загружаем карту…</div><iframe title="Карта EVA" loading="eager" src="https://yandex.ru/map-widget/v1/?ll=37.779988%2C55.918782&z=17"></iframe></div><div class="tn22-visit-actions"><a class="tn22-visit-btn tn22-call" href="tel:${PHONE}">Позвонить</a><a class="tn22-visit-btn tn22-route" href="${ROUTE}" target="_blank" rel="noopener">Построить маршрут</a></div><a class="tn22-footer" href="https://tanem.ru/" target="_blank" rel="noopener"><strong>TANEM.ru</strong><span>Цифровой офис для салонов красоты</span></a></div>`;
 const map=visit.querySelector('.tn22-mapwrap'),iframe=map.querySelector('iframe');iframe.addEventListener('load',()=>map.classList.add('loaded'));setTimeout(()=>map.classList.add('loaded'),5000);
-function status(){const el=visit.querySelector('#tn22Status'),txt=el.querySelector('.tn22-status-text');txt.textContent='Часы — в Яндекс Картах';el.className='tn22-status';const hs=hero.querySelector('.tn50-hero-status');if(hs){const main=hs.querySelector('.tn50-hero-status-main'),sub=hs.querySelector('.tn50-hero-status-sub');main.textContent='Режим работы';sub.textContent='смотреть в Яндекс Картах';hs.classList.remove('open','closed')}}status();
+function status(){
+const parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+const get=t=>parts.find(x=>x.type===t)?.value||'0';
+const mins=(+get('hour'))*60+(+get('minute'));
+const open=mins>=600&&mins<1260;
+const el=visit.querySelector('#tn22Status'),txt=el.querySelector('.tn22-status-text');
+txt.textContent=open?'Открыто до 21:00':(mins<600?'Закрыто до 10:00':'Закрыто до завтра 10:00');
+el.className='tn22-status '+(open?'open':'closed');
+const hs=hero.querySelector('.tn50-hero-status');
+if(hs){
+ const main=hs.querySelector('.tn50-hero-status-main'),sub=hs.querySelector('.tn50-hero-status-sub');
+ main.textContent=open?'Открыто':'Закрыто';
+ sub.textContent=open?'до 21:00':(mins<600?'до 10:00':'до завтра 10:00');
+ hs.classList.toggle('open',open);hs.classList.toggle('closed',!open);
+}
+}status();
 
 // STICKY
 const sticky=$('#tn13Sticky');if(sticky){sticky.innerHTML=`<strong>Доступно ${SERVICES.length} услуг</strong><button type="button">Записаться</button>`;sticky.querySelector('button').onclick=book}
