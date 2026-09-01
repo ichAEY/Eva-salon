@@ -230,7 +230,7 @@
         </div>
 
         <div class="tn13-hero-content">
-          <div class="tn13-ticker"><div class="tn13-ticker-track"><span>Салон красоты · Мытищи · рейтинг 4,9 · ногти · волосы · косметология</span><span>Салон красоты · Мытищи · рейтинг 4,9 · ногти · волосы · косметология</span></div></div>
+          <div class="tn13-ticker"><div class="tn13-ticker-track"><span>Салон красоты · Мытищи · рейтинг 5,0 · ногти · волосы · косметология</span><span>Салон красоты · Мытищи · рейтинг 5,0 · ногти · волосы · косметология</span></div></div>
           <h1>Салон красоты <em>EVA</em></h1>
           <p class="tn13-hero-copy">Ногти, волосы, косметология и другие направления — в одном пространстве на улице Академика Каргина.</p>
         </div>
@@ -253,7 +253,7 @@
         <div class="tn13-section-head"><div><p class="tn13-kicker">Портфолио</p><h2>Пространство<br>и работы</h2></div><p class="tn13-section-note">Реальные фотографии из карточки EVA</p></div>
       </div>
       <div class="tn13-shell tn13-reveal">
-        <div class="tn13-feature">${works.slice(3,7).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
+        <div class="tn13-feature">${works.slice(0,3).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
         <div class="tn13-work-grid">${works.slice(3,7).map(w=>`<button type="button" data-gallery="${w.cat}"><img src="${w.src}" alt="${w.alt}"></button>`).join('')}</div>
         <button class="tn13-gallery-btn" type="button" data-gallery="all"><span>Смотреть все работы</span><span>→</span></button>
       </div>
