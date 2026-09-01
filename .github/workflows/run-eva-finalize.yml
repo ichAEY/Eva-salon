@@ -19,6 +19,8 @@ jobs:
           fetch-depth: 0
       - name: Apply EVA about reviews and call fixes
         run: python tools/fix_eva_about_reviews_calls.py
+      - name: Final rating and review polish
+        run: python tools/polish_eva_rating_reviews.py
       - name: Commit corrected EVA build
         run: |
           git config user.name 'tanem-template-bot'
@@ -27,6 +29,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Fix EVA about reviews rating navigation and calls'
+            git commit -m 'Finalize EVA about reviews rating navigation and calls'
             git push
           fi
