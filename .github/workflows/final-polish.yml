@@ -1,0 +1,54 @@
+name: Polish final Eva build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/final-polish.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Final copy fixes and audit
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('<h3>Эва<br>в Мытищах</h3>','<h3>Салон красоты<br>на Каргина, 25</h3>')
+          s=s.replace('<div class="sticky-book" id="stickyBook"><span>Доступны услуги <strong>салона «Эва»</strong></span>','<div class="sticky-book" id="stickyBook"><span>Доступно <strong>15 услуг</strong></span>')
+          p.write_text(s,encoding='utf-8')
+          Path('.nojekyll').write_text('',encoding='utf-8')
+
+          forbidden=['stluxe','ивантеевка','победы, 16','51087098664','beauty_salon_stluxe','+79163552222','+7 916 355-22-22','violet']
+          text=p.read_text(encoding='utf-8').lower()
+          hits=[x for x in forbidden if x in text]
+          if hits: raise SystemExit(f'Forbidden inherited content: {hits}')
+
+          allowed={
+            'brows00001.webp','brows00002.webp','brows00003.webp','brows00004.webp',
+            'hair00001.webp','hair00002.webp','hair00003.webp','hair00004.webp','hair00005.webp','hair00006.webp','hair00007.webp',
+            'lashes00001.webp','lashes00002.webp','lashes00003.webp','lashes00004.webp','lips01.webp',
+            'nails00001.webp','nails00002.webp','nails00003.webp','nails00004.webp',
+            'salon01.webp','salon02.webp','salon03.webp','team01.webp'
+          }
+          current={x.name for x in Path('.').glob('*.webp')}
+          if current!=allowed: raise SystemExit(f'Unexpected media set: missing={sorted(allowed-current)} extra={sorted(current-allowed)}')
+          if any(name not in text for name in allowed):
+            missing=[name for name in sorted(allowed) if name not in text]
+            raise SystemExit(f'Uploaded images missing from site gallery: {missing}')
+          print('Eva final audit passed. Manual uploaded media:',len(allowed))
+          Path('.github/workflows/final-polish.yml').unlink()
+      - name: Commit final client-ready Eva
+        run: |
+          git config user.name tanem-template-bot
+          git config user.email actions@users.noreply.github.com
+          git add -A
+          git commit -m 'Finalize client-ready Eva site'
+          git push
