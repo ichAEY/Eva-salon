@@ -41,6 +41,9 @@ jobs:
       - name: Make all five review rows visible and bust cache
         if: steps.fetchreviews.outcome == 'success'
         run: python tools/fix_review_visibility.py
+      - name: Sync the same 15 reviews to desktop fallback
+        if: steps.fetchreviews.outcome == 'success'
+        run: python tools/sync_reviews_desktop.py
       - name: Commit corrected EVA build
         if: steps.fetchreviews.outcome == 'success'
         run: |
@@ -50,6 +53,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Show five EVA review rows and bust mobile cache'
+            git commit -m 'Sync five-row EVA reviews across all layouts'
             git push
           fi
