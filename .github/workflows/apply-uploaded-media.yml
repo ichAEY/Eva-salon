@@ -32,4 +32,4 @@ jobs:
           git commit -m 'Integrate categorised Eva salon media'
           git push
 
-# trigger: uploaded media integration
+# trigger: final portfolio range fix
