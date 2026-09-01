@@ -38,6 +38,9 @@ jobs:
       - name: Stop if Yandex fetch failed
         if: steps.fetchreviews.outcome == 'failure'
         run: exit 1
+      - name: Make all five review rows visible and bust cache
+        if: steps.fetchreviews.outcome == 'success'
+        run: python tools/fix_review_visibility.py
       - name: Commit corrected EVA build
         if: steps.fetchreviews.outcome == 'success'
         run: |
@@ -47,6 +50,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No changes to commit'
           else
-            git commit -m 'Add 15 five-star EVA Yandex reviews in five rows'
+            git commit -m 'Show five EVA review rows and bust mobile cache'
             git push
           fi
