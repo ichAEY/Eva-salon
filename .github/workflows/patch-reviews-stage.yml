@@ -1,0 +1,34 @@
+name: Stage EVA reviews-only patch
+
+on:
+  push:
+    branches: [eva-reviews-patch-stage]
+    paths:
+      - '.github/workflows/patch-reviews-stage.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: eva-reviews-patch-stage
+      - name: Patch reviews only
+        run: python tools/patch_reviews_only.py
+      - name: Verify only mobile bundle changed in generated patch
+        run: |
+          git diff --name-only
+          test "$(git diff --name-only | tr -d '\r')" = "mobile-eva-current.js"
+          grep -q "reviewGroupCount=3" mobile-eva-current.js
+          grep -q "REAL_REVIEW_DATA\[14\]" mobile-eva-current.js
+      - name: Commit staged mobile review patch
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add mobile-eva-current.js
+          git commit -m 'Stage 15 EVA reviews in five rows'
+          git push origin HEAD:eva-reviews-patch-stage
