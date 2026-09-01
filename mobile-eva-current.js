@@ -534,16 +534,17 @@ team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.datase
 const reviews=$('#tn13Reviews');
 const REAL_REVIEW_DATA=[
 ['Марина Ким','Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))'],
+['Екатерина Рэй','Была на окрашивании в один тон у Нарине. Помогла грамотно определиться с цветом, всё сделала аккуратно и быстро.'],
 ['Екатерина Рэй','Большая благодарность мастеру! Обязательно обращусь сюда же']
 ];
 const reviewInitial=n=>([...String(n).trim()][0]||'E').toUpperCase();
 const reviewHref=r=>`${YANDEX_REVIEWS}#:~:text=${encodeURIComponent(r[1])}`;
 const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
-const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]],[REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[0]]];
+const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2]],[REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0]],[REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]]];
 reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>{const loop=[lane[lane.length-1],...lane,lane[0]];return `<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${loop.map(reviewCard).join('')}</div></div>`}).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 const reviewStage=reviews.querySelector('.tn30-review-stage'),reviewTracks=[...reviews.querySelectorAll('.tn30-track')];
 let reviewIndex=1,reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
-const reviewGap=12,reviewDuration=780,reviewGroupCount=2;
+const reviewGap=12,reviewDuration=780,reviewGroupCount=3;
 function reviewMetrics(){const lane=reviews.querySelector('.tn30-lane'),card=reviews.querySelector('.tn30-review-card');const width=card?card.getBoundingClientRect().width:0;return {step:width+reviewGap,edge:lane?Math.max(0,(lane.clientWidth-width)/2):26}}
 function paintReviewTracks(animated,drag=0){const {step,edge}=reviewMetrics();reviewTracks.forEach(t=>{t.style.transition=animated?`transform ${reviewDuration}ms cubic-bezier(.22,.66,.24,1)`:'none';t.style.transform=`translate3d(${edge-reviewIndex*step+drag}px,0,0)`})}
 function scheduleReviews(){clearTimeout(reviewPauseTimer);reviewPauseTimer=setTimeout(()=>moveReviews(reviewIndex+1),4000)}
