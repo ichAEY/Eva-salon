@@ -1,4 +1,5 @@
 name: Finalize EVA client build
+# retry desktop+mobile review sync v2
 
 on:
   push:
