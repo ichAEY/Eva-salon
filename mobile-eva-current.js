@@ -531,6 +531,14 @@ function openMaster(id){currentMaster=MASTERS.find(m=>m.id===id);if(!currentMast
 team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.dataset.mid));teamSheet.querySelectorAll('[data-sheet-mid]').forEach(b=>b.onclick=()=>openMaster(b.dataset.sheetMid));
 
 // REVIEWS
+
+const reviewVisibilityStyle=document.createElement('style');reviewVisibilityStyle.textContent=`
+#tn13Reviews .tn30-review-stage{display:flex!important;flex-direction:column!important;gap:12px!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important}
+#tn13Reviews .tn30-lane{display:block!important;position:relative!important;height:auto!important;min-height:0!important;overflow:hidden!important}
+#tn13Reviews .tn30-track{display:flex!important;align-items:stretch!important}
+#tn13Reviews .tn30-review-card{flex:0 0 min(82vw,330px)!important;min-height:170px!important}
+#tn13Reviews .tn30-card-stars{display:flex!important;visibility:visible!important;opacity:1!important}
+`;document.head.appendChild(reviewVisibilityStyle);
 const reviewStarStyle=document.createElement('style');reviewStarStyle.textContent=`
 .tn30-card-stars{display:flex;align-items:center;gap:3px;margin:11px 0 9px;color:#c89555}
 .tn30-card-stars svg{width:13px;height:13px;display:block;fill:currentColor;stroke:none}
