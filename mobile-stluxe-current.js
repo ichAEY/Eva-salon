@@ -42,7 +42,12 @@
 
   const works=[
     {src:'assets/eva-gallery/eva-01.jpg',cat:'salon',alt:'EVA — салон красоты'},
-    {src:'assets/eva-gallery/eva-02.jpg',cat:'salon',alt:'EVA — салон красоты'}
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'salon',alt:'EVA — салон красоты'},
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'hair',alt:'EVA — салон красоты'},
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'nails',alt:'EVA — салон красоты'},
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'face',alt:'EVA — салон красоты'},
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'hair',alt:'EVA — салон красоты'},
+    {src:'assets/eva-gallery/eva-01.jpg',cat:'nails',alt:'EVA — салон красоты'}
   ];
 
   // Только короткие фрагменты отзывов, ранее подтверждённых по карточке EVA в Яндекс Картах.
