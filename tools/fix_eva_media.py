@@ -6,7 +6,7 @@ BUSINESS='200326329284'
 KNOWN='https://avatars.mds.yandex.net/get-altay/11908258/2a0000018e5bc631ae55a4afdfeeeb0de622/XXL_height'
 HEADERS={'User-Agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Safari/604.1'}
 
-raw=urllib.request.urlopen(urllib.request.Request(CARD,headers=HEADERS),timeout=30).read().decode('utf-8','ignore')
+raw=urllib.request.urlopen(urllib.request.Request(CARD,headers=HEADERS),timeout=8).read().decode('utf-8','ignore')
 raw=html.unescape(raw).replace('\\/','/')
 chunks=[]
 for m in re.finditer(BUSINESS,raw):
@@ -19,6 +19,7 @@ for u in re.findall(r"https://avatars\.mds\.yandex\.net/get-altay/[^\"'<> ]+",sc
     if u not in urls:
         urls.append(u)
 urls=[KNOWN]+[u for u in urls if u!=KNOWN]
+urls=urls[:10]
 
 out=Path('assets/eva-gallery')
 out.mkdir(parents=True,exist_ok=True)
@@ -26,9 +27,9 @@ for old in out.glob('*'):
     if old.is_file(): old.unlink()
 saved=[]
 for u in urls:
-    if len(saved)>=18: break
+    if len(saved)>=8: break
     try:
-        data=urllib.request.urlopen(urllib.request.Request(u,headers=HEADERS),timeout=25).read()
+        data=urllib.request.urlopen(urllib.request.Request(u,headers=HEADERS),timeout=5).read()
         if len(data)<15000: continue
         p=out/f'eva-{len(saved)+1:02d}.jpg'
         p.write_bytes(data)
@@ -42,7 +43,7 @@ print('Saved Eva card photos:',len(saved))
 real=[str(p).replace('\\','/') for p in saved]
 js=Path('mobile-stluxe-current.js')
 s=js.read_text(encoding='utf-8')
-cats=['salon','salon','hair','nails','face','hair','nails','salon','face','hair','nails','other']
+cats=['salon','salon','hair','nails','face','hair','nails','salon']
 items=[]
 for i,u in enumerate(real):
     items.append("    {src:%r,cat:%r,alt:%r}"%(u,cats[i%len(cats)],'EVA — салон красоты'))
