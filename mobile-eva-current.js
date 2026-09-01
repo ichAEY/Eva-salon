@@ -533,14 +533,73 @@ team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.datase
 // REVIEWS
 const reviews=$('#tn13Reviews');
 const REAL_REVIEW_DATA=[
-['Марина Ким','Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))'],
-['Екатерина Рэй','Была на окрашивании в один тон у Нарине. Помогла грамотно определиться с цветом, всё сделала аккуратно и быстро.'],
-['Екатерина Рэй','Большая благодарность мастеру! Обязательно обращусь сюда же']
+[
+"Александра Н.",
+"Все отлично!! Благодарю) сама хожу в ваш салон на окрашивание, маникюр. И мужа регулярно на стрижку записываю. Все мастера настоящие профессионалы!"
+],
+[
+"natalia tatarinceva",
+"Все отлично, мастер хороший,  внимательный. \nВсе на высшем уровне. \nРекомендую.  \nСейчас сложно найти салон, где сочетаются цена и качество.  Спасибо"
+],
+[
+"Арина Боданова",
+"обожаю"
+],
+[
+"gugen",
+"Хорошо стригут. Если сказать, что живёшь в этом доме (прописку не проверяют) - скидка 20%🔥"
+],
+[
+"Екатерина Рэй",
+"Была на окрашивании в один тон  у Нарине, оказалось, что она  замечательный специалист, помогла мне грамотно определиться с цветом, всё сделала аккуратно и быстро, очень рада что нашла этот салон! Большая благодарность мастеру! Обязательно обращусь сюда же в следующий раз 🌹"
+],
+[
+"aaarinkooo",
+"Сегодня ходила в этот салон на наращивание ногтей, я в восторге, очень аккуратно, красиво и быстро сделал мастер, буду ходить ещё!💅🏻🫶🏻"
+],
+[
+"Алина Жукова",
+"Подстригался сын остались очень довольны 👍 спасибо придём обязательно еще 🌸"
+],
+[
+"Светлана Старчикова",
+"Мне очень нравится этот салон! Все девушки очень приятные, записываться можно к любой - все сделают на высшем уровне!"
+],
+[
+"Екатерина",
+"Маникюр сделали быстро, качественно,"
+],
+[
+"Aliya Uderbaeva",
+"Хочу выразить огромную благодарность Наре!!!Мастер-золото!!!Попала благодаря отзывам,было немного волнения, но результат превзошел ожидания!!!!После первого посещения, осталась довольна и теперь только к ней!!!В салоне атмосфера -супер!!!В последний раз приходила с дочкой,мечтала о розовых локонах!!!Результат-ребенок счастлив!!!Всем рекомендую данный салон!!!Девочки-огонь!!!!!"
+],
+[
+"Оксана Вайнбергер",
+"Была первый раз в салоне Эва, у мастера маникюра Татев. Очень хороший мастер, все аккуратно, красиво и быстро!!! Спасибо, мастеру!♥️"
+],
+[
+"Ю.В. Куликова",
+"Мастер Елена просто чудо! Легкая рука, эпиляцию сделали мега быстро и безболезненно. С Еленой максимально комфортно взаимодействовать, интересный собеседник. Однозначно рекомендую за такой процедурой обращаться именно к Елене!"
+],
+[
+"Алина С.",
+"Что касается салона в целом: удобное расположение, приятные цены, приветливый коллектив, всегда дружелюбная атмосфера. \n\nОтдельно хочу отметить мастера по маникюру Розу. Она замечательный профессионал своего дела и просто чуткий человек. Маникюр держится превосходно и ручки после нее выглядят потрясающе. Спасибо 🌹 \n\nХочу дополнить отзыв: была записана на окрашивание к Нарине, как вдруг во всем доме выключили свет, но мастер не растерялась и справилась блестяще со своей работой в таких экстремальных условиях. Тут работают настоящие профессионалы!"
+],
+[
+"Зарета К.",
+"Мастер Евгения, лучшая в своём деле.Очень красиво подстригла, объяснила как делать укладку дома."
+],
+[
+"Марина Ким",
+"Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))"
+]
 ];
 const reviewInitial=n=>([...String(n).trim()][0]||'E').toUpperCase();
 const reviewHref=r=>`${YANDEX_REVIEWS}#:~:text=${encodeURIComponent(r[1])}`;
-const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
-const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2]],[REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0]],[REAL_REVIEW_DATA[2],REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]]];
+const reviewStarSvg='<svg viewBox="0 0 20 20" aria-hidden="true" style="width:12px;height:12px;display:block;fill:currentColor"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg>';
+const reviewStars=`<span aria-label="5 из 5" style="display:flex;gap:2px;margin-top:7px;color:#b78d4f">${reviewStarSvg.repeat(5)}</span>`;
+const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span>${reviewStars}</span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
+const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2]],[REAL_REVIEW_DATA[3],REAL_REVIEW_DATA[4],REAL_REVIEW_DATA[5]],[REAL_REVIEW_DATA[6],REAL_REVIEW_DATA[7],REAL_REVIEW_DATA[8]],[REAL_REVIEW_DATA[9],REAL_REVIEW_DATA[10],REAL_REVIEW_DATA[11]],[REAL_REVIEW_DATA[12],REAL_REVIEW_DATA[13],REAL_REVIEW_DATA[14]]];
 reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>{const loop=[lane[lane.length-1],...lane,lane[0]];return `<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${loop.map(reviewCard).join('')}</div></div>`}).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 const reviewStage=reviews.querySelector('.tn30-review-stage'),reviewTracks=[...reviews.querySelectorAll('.tn30-track')];
 let reviewIndex=1,reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
