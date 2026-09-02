@@ -34,7 +34,6 @@ html,body{background:var(--stl-white)!important}
     linear-gradient(180deg,#fbfafb 0%,#fafafa 91%,#fafafa 100%)!important;
 }
 .tn22-top{background:transparent!important}
-.tn22-media{top:0!important;height:424px!important}
 .tn22-media:after{background:linear-gradient(180deg,rgba(250,250,250,0),#fafafa 96%)!important}
 .tn22-card{
   background:
