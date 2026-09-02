@@ -1,5 +1,5 @@
 name: Correct EVA to Pavlino
-# rerun after normalizing all hidden Mytishchi address fragments
+# rerun after fixing legacy Mytishchi hero copy and map
 
 on:
   push:
