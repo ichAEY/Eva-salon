@@ -7,11 +7,23 @@ on:
       - '.github/workflows/inspect-pavlino-yandex.yml'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - run: python -m pip install requests -q
       - name: Fetch exact Yandex profile 1179517154
         run: python tools/fetch_pavlino_yandex_reviews.py
+      - name: Save inspection result
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add tmp/pavlino-review-contexts.txt
+          git commit -m 'Save Pavlino Yandex review inspection'
+          git push
