@@ -1,5 +1,5 @@
 name: Inspect correct EVA Yandex
-# exact API attempt for business 1179517154
+# exact /reviews/ pagination for business 1179517154
 
 on:
   push:
