@@ -1,0 +1,50 @@
+name: EVA transparent hero header
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/eva-transparent-header.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Remove only EVA hero header background
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('mobile-eva-theme-current.js')
+          s=p.read_text(encoding='utf-8')
+          old=""".tn22-top{
+            background:
+              radial-gradient(280px 160px at 108% -18%,rgba(201,130,153,.12),transparent 72%),
+              #fbfafb!important;
+          }"""
+          new=""".tn22-top{background:transparent!important}"""
+          if old not in s:
+              raise SystemExit('Expected tn22-top background block not found; refusing broad edit')
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          print('patched tn22-top only')
+          PY
+      - name: Validate JavaScript
+        run: node --check mobile-eva-theme-current.js
+      - name: Verify isolated change
+        run: |
+          test "$(git diff --name-only)" = "mobile-eva-theme-current.js"
+          grep -q '.tn22-top{background:transparent!important}' mobile-eva-theme-current.js
+      - name: Commit
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add mobile-eva-theme-current.js
+          git commit -m 'Make EVA hero header transparent'
+          git push
