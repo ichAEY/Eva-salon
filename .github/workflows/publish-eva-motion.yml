@@ -1,0 +1,50 @@
+name: Publish EVA motion layer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-eva-motion.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate motion JavaScript
+        run: node --check mobile-eva-motion.js
+      - name: Connect motion layer after current mobile theme
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'mobile-eva-motion.js' in s:
+              raise SystemExit('motion layer already connected')
+          marker='<script defer src="mobile-eva-theme-current.js?v=20260902-pavlino-correct"></script>'
+          if marker not in s:
+              raise SystemExit('expected current theme script marker not found')
+          insert=marker+'\n<script defer src="mobile-eva-motion.js?v=20260903-motion-v1"></script>'
+          s=s.replace(marker,insert,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Verify isolated index change
+        run: |
+          test "$(git diff --name-only)" = "index.html"
+          grep -q 'mobile-eva-motion.js?v=20260903-motion-v1' index.html
+          node --check mobile-eva-current.js
+          node --check mobile-eva-theme-current.js
+          node --check mobile-eva-motion.js
+      - name: Commit connection
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Enable EVA restrained mobile animations'
+          git push
