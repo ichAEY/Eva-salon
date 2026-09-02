@@ -37,7 +37,7 @@ const reviewLanes=[REAL_REVIEW_DATA.slice(0,3),REAL_REVIEW_DATA.slice(3,6),REAL_
 reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage tn30-review-stage-5x3">${{reviewLanes.map((lane,i)=>`<div class="tn30-lane" data-lane="${{i}}"><div class="tn30-track">${{lane.map(reviewCard).join('')}}</div></div>`).join('')}}</div><a class="tn30-review-all" href="${{YANDEX_REVIEWS}}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 
 // VISIT'''
-s, n = re.subn(r'// REVIEWS\n.*?// VISIT', block, s, count=1, flags=re.S)
+s, n = re.subn(r'// REVIEWS\n.*?// VISIT', lambda _: block, s, count=1, flags=re.S)
 if n != 1:
     raise SystemExit('review block replacement failed')
 review_block = re.search(r'// REVIEWS\n.*?// VISIT', s, re.S).group(0)
@@ -64,7 +64,6 @@ compact_css = '''
 .tn30-review-stage-5x3 .tn30-review-card p{margin:7px 0 0!important;font-size:9px!important;line-height:1.28!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:4!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .tn30-review-stage-5x3 .tn30-review-open{display:block!important;margin-top:auto!important;padding-top:5px!important;font-size:7.4px!important;line-height:1!important;white-space:nowrap!important}
 '''
-# Remove any previous compact override if this script is rerun.
 theme = re.sub(r'\n\.tn30-review-stage-5x3\{.*?(?=\n/\* Contacts \*/)', '\n', theme, count=1, flags=re.S)
 if marker not in theme:
     raise SystemExit('review theme marker missing')
