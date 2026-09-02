@@ -33,11 +33,7 @@ html,body{background:var(--stl-white)!important}
     radial-gradient(260px 190px at -12% 78%,rgba(214,151,170,.055),transparent 72%),
     linear-gradient(180deg,#fbfafb 0%,#fafafa 91%,#fafafa 100%)!important;
 }
-.tn22-top{
-  background:
-    radial-gradient(280px 160px at 108% -18%,rgba(201,130,153,.12),transparent 72%),
-    #fbfafb!important;
-}
+.tn22-top{background:transparent!important}
 .tn22-media:after{background:linear-gradient(180deg,rgba(250,250,250,0),#fafafa 96%)!important}
 .tn22-card{
   background:
