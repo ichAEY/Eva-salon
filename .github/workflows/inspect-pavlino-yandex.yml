@@ -1,5 +1,5 @@
 name: Inspect correct EVA Yandex
-# fetch 15 exact five-star Pavlino reviews
+# exact API attempt for business 1179517154
 
 on:
   push:
