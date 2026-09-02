@@ -1,5 +1,5 @@
-name: Run EVA mobile reviews 5x3
-# rerun after escaping fix
+name: Run EVA animated mobile reviews
+# three visible animated rows, five reviews per row
 
 on:
   push:
@@ -18,12 +18,31 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply compact 5x3 reviews
+      - name: Apply animated three-row reviews
         run: python tools/mobile_reviews_5x3_compact.py
       - name: Validate JavaScript
         run: |
           node --check mobile-eva-current.js
           node --check mobile-eva-theme-current.js
+      - name: Validate review structure
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s=Path('mobile-eva-current.js').read_text(encoding='utf-8')
+          block=re.search(r'// REVIEWS\n.*?// VISIT',s,re.S).group(0)
+          assert block.count('REAL_REVIEW_DATA.slice(')==3
+          assert 'slice(0,5)' in block and 'slice(5,10)' in block and 'slice(10,15)' in block
+          assert 'reviewGroupCount=5' in block
+          assert 'reviewStarSvg.repeat(5)' in block
+          assert 'const loop=[lane[lane.length-1],...lane,lane[0]]' in block
+          t=Path('mobile-eva-theme-current.js').read_text(encoding='utf-8')
+          assert 'tn30-review-stage-5x3' not in t
+          assert 'tn30-review-stage-3x5' in t
+          assert '-webkit-line-clamp:4' in t
+          assert 'height:154px' in t
+          print('3 animated lanes x 5 reviews validated')
+          PY
       - name: Validate isolated files
         run: |
           changed="$(git diff --name-only | sort)"
@@ -34,5 +53,5 @@ jobs:
           git config user.name 'tanem-template-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add index.html mobile-eva-current.js mobile-eva-theme-current.js
-          git commit -m 'Add compact EVA mobile reviews 5x3'
+          git commit -m 'Restore EVA animated reviews with three visible rows'
           git push
