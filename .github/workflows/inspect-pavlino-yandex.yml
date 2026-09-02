@@ -1,0 +1,17 @@
+name: Inspect correct EVA Yandex
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-pavlino-yandex.yml'
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install requests -q
+      - name: Fetch exact Yandex profile 1179517154
+        run: python tools/fetch_pavlino_yandex_reviews.py
