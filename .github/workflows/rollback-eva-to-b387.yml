@@ -1,0 +1,34 @@
+name: Roll back EVA to previous published version
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rollback-eva-to-b387.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore exact previous published site files
+        run: |
+          git checkout b387c87e0f646933412e492bf5dd4c1238c317a2 -- index.html mobile-eva-theme-current.js .nojekyll
+      - name: Validate JavaScript
+        run: node --check mobile-eva-theme-current.js
+      - name: Verify exact rollback
+        run: |
+          git diff --exit-code b387c87e0f646933412e492bf5dd4c1238c317a2 -- index.html mobile-eva-theme-current.js .nojekyll
+      - name: Commit rollback
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html mobile-eva-theme-current.js .nojekyll
+          git commit -m 'Restore EVA previous published version'
+          git push
