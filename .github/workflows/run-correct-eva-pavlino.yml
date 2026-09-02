@@ -1,0 +1,46 @@
+name: Correct EVA to Pavlino
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-correct-eva-pavlino.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply guarded exact-card correction
+        run: python tools/correct_eva_to_pavlino.py
+      - name: Validate JavaScript
+        run: |
+          node --check mobile-eva-current.js
+          node --check mobile-eva-theme-current.js
+      - name: Validate exact identity and no wrong salon data
+        run: |
+          grep -q "1179517154" index.html
+          grep -q "1179517154" mobile-eva-current.js
+          grep -q "Павлино" index.html
+          grep -q "Павлино" mobile-eva-current.js
+          grep -q "+79260063922" index.html
+          grep -q "+79260063922" mobile-eva-current.js
+          ! grep -Eq "Мытищи|Академика Каргина|200326329284|79684270101|Нарине" index.html mobile-eva-current.js
+      - name: Verify isolated live-file changes
+        run: |
+          changed="$(git diff --name-only | sort)"
+          expected="$(printf 'index.html\nmobile-eva-current.js')"
+          test "$changed" = "$expected"
+      - name: Commit corrected salon
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html mobile-eva-current.js
+          git commit -m 'Correct EVA to exact Pavlino Yandex card'
+          git push
