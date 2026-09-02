@@ -141,6 +141,19 @@ html,body{background:var(--stl-white)!important}
 .tn30-review-avatar{background:#e4e2e7!important;color:#504a52!important}
 .tn30-review-meta{color:#88828a!important}
 .tn30-review-all{background:#f1f0f3!important;border-color:rgba(67,58,71,.14)!important}
+.tn30-review-stage-5x3{display:grid!important;gap:9px!important;margin:32px 14px 0!important;overflow:visible!important;touch-action:auto!important;cursor:default!important;user-select:auto!important}
+.tn30-review-stage-5x3 .tn30-lane{width:100%!important;overflow:visible!important}
+.tn30-review-stage-5x3 .tn30-track{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;width:100%!important;transform:none!important;transition:none!important}
+.tn30-review-stage-5x3 .tn30-review-card{flex:none!important;width:auto!important;min-width:0!important;height:136px!important;min-height:136px!important;padding:10px 9px 9px!important;border-radius:11px!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+.tn30-review-stage-5x3 .tn30-review-head{display:block!important;margin:0!important}
+.tn30-review-stage-5x3 .tn30-review-avatar{display:none!important}
+.tn30-review-stage-5x3 .tn30-review-name{display:block!important;font-size:11.5px!important;line-height:1.05!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.tn30-review-stage-5x3 .tn30-review-meta{display:block!important;margin-top:4px!important;font-size:6.8px!important;letter-spacing:.06em!important}
+.tn30-card-stars{display:flex!important;gap:1px!important;margin-top:5px!important;color:var(--stl-yellow)!important}
+.tn30-card-stars svg{width:7px!important;height:7px!important;display:block!important;fill:currentColor!important;flex:0 0 auto!important}
+.tn30-review-stage-5x3 .tn30-review-card p{margin:7px 0 0!important;font-size:9px!important;line-height:1.28!important;display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:4!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.tn30-review-stage-5x3 .tn30-review-open{display:block!important;margin-top:auto!important;padding-top:5px!important;font-size:7.4px!important;line-height:1!important;white-space:nowrap!important}
+
 
 /* Contacts */
 #tn13Visit{
