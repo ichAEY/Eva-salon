@@ -63,9 +63,8 @@
 
   const masters=[
     {id:'hair',name:'Мастер',category:'Волосы',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['hair']},
-    {id:'nails',name:'Мастер',category:'Маникюр · педикюр',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['nails']},
-    {id:'cosmetology',name:'Мастер',category:'Косметология',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['face']},
-    {id:'look',name:'Мастер',category:'Брови · ресницы',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['brows','lashes']}
+    {id:'look',name:'Мастер',category:'Брови · ресницы',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['browslashes']},
+    {id:'nails',name:'Мастер',category:'Маникюр',initial:'E',about:'Персональные данные специалиста уточняются у салона.',cats:['nails']}
   ];
 
   const font=document.createElement('link');
@@ -390,9 +389,8 @@ const PORTFOLIO=[
 const REVIEW_DATA=[];
 const MASTERS=[
 {id:'hair',name:'Мастер',role:'Волосы',about:'Персональные данные специалиста уточняются у салона.',cats:['Волосы'],work:['hair00001.webp','hair00002.webp','hair00003.webp'],reviewNames:[]},
-{id:'nails',name:'Мастер',role:'Маникюр · педикюр',about:'Персональные данные специалиста уточняются у салона.',cats:['Маникюр'],work:['nails00001.webp','nails00002.webp','nails00003.webp'],reviewNames:[]},
-{id:'cosmetology',name:'Мастер',role:'Косметология',about:'Персональные данные специалиста уточняются у салона.',cats:['Косметология'],work:[],reviewNames:[]},
-{id:'look',name:'Мастер',role:'Брови · ресницы',about:'Персональные данные специалиста уточняются у салона.',cats:['Брови','Ресницы'],work:['brows00001.webp','lashes00001.webp'],reviewNames:[]}
+{id:'look',name:'Мастер',role:'Брови · ресницы',about:'Персональные данные специалиста уточняются у салона.',cats:['Брови и ресницы'],work:['brows00001.webp','lashes00001.webp'],reviewNames:[]},
+{id:'nails',name:'Мастер',role:'Маникюр',about:'Персональные данные специалиста уточняются у салона.',cats:['Маникюр'],work:['nails00001.webp','nails00002.webp','nails00003.webp'],reviewNames:[]}
 ];
 const MASTER_AVATAR='<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="23" r="11" fill="currentColor"></circle><path d="M12 56c2.7-11.4 10-17 20-17s17.3 5.6 20 17" fill="currentColor"></path></svg>';
 
