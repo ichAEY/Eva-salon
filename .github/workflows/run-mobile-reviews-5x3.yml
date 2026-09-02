@@ -1,0 +1,37 @@
+name: Run EVA mobile reviews 5x3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/run-mobile-reviews-5x3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply compact 5x3 reviews
+        run: python tools/mobile_reviews_5x3_compact.py
+      - name: Validate JavaScript
+        run: |
+          node --check mobile-eva-current.js
+          node --check mobile-eva-theme-current.js
+      - name: Validate isolated files
+        run: |
+          changed="$(git diff --name-only | sort)"
+          expected="$(printf 'index.html\nmobile-eva-current.js\nmobile-eva-theme-current.js')"
+          test "$changed" = "$expected"
+      - name: Commit
+        run: |
+          git config user.name 'tanem-template-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html mobile-eva-current.js mobile-eva-theme-current.js
+          git commit -m 'Add compact EVA mobile reviews 5x3'
+          git push
