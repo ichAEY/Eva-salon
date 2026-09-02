@@ -1,4 +1,5 @@
 name: Inspect correct EVA Yandex
+# fetch 15 exact five-star Pavlino reviews
 
 on:
   push:
@@ -24,6 +25,6 @@ jobs:
         run: |
           git config user.name 'tanem-template-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add tmp/pavlino-review-contexts.txt
-          git commit -m 'Save Pavlino Yandex review inspection'
+          git add tmp/pavlino-5star-reviews.json
+          git commit -m 'Save 15 Pavlino five-star Yandex reviews'
           git push
