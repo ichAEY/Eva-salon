@@ -5,68 +5,39 @@ from pathlib import Path
 import requests
 
 BUSINESS_ID='1179517154'
-CARD='https://yandex.ru/maps/org/yeva/1179517154/'
-ENDPOINT='https://yandex.ru/maps/api/business/fetchReviews'
-HEADERS={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/140 Safari/537.36','Accept-Language':'ru-RU,ru;q=0.9,en;q=0.8','Referer':CARD}
+BASE='https://yandex.com/maps/org/yeva/1179517154/reviews/'
+HEADERS={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36','Accept-Language':'ru-RU,ru;q=0.9','Accept':'text/html,application/xhtml+xml'}
+PAT=re.compile(r'"reviewId":"(?P<id>(?:\\.|[^"])*)".*?"businessId":"1179517154".*?"author":\{"name":"(?P<name>(?:\\.|[^"])*)".*?\},"text":"(?P<text>(?:\\.|[^"])*)".*?"rating":(?P<rating>\d+)',re.S)
 
-def djb2_xor(s):
-    n=5381
-    for ch in s:
-        n=(33*n)^ord(ch)
-    return n & 0xffffffff
+def dec(s):
+    return json.loads('"'+s+'"')
 
-session=requests.Session()
-page=session.get(CARD,headers=HEADERS,timeout=30)
-print('card',page.status_code,'len',len(page.text),'url',page.url)
-page.raise_for_status()
-s=htmlmod.unescape(page.text)
-for key in ('reqId','sessionId','csrfToken'):
-    vals=[]
-    for pat in [rf'"{key}":"([^"]+)"',rf'{key}=([^&"\\]+)']:
-        vals.extend(re.findall(pat,s))
-    uniq=[]
-    for v in vals:
-        if v not in uniq: uniq.append(v)
-    print(key,'candidates',uniq[:10])
-
-reqs=re.findall(r'"reqId":"([^"]+)"',s)
-sessions=re.findall(r'"sessionId":"([^"]+)"',s)
-if not reqs or not sessions:
-    raise SystemExit('reqId/sessionId not found in exact Yandex card')
-req_id=reqs[0]; session_id=sessions[0]
-post=session.post(ENDPOINT,headers=HEADERS,timeout=30)
-print('csrf POST',post.status_code,post.text[:300])
-post.raise_for_status()
-csrf=post.json()['csrfToken']
-
-reviews=[]; seen=set()
-for pageno in range(1,8):
-    ordered=[('ajax','1'),('businessId',BUSINESS_ID),('csrfToken',csrf),('locale','ru_RU'),('page',str(pageno)),('pageSize','50'),('ranking','by_time'),('reqId',req_id),('sessionId',session_id)]
-    raw='&'.join(f'{k}={v}' for k,v in ordered)
-    sig=str(djb2_xor(raw))
-    params=dict(ordered); params['s']=sig
-    r=session.get(ENDPOINT,params=params,headers=HEADERS,timeout=30)
-    print('reviews page',pageno,'status',r.status_code,'url',r.url[:260])
-    print('body head',r.text[:220])
-    if r.status_code!=200: break
-    data=r.json()
-    candidates=data.get('reviews') or data.get('reviewResults',{}).get('reviews') or data.get('data',{}).get('reviews') or []
-    print('items',len(candidates),'keys',list(data)[:15])
-    for item in candidates:
-        rid=str(item.get('reviewId',''))
-        if not rid or rid in seen: continue
-        seen.add(rid)
-        author=item.get('author') or {}
-        text=item.get('text') or ''
-        rating=int(item.get('rating') or 0)
-        if str(item.get('businessId',BUSINESS_ID))==BUSINESS_ID and rating==5 and text.strip():
-            reviews.append({'reviewId':rid,'businessId':BUSINESS_ID,'name':author.get('name',''),'text':text,'rating':rating})
+session=requests.Session(); seen=set(); reviews=[]
+for page in range(1,8):
+    url=BASE if page==1 else BASE+f'?page={page}'
+    r=session.get(url,headers=HEADERS,timeout=30)
+    print('page',page,'status',r.status_code,'len',len(r.text),'url',r.url)
+    r.raise_for_status()
+    s=htmlmod.unescape(r.text)
+    matches=list(PAT.finditer(s))
+    print('matches',len(matches))
+    new=0
+    for m in matches:
+        rid=dec(m.group('id'))
+        if rid in seen: continue
+        seen.add(rid); new+=1
+        name=dec(m.group('name')); text=dec(m.group('text')); rating=int(m.group('rating'))
+        if rating==5 and text.strip():
+            reviews.append({'reviewId':rid,'businessId':BUSINESS_ID,'name':name,'text':text,'rating':rating})
+    print('new ids',new,'five-star total',len(reviews))
     if len(reviews)>=15: break
 
 if len(reviews)<15:
-    raise SystemExit(f'only {len(reviews)} exact 5-star reviews fetched through Yandex API')
+    raise SystemExit(f'only {len(reviews)} unique 5-star reviews from exact reviews pages')
 reviews=reviews[:15]
+if len({r['reviewId'] for r in reviews}) != 15 or any(r['businessId']!=BUSINESS_ID or r['rating']!=5 for r in reviews):
+    raise SystemExit('validation failed')
 Path('tmp').mkdir(exist_ok=True)
 Path('tmp/pavlino-5star-reviews.json').write_text(json.dumps(reviews,ensure_ascii=False,indent=2),encoding='utf-8')
-print('SUCCESS exact reviews',len(reviews))
-for i,r in enumerate(reviews,1): print(i,r['name'],repr(r['text'][:100]))
+print('SUCCESS 15 exact five-star reviews from business',BUSINESS_ID)
+for i,r in enumerate(reviews,1): print(i,r['name'],repr(r['text'][:110]))
