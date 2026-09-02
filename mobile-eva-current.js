@@ -533,91 +533,28 @@ team.querySelectorAll('[data-mid]').forEach(b=>b.onclick=()=>openMaster(b.datase
 // REVIEWS
 const reviews=$('#tn13Reviews');
 const REAL_REVIEW_DATA=[
-[
-"Александра Н.",
-"Все отлично!! Благодарю) сама хожу в ваш салон на окрашивание, маникюр. И мужа регулярно на стрижку записываю. Все мастера настоящие профессионалы!"
-],
-[
-"natalia tatarinceva",
-"Все отлично, мастер хороший,  внимательный. \nВсе на высшем уровне. \nРекомендую.  \nСейчас сложно найти салон, где сочетаются цена и качество.  Спасибо"
-],
-[
-"Арина Боданова",
-"обожаю"
-],
-[
-"gugen",
-"Хорошо стригут. Если сказать, что живёшь в этом доме (прописку не проверяют) - скидка 20%🔥"
-],
-[
-"Екатерина Рэй",
-"Была на окрашивании в один тон  у Нарине, оказалось, что она  замечательный специалист, помогла мне грамотно определиться с цветом, всё сделала аккуратно и быстро, очень рада что нашла этот салон! Большая благодарность мастеру! Обязательно обращусь сюда же в следующий раз 🌹"
-],
-[
-"aaarinkooo",
-"Сегодня ходила в этот салон на наращивание ногтей, я в восторге, очень аккуратно, красиво и быстро сделал мастер, буду ходить ещё!💅🏻🫶🏻"
-],
-[
-"Алина Жукова",
-"Подстригался сын остались очень довольны 👍 спасибо придём обязательно еще 🌸"
-],
-[
-"Светлана Старчикова",
-"Мне очень нравится этот салон! Все девушки очень приятные, записываться можно к любой - все сделают на высшем уровне!"
-],
-[
-"Екатерина",
-"Маникюр сделали быстро, качественно,"
-],
-[
-"Aliya Uderbaeva",
-"Хочу выразить огромную благодарность Наре!!!Мастер-золото!!!Попала благодаря отзывам,было немного волнения, но результат превзошел ожидания!!!!После первого посещения, осталась довольна и теперь только к ней!!!В салоне атмосфера -супер!!!В последний раз приходила с дочкой,мечтала о розовых локонах!!!Результат-ребенок счастлив!!!Всем рекомендую данный салон!!!Девочки-огонь!!!!!"
-],
-[
-"Оксана Вайнбергер",
-"Была первый раз в салоне Эва, у мастера маникюра Татев. Очень хороший мастер, все аккуратно, красиво и быстро!!! Спасибо, мастеру!♥️"
-],
-[
-"Ю.В. Куликова",
-"Мастер Елена просто чудо! Легкая рука, эпиляцию сделали мега быстро и безболезненно. С Еленой максимально комфортно взаимодействовать, интересный собеседник. Однозначно рекомендую за такой процедурой обращаться именно к Елене!"
-],
-[
-"Алина С.",
-"Что касается салона в целом: удобное расположение, приятные цены, приветливый коллектив, всегда дружелюбная атмосфера. \n\nОтдельно хочу отметить мастера по маникюру Розу. Она замечательный профессионал своего дела и просто чуткий человек. Маникюр держится превосходно и ручки после нее выглядят потрясающе. Спасибо 🌹 \n\nХочу дополнить отзыв: была записана на окрашивание к Нарине, как вдруг во всем доме выключили свет, но мастер не растерялась и справилась блестяще со своей работой в таких экстремальных условиях. Тут работают настоящие профессионалы!"
-],
-[
-"Зарета К.",
-"Мастер Евгения, лучшая в своём деле.Очень красиво подстригла, объяснила как делать укладку дома."
-],
-[
-"Марина Ким",
-"Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))"
-]
+['Марина Ким','Professional Master Nara, thank you for my brown hair like 18 years old, and delicious armenian coffee))'],
+['Екатерина Рэй','Большая благодарность мастеру! Обязательно обращусь сюда же']
 ];
 const reviewInitial=n=>([...String(n).trim()][0]||'E').toUpperCase();
 const reviewHref=r=>`${YANDEX_REVIEWS}#:~:text=${encodeURIComponent(r[1])}`;
-const reviewStarSvg='<svg viewBox="0 0 20 20" aria-hidden="true" style="width:12px;height:12px;display:block;fill:currentColor"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg>';
-const reviewStars=`<span aria-label="5 из 5" style="display:flex;gap:2px;margin-top:7px;color:#b78d4f">${reviewStarSvg.repeat(5)}</span>`;
-const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span>${reviewStars}</span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
-const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[2]],[REAL_REVIEW_DATA[3],REAL_REVIEW_DATA[4],REAL_REVIEW_DATA[5]],[REAL_REVIEW_DATA[6],REAL_REVIEW_DATA[7],REAL_REVIEW_DATA[8]],[REAL_REVIEW_DATA[9],REAL_REVIEW_DATA[10],REAL_REVIEW_DATA[11]],[REAL_REVIEW_DATA[12],REAL_REVIEW_DATA[13],REAL_REVIEW_DATA[14]]];
-reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>`<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${lane.map(reviewCard).join('')}</div></div>`).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
+const reviewCard=r=>`<a class="tn30-review-card" href="${reviewHref(r)}" target="_blank" rel="noopener"><div class="tn30-review-head"><span class="tn30-review-avatar">${reviewInitial(r[0])}</span><span><strong class="tn30-review-name">${r[0]}</strong><span class="tn30-review-meta">Яндекс Карты</span></span></div><p>${r[1]}</p><span class="tn30-review-open">Подробнее →</span></a>`;
+const reviewLanes=[[REAL_REVIEW_DATA[0],REAL_REVIEW_DATA[1]],[REAL_REVIEW_DATA[1],REAL_REVIEW_DATA[0]]];
+reviews.innerHTML=`<div class="tn30-reviews"><p class="tn22-kicker">Отзывы</p><h2>Что говорят о нас</h2><div class="tn30-score"><strong>4,8</strong><div class="tn30-stars">★★★★★</div><div class="tn30-count">92 отзыва на Яндекс Картах</div></div><div class="tn30-review-stage">${reviewLanes.map((lane,i)=>{const loop=[lane[lane.length-1],...lane,lane[0]];return `<div class="tn30-lane" data-lane="${i}"><div class="tn30-track">${loop.map(reviewCard).join('')}</div></div>`}).join('')}</div><a class="tn30-review-all" href="${YANDEX_REVIEWS}" target="_blank" rel="noopener">Смотреть все отзывы →</a></div>`;
 const reviewStage=reviews.querySelector('.tn30-review-stage'),reviewTracks=[...reviews.querySelectorAll('.tn30-track')];
-let reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
-const reviewGap=12,reviewDuration=780;
+let reviewIndex=1,reviewPauseTimer=0,reviewMotionTimer=0,reviewDragging=false,reviewMoved=false,reviewSuppressClick=false,reviewStartX=0,reviewStartY=0,reviewDx=0;
+const reviewGap=12,reviewDuration=780,reviewGroupCount=2;
 function reviewMetrics(){const lane=reviews.querySelector('.tn30-lane'),card=reviews.querySelector('.tn30-review-card');const width=card?card.getBoundingClientRect().width:0;return {step:width+reviewGap,edge:lane?Math.max(0,(lane.clientWidth-width)/2):26}}
-function setReviewTrack(track,x,animated){track.style.transition=animated?`transform ${reviewDuration}ms cubic-bezier(.22,.66,.24,1)`:'none';track.style.transform=`translate3d(${x}px,0,0)`}
-function paintReviewTracks(animated,drag=0){const {edge}=reviewMetrics();reviewTracks.forEach(t=>setReviewTrack(t,edge+drag,animated))}
-function scheduleReviews(){clearTimeout(reviewPauseTimer);reviewPauseTimer=setTimeout(()=>rotateReviewsForward(),4000)}
-function rotateReviewsForward(){clearTimeout(reviewPauseTimer);clearTimeout(reviewMotionTimer);const {step,edge}=reviewMetrics();reviewTracks.forEach(t=>setReviewTrack(t,edge-step,true));reviewMotionTimer=setTimeout(()=>{reviewTracks.forEach(t=>{if(t.firstElementChild)t.appendChild(t.firstElementChild);setReviewTrack(t,edge,false)});scheduleReviews()},reviewDuration+40)}
-function rotateReviewsBackward(){clearTimeout(reviewPauseTimer);clearTimeout(reviewMotionTimer);const {step,edge}=reviewMetrics();reviewTracks.forEach(t=>{if(t.lastElementChild)t.insertBefore(t.lastElementChild,t.firstElementChild);setReviewTrack(t,edge-step,false)});requestAnimationFrame(()=>requestAnimationFrame(()=>{reviewTracks.forEach(t=>setReviewTrack(t,edge,true));reviewMotionTimer=setTimeout(scheduleReviews,reviewDuration+40)}))}
+function paintReviewTracks(animated,drag=0){const {step,edge}=reviewMetrics();reviewTracks.forEach(t=>{t.style.transition=animated?`transform ${reviewDuration}ms cubic-bezier(.22,.66,.24,1)`:'none';t.style.transform=`translate3d(${edge-reviewIndex*step+drag}px,0,0)`})}
+function scheduleReviews(){clearTimeout(reviewPauseTimer);reviewPauseTimer=setTimeout(()=>moveReviews(reviewIndex+1),4000)}
+function normalizeReviewIndex(){if(reviewIndex===0){reviewIndex=reviewGroupCount;paintReviewTracks(false)}else if(reviewIndex===reviewGroupCount+1){reviewIndex=1;paintReviewTracks(false)}}
+function moveReviews(next){clearTimeout(reviewPauseTimer);clearTimeout(reviewMotionTimer);reviewIndex=Math.max(0,Math.min(reviewGroupCount+1,next));paintReviewTracks(true);reviewMotionTimer=setTimeout(()=>{normalizeReviewIndex();scheduleReviews()},reviewDuration+40)}
 requestAnimationFrame(()=>{paintReviewTracks(false);scheduleReviews()});
 window.addEventListener('resize',()=>paintReviewTracks(false),{passive:true});
 reviewStage.addEventListener('pointerdown',e=>{clearTimeout(reviewPauseTimer);clearTimeout(reviewMotionTimer);reviewDragging=true;reviewMoved=false;reviewDx=0;reviewStartX=e.clientX;reviewStartY=e.clientY;reviewStage.classList.add('dragging');paintReviewTracks(false);try{reviewStage.setPointerCapture(e.pointerId)}catch(_){}});
 reviewStage.addEventListener('pointermove',e=>{if(!reviewDragging)return;const dx=e.clientX-reviewStartX,dy=e.clientY-reviewStartY;if(!reviewMoved&&Math.abs(dx)<6)return;if(!reviewMoved&&Math.abs(dy)>Math.abs(dx))return;reviewMoved=true;reviewDx=dx;paintReviewTracks(false,reviewDx)});
-function finishReviewDrag(e){if(!reviewDragging)return;reviewDragging=false;reviewStage.classList.remove('dragging');try{reviewStage.releasePointerCapture(e.pointerId)}catch(_){}const {step}=reviewMetrics();const shouldMove=reviewMoved&&Math.abs(reviewDx)>Math.min(70,step*.16);reviewSuppressClick=reviewMoved;if(shouldMove){const dir=reviewDx<0?1:-1;reviewDx=0;if(dir>0)rotateReviewsForward();else rotateReviewsBackward()}else{reviewDx=0;paintReviewTracks(true);scheduleReviews()}}
-reviewStage.addEventListener('pointerup',finishReviewDrag);
-reviewStage.addEventListener('pointercancel',finishReviewDrag);
-reviewStage.addEventListener('click',e=>{if(reviewSuppressClick){e.preventDefault();e.stopPropagation();reviewSuppressClick=false}},true);
+function finishReviewDrag(e){if(!reviewDragging)return;reviewDragging=false;reviewStage.classList.remove('dragging');try{reviewStage.releasePointerCapture(e.pointerId)}catch(_){}const {step}=reviewMetrics();if(reviewMoved&&Math.abs(reviewDx)>Math.min(70,step*.16))reviewIndex+=reviewDx<0?1:-1;reviewIndex=Math.max(0,Math.min(reviewGroupCount+1,reviewIndex));reviewSuppressClick=reviewMoved;reviewDx=0;paintReviewTracks(true);clearTimeout(reviewMotionTimer);reviewMotionTimer=setTimeout(()=>{normalizeReviewIndex();scheduleReviews()},reviewDuration+40)}
+reviewStage.addEventListener('pointerup',finishReviewDrag);reviewStage.addEventListener('pointercancel',finishReviewDrag);reviewStage.addEventListener('click',e=>{if(reviewSuppressClick){e.preventDefault();e.stopPropagation();reviewSuppressClick=false}},true);
 
 // VISIT
 const visit=$('#tn13Visit');const pin=`<svg viewBox="0 0 24 24"><path d="M12 21s6-5.3 6-11a6 6 0 1 0-12 0c0 5.7 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>`,ph=`<svg viewBox="0 0 24 24"><path d="M7.3 3.5 10 7.3 8.2 9.1c1.5 3 3.8 5.3 6.8 6.8l1.8-1.8 3.8 2.7c.2.2.3.5.2.8-.5 1.8-2 3-3.9 3C10 20.6 3.4 14 3.4 7.1c0-1.9 1.2-3.4 3-3.9.3-.1.7 0 .9.3Z"/></svg>`,clock=`<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.2 1.8"/></svg>`;
