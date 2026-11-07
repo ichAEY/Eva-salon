@@ -1,395 +1,127 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" class="br-booting">
 <head>
-<script>try{if(matchMedia('(max-width:767px)').matches)document.documentElement.classList.add('eva-boot')}catch(e){}</script><style>@media(max-width:767px){html.eva-boot body{margin:0;background:#f8f4ee;overflow:hidden}html.eva-boot body>*{visibility:hidden!important}html.eva-boot body:before{content:'EVA';visibility:visible!important;position:fixed;z-index:2147483647;inset:0;display:grid;place-items:center;background:#f8f4ee;color:#171513;font:500 64px/1 Georgia,serif;letter-spacing:.08em}html.eva-boot body:after{content:'САЛОН КРАСОТЫ';visibility:visible!important;position:fixed;z-index:2147483647;left:0;right:0;top:calc(50% + 52px);text-align:center;color:#75665e;font:600 9px/1 Arial,sans-serif;letter-spacing:.24em}}</style>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#ffffff" />
-  <meta name="description" content="EVA — салон красоты в Павлино, Балашиха. Услуги, портфолио, направления и запись." />
-  <title>EVA — салон красоты в Павлино, Балашиха</title>
-  <style>
-    :root{
-      --bg:#fff;
-      --surface:#fff;
-      --soft:#faf9fc;
-      --soft-2:#f5f2f8;
-      --text:#171719;
-      --muted:#6f6b74;
-      --line:#ece8ef;
-      --violet:#c97f96;
-      --violet-2:#b86682;
-      --violet-soft:#f8eaf0;
-      --shadow:0 12px 40px rgba(40,24,48,.08), 0 2px 10px rgba(40,24,48,.04);
-      --radius:22px;
-      --radius-sm:15px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--bg)}
-    body{margin:0;color:var(--text);background:
-      radial-gradient(900px 260px at 50% -120px, rgba(201,127,150,.10), transparent 68%),
-      #fff;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-    button,a{font:inherit}
-    button{cursor:pointer}
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%}
-    .shell{width:min(100%,780px);margin:0 auto;padding:0 16px}
-
-    .topbar{height:58px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:5}
-    .brand-mini{display:flex;align-items:center;gap:9px;font-weight:760;letter-spacing:-.02em}
-    .brand-dot{width:27px;height:27px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#f5eff8);box-shadow:inset 0 0 0 1px #e9e0ed;color:var(--violet);font-size:13px;font-weight:850}
-    .top-actions{display:flex;gap:8px}
-    .icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);display:grid;place-items:center;color:#2b2930;box-shadow:0 5px 18px rgba(36,22,43,.05)}
-
-    .hero-gallery{position:relative;overflow:hidden;border-radius:26px;background:#eee;box-shadow:var(--shadow)}
-    .hero-track{display:flex;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-    .hero-slide{min-width:100%;aspect-ratio:1.18/1;position:relative;background:#eee;border:0;padding:0}
-    .hero-slide img{width:100%;height:100%;object-fit:cover}
-    .hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.01),rgba(0,0,0,.12));pointer-events:none}
-    .counter{position:absolute;right:12px;bottom:12px;height:31px;padding:0 11px;border-radius:999px;background:rgba(19,17,20,.68);backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;font-size:12px;font-weight:720;z-index:2}
-    .gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border:0;border-radius:50%;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);box-shadow:0 4px 18px rgba(0,0,0,.13);display:grid;place-items:center;z-index:2;color:#222}
-    .gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
-    .gallery-hint{position:absolute;left:12px;bottom:12px;color:#fff;background:rgba(19,17,20,.38);backdrop-filter:blur(8px);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:650;z-index:2}
-
-    .venue{padding:19px 2px 8px}
-    .venue h1{font-size:31px;line-height:1.05;letter-spacing:-.045em;margin:0 0 8px;font-weight:800}
-    .venue-kicker{font-size:15px;color:#4e4a52;margin:0 0 12px;font-weight:560}
-    .meta-row{display:flex;flex-wrap:wrap;gap:7px 13px;align-items:center;font-size:13px;color:var(--muted)}
-    .rating{font-weight:750;color:#27242a}
-    .violet-star{color:var(--violet)}
-    .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
-    .btn{min-height:46px;border-radius:14px;border:1px solid var(--line);padding:0 16px;font-weight:720;background:#fff;color:#242127}
-    .btn.primary{background:linear-gradient(180deg,var(--violet-2),var(--violet));border-color:transparent;color:white;box-shadow:0 8px 24px rgba(184,102,130,.22)}
-
-    .nav-wrap{position:sticky;top:8px;z-index:20;margin:12px 0 18px}
-    .nav-island{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;padding:6px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px) saturate(150%);border:1px solid rgba(228,222,232,.9);border-radius:18px;box-shadow:0 10px 32px rgba(36,22,43,.08)}
-    .nav-island::-webkit-scrollbar{display:none}
-    .nav-chip{border:0;background:transparent;white-space:nowrap;border-radius:12px;padding:9px 12px;color:#5e5963;font-size:12px;font-weight:720}
-    .nav-chip.active{background:var(--soft-2);color:#252228}
-
-    section{scroll-margin-top:82px;padding:20px 0 9px}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:14px}
-    .section-head h2{font-size:24px;line-height:1.1;letter-spacing:-.035em;margin:0;font-weight:790}
-    .section-head p{margin:4px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
-    .section-link{border:0;background:transparent;color:var(--violet);font-size:12px;font-weight:760;padding:5px 0;white-space:nowrap}
-
-    .filters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 13px;padding:0 16px}
-    .filters::-webkit-scrollbar{display:none}
-    .filter{border:1px solid var(--line);background:#fff;padding:9px 12px;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:690;color:#5e5962}
-    .filter.active{background:#262328;border-color:#262328;color:#fff}
-    .portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .work-card{border:0;padding:0;background:#f0eef2;border-radius:17px;overflow:hidden;position:relative;aspect-ratio:1/1.18}
-    .work-card:nth-child(3n){aspect-ratio:1/1}
-    .work-card img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease}
-    .work-card:active img{transform:scale(.985)}
-    .work-tag{position:absolute;left:8px;bottom:8px;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:750;color:#332f36}
-    .work-card[hidden]{display:none}
-
-    .service-groups{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 12px;padding:0 16px}
-    .service-groups::-webkit-scrollbar{display:none}
-    .service-group{border:1px solid var(--line);background:white;padding:10px 12px;border-radius:13px;white-space:nowrap;font-size:12px;font-weight:700;color:#5d5961}
-    .service-group.active{border-color:#d9cec7;background:var(--violet-soft);color:#594d46}
-    .services{border-top:1px solid var(--line)}
-    .service{display:grid;grid-template-columns:1fr auto;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);align-items:center}
-    .service-name{font-size:14px;font-weight:690;line-height:1.35;margin-bottom:5px}
-    .service-note{font-size:11px;color:var(--muted);line-height:1.35}
-    .service-side{text-align:right;min-width:88px}
-    .price{font-size:13px;font-weight:780;margin-bottom:6px}
-    .pick{border:0;background:transparent;color:var(--violet);font-size:11px;font-weight:800;padding:0}
-    .service.extra{display:none}
-    .services.expanded .service.extra{display:grid}
-    .show-more{width:100%;margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:14px;min-height:45px;font-weight:730;color:#343038}
-
-    .specialists{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px 6px}
-    .specialists::-webkit-scrollbar{display:none}
-    .specialist{min-width:148px;border:1px solid var(--line);background:linear-gradient(180deg,#fff,#fcfbfd);border-radius:18px;padding:13px;text-align:left;box-shadow:0 6px 22px rgba(36,22,43,.035)}
-    .avatar-placeholder{width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#f0edf2,#e3dfe6);display:grid;place-items:center;margin-bottom:12px;color:#9a949e}
-    .avatar-placeholder svg{width:30px;height:30px}
-    .specialist strong{display:block;font-size:13px;margin-bottom:5px;line-height:1.2}
-    .specialist span{display:block;font-size:10.5px;color:var(--muted);line-height:1.35}
-
-    .reviews-summary{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:18px;padding:14px 15px;background:linear-gradient(145deg,#fff,#fcfbfd);margin-bottom:10px}
-    .score{font-size:31px;letter-spacing:-.05em;font-weight:820}
-    .score-label{font-size:11px;color:var(--muted);margin-top:3px}
-    .review-card{border:1px solid var(--line);border-radius:17px;padding:14px;margin-top:8px;background:#fff}
-    .review-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:9px}
-    .review-name{font-size:12px;font-weight:760}.review-stars{font-size:11px;color:var(--violet)}
-    .review-text{font-size:12px;line-height:1.48;color:#444047;margin:0;overflow-wrap:anywhere}
-    .reviews-grid-5x3{display:grid;gap:10px;margin-top:10px}
-    .reviews-row-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch}
-    .reviews-row-3 .review-card{margin-top:0;height:100%;min-width:0;overflow:hidden}
-    .reviews-row-3 .review-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden;text-overflow:ellipsis}
-    .review-stars-svg{display:flex;flex:0 0 auto;gap:2px;color:var(--violet)}
-    .review-stars-svg svg{width:11px;height:11px;display:block;fill:currentColor}
-
-    .about-card{border-radius:22px;background:linear-gradient(145deg,#fbf9f6,#f3eee9);border:1px solid #e9e1da;padding:18px;overflow:hidden;position:relative}
-    .about-card:after{content:"";width:170px;height:170px;border-radius:50%;background:rgba(201,127,150,.08);filter:blur(8px);position:absolute;right:-80px;top:-90px}
-    .about-card h3{font-size:18px;margin:0 0 9px;letter-spacing:-.025em;position:relative;z-index:1}
-    .about-card p{font-size:13px;line-height:1.55;color:#514c55;margin:0;position:relative;z-index:1}
-
-    .visit-card{border:1px solid var(--line);border-radius:20px;padding:16px;background:white}
-    .visit-row{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);align-items:flex-start}
-    .visit-row:last-child{border-bottom:0}
-    .visit-icon{width:34px;height:34px;flex:0 0 auto;border-radius:11px;background:var(--soft-2);display:grid;place-items:center;color:var(--violet)}
-    .visit-row strong{font-size:12px;display:block;margin-bottom:3px}.visit-row span{font-size:12px;color:var(--muted);line-height:1.4}
-    .visit-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
-
-    footer{padding:28px 0 118px;color:#77717b;font-size:11px;text-align:center}
-    footer strong{color:#27242a;display:block;font-size:14px;margin-bottom:5px}
-
-    .booking-island{position:fixed;left:50%;bottom:max(12px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(calc(100% - 24px),560px);z-index:40;padding:7px 7px 7px 14px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px) saturate(150%);border:1px solid rgba(225,218,229,.95);border-radius:20px;box-shadow:0 15px 45px rgba(31,20,38,.16);display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .availability{min-width:0}.availability strong{display:block;font-size:12px;white-space:nowrap}.availability span{display:block;font-size:10px;color:var(--muted);margin-top:2px;white-space:nowrap}
-    .book-btn{border:0;border-radius:14px;background:linear-gradient(180deg,var(--violet-2),var(--violet));color:#fff;min-height:44px;padding:0 18px;font-weight:790;box-shadow:0 7px 20px rgba(117,102,94,.22)}
-
-    .modal{position:fixed;inset:0;background:rgba(20,18,22,.48);backdrop-filter:blur(5px);z-index:80;display:none;align-items:flex-end;justify-content:center;padding:12px}
-    .modal.open{display:flex}
-    .sheet{width:min(100%,560px);max-height:86vh;overflow:auto;background:#fff;border-radius:25px;padding:18px;box-shadow:0 25px 80px rgba(0,0,0,.28);animation:sheetIn .25s ease}
-    @keyframes sheetIn{from{transform:translateY(18px);opacity:.5}to{transform:none;opacity:1}}
-    .sheet-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:15px}.sheet h3{margin:0;font-size:22px;letter-spacing:-.035em}.sheet .muted{color:var(--muted);font-size:12px;line-height:1.45;margin:6px 0 0}.close{width:36px;height:36px;flex:0 0 auto;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:19px}
-    .sheet-actions{display:grid;gap:8px;margin-top:15px}.sheet-actions .btn{width:100%}
-    .role-services{margin-top:12px;border-top:1px solid var(--line)}.role-service{padding:12px 0;border-bottom:1px solid var(--line);font-size:13px;font-weight:650}
-
-    .lightbox{position:fixed;inset:0;background:#111;z-index:100;display:none;align-items:center;justify-content:center}.lightbox.open{display:flex}.lightbox img{max-width:100vw;max-height:100vh;object-fit:contain}.lightbox-close{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.16);color:#fff;font-size:24px;backdrop-filter:blur(10px)}
-
-    @media (min-width:760px){
-      .shell{padding:0 24px}.hero-slide{aspect-ratio:1.7/1}.venue h1{font-size:38px}.portfolio-grid{grid-template-columns:repeat(3,1fr)}.booking-island{bottom:18px}
-    }
-  </style>
-  <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113119345', 'ym');
-
-    ym(113119345, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FAF9F6">
+<title>Ева — салон красоты в Павлино</title>
+<meta name="description" content="Салон красоты «Ева» в д. Павлино, 69. Маникюр, педикюр, парикмахерские услуги и косметология. Запись по телефону и в мессенджере.">
+<link rel="icon" type="image/png" href="favicon-source.png">
+<link rel="shortcut icon" href="favicon-source.png">
+<link rel="apple-touch-icon" href="favicon-source.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="logo-placeholder.svg" as="image" type="image/svg+xml" fetchpriority="high">
+<link rel="preload" href="media-placeholder.svg" as="image" type="image/svg+xml" fetchpriority="high">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#FAF9F6;color:#252525;font-family:Manrope,Arial,sans-serif}
+#brBootIntro{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;background:#FAF9F6;opacity:1;transition:opacity .24s ease;pointer-events:auto}
+#brBootIntro img{display:block;width:min(50vw,220px);height:auto;max-height:38svh;object-fit:contain}
+html[data-br-device="desktop"] #brBootIntro{transition:opacity .40s cubic-bezier(.22,1,.36,1)}
+html[data-br-device="desktop"] #brBootIntro img{width:min(75vw,330px);max-height:48svh}
+#brBootIntro.has-client-logo img{width:min(70vw,308px);max-height:53.2svh}
+html[data-br-device="desktop"] #brBootIntro.has-client-logo img{width:min(90vw,462px);max-height:67.2svh}
+#brBootIntro .br-intro-name{display:block;max-width:calc(100vw - 48px);margin:0;text-align:center;text-transform:uppercase;overflow-wrap:anywhere}
+#brBootIntro .br-intro-name.is-mobile{font:500 clamp(50.96px,12.74vw,116.48px)/.92 "Cormorant Garamond",Georgia,serif;letter-spacing:.16em;padding:24px 24px 24px calc(24px + .16em)}
+#brBootIntro .br-intro-name.is-desktop{font:500 clamp(50.96px,12.74vw,116.48px)/.84 "Cormorant Garamond",Georgia,serif;letter-spacing:.105em;padding:24px 24px 24px calc(24px + .105em)}
+#brBootIntro.is-exiting{opacity:0;pointer-events:none}
+html.br-booting #salon-mobile,html.br-booting #salon-desktop-v1{visibility:hidden!important}
+#brLoadError{display:none;min-height:100svh;padding:32px;place-items:center;text-align:center}
+#brLoadError.is-visible{display:grid}
+#brLoadError a{display:inline-block;margin-top:22px;color:#181818}
+@media(prefers-reduced-motion:reduce){#brBootIntro{transition:none!important}}
+</style>
+<link rel="stylesheet" href="desktop.css?v=salon-20261003-v2" media="(hover:hover) and (pointer:fine), (min-width:1024px)">
+<link rel="stylesheet" href="salon-palette.css?v=eva-profile-close-20261108" media="(hover:hover) and (pointer:fine), (min-width:1024px)">
+<script src="site-data.js?v=eva-profile-20261107-v2"></script>
+<script src="site-services.js?v=eva-options-animation-final-20261107-v1"></script>
+<script src="site-regions.js?v=salon-final-20260928-v2"></script>
+<script>
+(()=>{
+ const desktop=!!(window.matchMedia&&(matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(min-width:1024px)').matches));
+ window.__BR_DESKTOP_DEVICE__=desktop;
+ document.documentElement.dataset.brDevice=desktop?'desktop':'mobile';
+ if(!desktop){
+  const css=document.createElement('link');
+  css.rel='stylesheet';
+  css.href='mobile.css?v=safe-clean-20260929-v1';
+  document.head.appendChild(css);
+  const preload=document.createElement('link');
+  preload.rel='preload';
+  preload.as='style';
+  preload.href='mobile-overrides.css?v=salon-20261003-v5';
+  const palettePreload=document.createElement('link');
+  palettePreload.rel='preload';
+  palettePreload.as='style';
+  palettePreload.href='salon-palette.css?v=eva-profile-close-20261108';
+  document.head.appendChild(palettePreload);
+  document.head.appendChild(preload);
+ }
+})()
 </script>
-<!-- /Yandex.Metrika counter -->
 </head>
 <body>
-  <noscript><div><img src="https://mc.yandex.ru/watch/113119345" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <main class="shell">
-    <header class="topbar">
-      <a class="brand-mini" href="#top" aria-label="EVA"><span class="brand-dot">E</span> EVA</a>
-      <div class="top-actions">
-        <a class="icon-btn" href="tel:+79260063922" aria-label="Позвонить">☎</a>
-        <button class="icon-btn" type="button" onclick="openBooking()" aria-label="Записаться">↗</button>
-      </div>
-    </header>
-
-    <div id="top" class="hero-gallery" aria-label="Фотографии EVA">
-      <div class="hero-track" id="heroTrack">
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[0])"><img src="salon02.webp" alt="Интерьер EVA" /></button>
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[1])"><img src="salon03.webp" alt="Рабочая зона EVA" /></button>
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[2])"><img src="nails00001.webp" alt="Работа EVA — маникюр" /></button>
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[3])"><img src="nails00002.webp" alt="Работа EVA — дизайн ногтей" /></button>
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[4])"><img src="nails00003.webp" alt="Работа EVA — маникюр" /></button>
-        <button class="hero-slide" type="button" onclick="openLightbox(heroImages[5])"><img src="hair00001.webp" alt="Работа EVA — волосы" /></button>
-      </div>
-      <button class="gallery-arrow prev" type="button" onclick="moveHero(-1)" aria-label="Предыдущее фото">‹</button>
-      <button class="gallery-arrow next" type="button" onclick="moveHero(1)" aria-label="Следующее фото">›</button>
-      <span class="gallery-hint">Нажмите, чтобы увеличить</span>
-      <span class="counter" id="heroCounter">1/6</span>
-    </div>
-
-    <section class="venue" aria-label="Информация о салоне">
-      <h1>EVA</h1>
-      <p class="venue-kicker">Салон красоты · Балашиха · Павлино</p>
-      <div class="meta-row">
-        <span class="rating"><span class="violet-star">★</span> 4,8 · 155 отзывов</span>
-        <span>Балашиха, д. Павлино, 69</span>
-        <span>Ежедневно 10:00–21:00</span>
-      </div>
-      <div class="hero-actions">
-        <button class="btn primary" type="button" onclick="openBooking()">Записаться</button>
-        <a class="btn" href="#portfolio" style="display:grid;place-items:center">Посмотреть работы</a>
-      </div>
-    </section>
-
-    <div class="nav-wrap">
-      <nav class="nav-island" id="sectionNav" aria-label="Разделы сайта">
-        <button class="nav-chip active" data-target="top">Фото</button>
-        <button class="nav-chip" data-target="portfolio">Портфолио</button>
-        <button class="nav-chip" data-target="services">Услуги</button>
-        <button class="nav-chip" data-target="about">О нас</button>
-        <button class="nav-chip" data-target="team">Специалисты</button>
-        <button class="nav-chip" data-target="reviews">Отзывы</button>
-        <button class="nav-chip" data-target="visit">Визит</button>
-      </nav>
-    </div>
-
-    <section id="portfolio">
-      <div class="section-head">
-        <div><h2>Портфолио</h2><p>Реальные работы мастеров EVA</p></div>
-      </div>
-      <div class="filters" id="portfolioFilters">
-        <button class="filter active" data-filter="all">Все работы</button>
-        <button class="filter " data-filter="nails">Ногти</button>
-        <button class="filter " data-filter="hair">Волосы</button>
-        <button class="filter " data-filter="brows">Брови</button>
-        <button class="filter " data-filter="lashes">Ресницы</button>
-        <button class="filter " data-filter="other">Перманент</button>
-      </div>
-      <div class="portfolio-grid" id="portfolioGrid">
-        <button class="work-card" data-category="nails" onclick="openLightbox('nails00001.webp')"><img src="nails00001.webp" alt="Маникюр EVA"><span class="work-tag">Ногти</span></button>
-        <button class="work-card" data-category="nails" onclick="openLightbox('nails00002.webp')"><img src="nails00002.webp" alt="Маникюр EVA"><span class="work-tag">Ногти</span></button>
-        <button class="work-card" data-category="nails" onclick="openLightbox('nails00003.webp')"><img src="nails00003.webp" alt="Маникюр EVA"><span class="work-tag">Ногти</span></button>
-        <button class="work-card" data-category="nails" onclick="openLightbox('nails00004.webp')"><img src="nails00004.webp" alt="Маникюр EVA"><span class="work-tag">Ногти</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00001.webp')"><img src="hair00001.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00002.webp')"><img src="hair00002.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00003.webp')"><img src="hair00003.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00004.webp')"><img src="hair00004.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00005.webp')"><img src="hair00005.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00006.webp')"><img src="hair00006.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="hair" onclick="openLightbox('hair00007.webp')"><img src="hair00007.webp" alt="Работа с волосами EVA"><span class="work-tag">Волосы</span></button>
-        <button class="work-card" data-category="brows" onclick="openLightbox('brows00001.webp')"><img src="brows00001.webp" alt="Брови EVA"><span class="work-tag">Брови</span></button>
-        <button class="work-card" data-category="brows" onclick="openLightbox('brows00002.webp')"><img src="brows00002.webp" alt="Брови EVA"><span class="work-tag">Брови</span></button>
-        <button class="work-card" data-category="brows" onclick="openLightbox('brows00003.webp')"><img src="brows00003.webp" alt="Брови EVA"><span class="work-tag">Брови</span></button>
-        <button class="work-card" data-category="brows" onclick="openLightbox('brows00004.webp')"><img src="brows00004.webp" alt="Брови EVA"><span class="work-tag">Брови</span></button>
-        <button class="work-card" data-category="lashes" onclick="openLightbox('lashes00001.webp')"><img src="lashes00001.webp" alt="Ресницы EVA"><span class="work-tag">Ресницы</span></button>
-        <button class="work-card" data-category="lashes" onclick="openLightbox('lashes00002.webp')"><img src="lashes00002.webp" alt="Ресницы EVA"><span class="work-tag">Ресницы</span></button>
-        <button class="work-card" data-category="lashes" onclick="openLightbox('lashes00003.webp')"><img src="lashes00003.webp" alt="Ресницы EVA"><span class="work-tag">Ресницы</span></button>
-        <button class="work-card" data-category="lashes" onclick="openLightbox('lashes00004.webp')"><img src="lashes00004.webp" alt="Ресницы EVA"><span class="work-tag">Ресницы</span></button>
-        <button class="work-card" data-category="other" onclick="openLightbox('lips01.webp')"><img src="lips01.webp" alt="Перманентный макияж EVA"><span class="work-tag">Перманент</span></button>
-      </div>
-    </section>
-
-    <section id="services">
-      <div class="section-head"><div><h2>Услуги</h2><p>Услуги и цены из карточки EVA в Яндекс Картах</p></div></div>
-      <div class="service-groups" id="serviceGroups">
-        <button class="service-group active" data-service-filter="hair">Волосы</button>
-        <button class="service-group" data-service-filter="browslashes">Брови и ресницы</button>
-        <button class="service-group" data-service-filter="nails">Маникюр</button>
-      </div>
-      <div class="services" id="servicesList">
-        <div class="service" data-service-category="hair"><div><div class="service-name">Стрижка женская (короткие)</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 300 ₽</div><button class="pick" onclick="openBooking('Стрижка женская (короткие)')">Выбрать</button></div></div>
-        <div class="service" data-service-category="hair"><div><div class="service-name">Стрижка женская (средние)</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 500 ₽</div><button class="pick" onclick="openBooking('Стрижка женская (средние)')">Выбрать</button></div></div>
-        <div class="service" data-service-category="hair"><div><div class="service-name">Стрижка женская (длинные)</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 700 ₽</div><button class="pick" onclick="openBooking('Стрижка женская (длинные)')">Выбрать</button></div></div>
-        <div class="service" data-service-category="hair"><div><div class="service-name">Стрижка женская (оч. длинные)</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">2 000 ₽</div><button class="pick" onclick="openBooking('Стрижка женская (оч. длинные)')">Выбрать</button></div></div>
-        <div class="service" data-service-category="hair"><div><div class="service-name">Стрижка детская</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 000 ₽</div><button class="pick" onclick="openBooking('Стрижка детская')">Выбрать</button></div></div>
-        <div class="service" data-service-category="hair"><div><div class="service-name">Укладка</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 000 ₽</div><button class="pick" onclick="openBooking('Укладка')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Уход за волосами</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 000 ₽</div><button class="pick" onclick="openBooking('Уход за волосами')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Окрашивание волос в один тон</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">3 600 ₽</div><button class="pick" onclick="openBooking('Окрашивание волос в один тон')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Окрашивание корней</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">3 500 ₽</div><button class="pick" onclick="openBooking('Окрашивание корней')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Тонирование волос</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">3 600 ₽</div><button class="pick" onclick="openBooking('Тонирование волос')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Сложное окрашивание</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">7 000 ₽</div><button class="pick" onclick="openBooking('Сложное окрашивание')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Мелирование прикорневое</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">3 000 ₽</div><button class="pick" onclick="openBooking('Мелирование прикорневое')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="hair"><div><div class="service-name">Стрижка модельная мужская</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 500 ₽</div><button class="pick" onclick="openBooking('Стрижка модельная мужская')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="browslashes"><div><div class="service-name">Архитектура бровей</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 500 ₽</div><button class="pick" onclick="openBooking('Архитектура бровей')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="browslashes"><div><div class="service-name">Ламинирование бровей/ Ламинирование ресниц</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">2 500 ₽</div><button class="pick" onclick="openBooking('Ламинирование бровей/ Ламинирование ресниц')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="nails"><div><div class="service-name">Маникюр аппаратный/комбинированный/классический</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">1 000 ₽</div><button class="pick" onclick="openBooking('Маникюр аппаратный/комбинированный/классический')">Выбрать</button></div></div>
-        <div class="service extra" data-service-category="nails"><div><div class="service-name">Маникюр с покрытием гель-лак/гель/укрепление</div><div class="service-note">EVA · Яндекс Карты</div></div><div class="service-side"><div class="price">2 000 ₽</div><button class="pick" onclick="openBooking('Маникюр с покрытием гель-лак/гель/укрепление')">Выбрать</button></div></div>
-      </div>
-      <button class="show-more" id="servicesMore" type="button">Посмотреть ещё</button>
-    </section>
-
-    <section id="team">
-      <div class="section-head"><div><h2>Специалисты</h2><p>Направления команды EVA</p></div></div>
-      <div class="specialists">
-        <button class="specialist" onclick="openRole('Мастер по волосам','Стрижка женская|Стрижка модельная мужская|Окрашивание волос в один тон|Укладка')"><span class="avatar-placeholder">E</span><strong>Мастер по волосам</strong><span>Волосы</span></button>
-        <button class="specialist" onclick="openRole('Мастер бровей и ресниц','Архитектура бровей|Ламинирование бровей/ Ламинирование ресниц')"><span class="avatar-placeholder">E</span><strong>Мастер бровей и ресниц</strong><span>Брови · ресницы</span></button>
-        <button class="specialist" onclick="openRole('Мастер маникюра','Маникюр аппаратный/комбинированный/классический|Маникюр с покрытием гель-лак/гель/укрепление')"><span class="avatar-placeholder">E</span><strong>Мастер маникюра</strong><span>Маникюр</span></button>
-      </div>
-    </section>
-
-    <section id="reviews">
-      <div class="section-head"><div><h2>Отзывы</h2><p>Оригинальные отзывы клиентов EVA из Яндекс Карт</p></div><a class="section-link" href="https://yandex.com/maps/org/yeva/1179517154/reviews/" target="_blank" rel="noopener">Все отзывы ↗</a></div>
-      <div class="reviews-summary"><div><div class="score">4,8</div><div class="score-label">310 оценок</div></div><div style="text-align:right"><div style="color:var(--violet);font-size:16px;letter-spacing:2px">★★★★★</div><div class="score-label">155 отзывов на Яндекс Картах</div></div></div>
-      <div class="reviews-grid-5x3">
-        <div class="reviews-row-3"><article class="review-card"><div class="review-top"><span class="review-name">Екатерина Филина</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Больше, я и моя дочь, посещаем салон красоты Ева. Пользуемся услугами косметолога Юлии.Осталась довольна результатом после процедуры.Юлия ответственная, аккуратная. Профессионал своего дела.<br>Хочу выразить благодарность мастеру маникюра Олесе.Мастер с большой буквы.<br>Все маникюрные фантазии воплощает в реальность.<br>Директор волшебная женщина.<br>Салон часто радует клиентскими днями, бонусами и подарками.<br>Администраторы приветливые, всегда предложат чай, кофе.В салоне очень благоприятная атмосфера.<br>Спасибо большое за вашу заботу о нас.<br>Процветания салону.</p></article><article class="review-card"><div class="review-top"><span class="review-name">Татьяна С.</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Всем здравствуйте. Я хожу в салон относительно не давно, но могу сказать однозначно, что менять своего мастера Олесю я ни на кого не собираюсь…<br>Да к сожалению я уехала в другой город, но когда в командировке сразу записываюсь. Руки остаются в ухоженном состоянии очень долго. Мне хватает до следующего раза. Даже не ищу в своем городе мастера…<br>Благодарю! Всегда вежливый персонал. <br>Очень полюбила этот салон. </p></article><article class="review-card"><div class="review-top"><span class="review-name">Олеся Микляева</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Приятно удивлена посещением данного салона! Пришла на маникюр, атмосфера сразу располагает, красиво, чисто, все сотрудники приветливы и вежливы, мне предложили горячий чай и сладости. Мастер Юля произвела очень хорошее впечатление, маникюр супер, осталась очень довольна! <br>Рекомендую ☺️</p></article></div>
-        <div class="reviews-row-3"><article class="review-card"><div class="review-top"><span class="review-name">Алена К.</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Потрясающие мастера, настоящие мастера своего дела! <br>Про этом обслуживание, клиентоориентированность, профессионализм. Ни один раз полностью сменили внешность и каждый раз вау эффект. На видео выход из темного каштана в блонд, но это результат первого окрашивания.<br>Спасибо сотрудникам салона, за теплоту и красоту)</p></article><article class="review-card"><div class="review-top"><span class="review-name">Валентина</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Хочу выразить огромную благодарность Ирине за её профессионализм и внимательное отношение к клиентам. Каждый визит к ней – это не просто процедура, а настоящее удовольствие и уверенность в результате.<br>Так же Ирина– это не просто учитель, а настоящий наставник и источник вдохновения. Её подход к обучению уникален и эффективен, она умеет найти подход к каждому ученику, независимо от уровня подготовки и возраста.<br>На её уроках царит атмосфера творчества и взаимопонимания. Ирина всегда стремится не только передать знания, но и развить в нас любовь к предмету .</p></article><article class="review-card"><div class="review-top"><span class="review-name">Елена Таранова</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Мое восхищение работой, профессионализмом и художественным виденьем в работе мастера  Дарьи. Захотелось перемен,сделала стрижку . Понравилось, что меня услышала мастер и усовершенствовала мои пожелания. В целом салон уютный, персонал вежливый и доброжелательный, а главное- профессионалы своего дела.</p></article></div>
-        <div class="reviews-row-3"><article class="review-card"><div class="review-top"><span class="review-name">Наталия Темникова</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Открыла для себя салон &quot;Ева&quot;  недавно и хочу поделиться  впечатлением. Это действительно то место, где можно получить качественные услуги по уходу.  На рецепшен работают приветливые  компетентные администраторы. Время назначенных  процедур соблюдается чётко по записи. Пользуюсь услугами мастера парикмахера Дарьи. Осталась очень довольна стрижкой и покраской волос. Чувствуется рука профессионала  высокого уровня. Качество используемой  итальянской  косметики великолепное.  Попробовала процедуру чистки лица с биореталем у врача косметолога Ирины и была приятно удивлена отличным результатом. Спектр косметических услуг большой, чем постараюсь воспользоваться в ближайшее время.  Используемые препараты и косметика не вызывают аллергии и оставляют на лице приятное ощущение.   Моя искренняя благодарность коллективу салона за отличную работу и профессионализм !</p></article><article class="review-card"><div class="review-top"><span class="review-name">Надежда К.</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Хочу выразить благодарность мастеру Ирине! Отличный косметолог с мед образованием, не навязывает доп. услуги, препараты оригинальные, профессиональный уход. Ирина подробно объясняет каждый этап и подбирает процедуры, идеально подходящие под мои потребности, Массаж RF, чистка лица с альгинатной маской, процедура по увеличению губ, уколы красоты и тд. отличный результат, кожа становится свежей, сияющей и ухоженной. Желаю дальнейшего процветания салону ЕВА! С уважением, постоянный клиент!</p></article><article class="review-card"><div class="review-top"><span class="review-name">Ирина Т.</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Хочу сказать несколько слов о салоне!<br>Года полтора хожу к мастеру маникюра и педикюра Марине. Она очень любит то, чем занимается. Качество работы на высочайшем уровне. Всегда в хорошем настроении. Приятная в общении. Ничего не навязывает, все очень деликатно. Все мастера регулярно повышают свою квалификацию. <br>Анна- администратор приветливая, коммуникабельная девушка. <br>Директор салона- Марина все сделала для того, чтобы клиентам было комфортно. Каждый клиент окружен вниманием и заботой. <br>Рекомендую всем девушкам. Моя мама ходит на стрижку и окрашивание к Эле.</p></article></div>
-        <div class="reviews-row-3"><article class="review-card"><div class="review-top"><span class="review-name">Антонина Бажина</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text"><br><br>⭐ 5/5 – Мастер Марина Орлова с золотыми руками ! ⭐  <br><br>К Марине хожу уже очень,очень давно, и это не просто маникюр – это  ритуал красоты, комфорта и душевного общения!  <br><br> Марина использует только лучшие материалы, а её работа держится  идеально долго. Никаких сколов, отслоек – только безупречный результат.  <br>Всегда прислушивается к пожеланиям, а её интерессны идеи делают каждый маникюр особенным.  Не могу не сказать о том,сколько раз она спасала мои ногти в экстренных ситуациях! Даже если график плотный, Марина найдёт время помочь – это дорогого стоит.  <br>После сеанса уходишь не только с красивыми ногтями, но и с  отличным настроением.    <br><br>Спасибо за ваш труд и теплоту! 🤍</p></article><article class="review-card"><div class="review-top"><span class="review-name">Маша Радуга</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Очень нравится салон, приятная атмосфера. Хожу в салон Ева больше 3х лет на маникюр к мастеру Олесе. Любовь с первого взгляда)Супер мастер!<br>Также хожу к мастеру Дарье на окрашивание волос, около 2х лет, всегда отличный цвет блонд. Рекомендую!</p></article><article class="review-card"><div class="review-top"><span class="review-name">Алиева Оля</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Это самый лучший Салон, который я знаю!!! Попала сюда случайно, 4 года назад и воюбилась. Полозуюсь всеми услугами, которые тут могут предложить ( манекюр, педикюр, парикмахер, косметологии, массаж, солярий) Тут работают действительно проффесионалы своего дела. Мастер манекюра Олеся действительно ногтевая фея, педикюр от Марины выше всех похвал. Парикмахер Даша и Эля волшебницы, косметолог Ирина специалист с Большой буквы.<br>Желаю любимому Салону, и особенно владельце Марине, дальнейшего процветания и развития, благодарных гостей и удачи!!<br></p></article></div>
-        <div class="reviews-row-3"><article class="review-card"><div class="review-top"><span class="review-name">Инна Шульга</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Салон замечательный. С удовольствием хожу к парикмахеру - стилисту Дарье. Если хотите выглядеть замечательно  то вам обязательно надо попасть к ней. Коррекция и окрашивание бровей у Юлии превосходное! Желаю салону процветания! </p></article><article class="review-card"><div class="review-top"><span class="review-name">Нюта Уралова</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Хочу сказать большое спасибо нашим незаменимым мастерам Дарье и Эле , которые делают нас красивыми каждый раз. Так же они очень позитивные и общительные , могут даже пообщаться с ребёнком в момент стрижки , ребенку с ними очень комфортно и радостно 😊<br>Мы долго не могли найти подходящего нам мастера для детской стрижке, но именно в Eva нас услышали и приняли наши запросы. <br>Сын бежит с удовольствием на стрижку ,и это радует.<br>Персонал замечательный , чуткий и отзывчивый 👍 спасибо Вам большое , вы лучшие ! 🌹🙌❤️</p></article><article class="review-card"><div class="review-top"><span class="review-name">Надежда Аксенова</span><span class="review-stars-svg" aria-label="5 из 5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.7l2.45 4.96 5.47.8-3.96 3.85.94 5.45L10 14.2l-4.9 2.57.94-5.45L1.08 7.46l5.47-.8L10 1.7Z"/></svg></span></div><p class="review-text">Салон просто ОГОНЬ 🔥!!!<br>Посещаю его более пяти лет,никаких проблем никогда не возникало !!!<br>Замечательный коллектив,все девочки профессионалы в своей работе!!!<br>Рекомендую салон всем моим знакомым и тем ,кто сейчас читает мой отзыв!<br>Словами не передать какой он замечательный,но стоит раз его посетить и вы останитесь очень довольны и постоянным клиентом!<br></p></article></div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="section-head"><div><h2>О салоне</h2><p>EVA · Павлино</p></div></div>
-      <div class="about-card"><h3>Салон красоты EVA</h3><p>EVA — салон красоты в Павлино. Здесь работают с волосами и ногтями, предлагают косметологические процедуры, оформление бровей и ресниц, эпиляцию и перманентный макияж. Салон работает ежедневно с 10:00 до 21:00.</p></div>
-    </section>
-
-    <section id="visit">
-      <div class="section-head"><div><h2>Визит</h2><p>Московская область, г.о. Балашиха, д. Павлино, 69</p></div><a class="section-link" href="https://yandex.ru/maps/org/yeva/1179517154/" target="_blank" rel="noopener">Яндекс Карты ↗</a></div>
-      <div class="visit-card">
-        <div class="visit-row"><span class="visit-icon">⌖</span><div><strong>Балашиха, д. Павлино, 69</strong><span>Московская область · городской округ Балашиха</span></div></div>
-        <div class="visit-row"><span class="visit-icon">◷</span><div><strong>Ежедневно 10:00–21:00</strong><span>Актуальные часы — в карточке Яндекс Карт</span></div></div>
-        <div class="visit-row"><span class="visit-icon">☎</span><div><strong>+7 (926) 006-39-22</strong><span>Запись и уточнение стоимости услуг</span></div></div>
-        <div class="visit-actions"><a class="btn" href="tel:+79260063922" style="display:grid;place-items:center">Позвонить</a><a class="btn primary" href="https://yandex.ru/maps/?rtext=~55.729412%2C37.961358&rtt=auto" target="_blank" rel="noopener" style="display:grid;place-items:center">Маршрут</a></div>
-      </div>
-    </section>
-
-    <footer><strong>EVA</strong>Павлино · Балашиха, д. Павлино, 69<br><span style="display:inline-block;margin-top:9px">Цифровой офис на TANEM</span></footer>
-  </main>
-
-  <div class="booking-island" aria-label="Быстрая запись">
-    <div class="availability"><strong>Доступно 17 услуг</strong><span>Волосы · брови и ресницы · маникюр</span></div>
-    <button class="book-btn" type="button" onclick="openBooking()">Забронировать</button>
-  </div>
-
-  <div class="modal" id="bookingModal" onclick="closeOnBackdrop(event,'bookingModal')">
-    <div class="sheet"><div class="sheet-head"><div><h3>Запись в EVA</h3><p class="muted" id="bookingText">Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.</p></div><button class="close" onclick="closeModal('bookingModal')">×</button></div><div class="sheet-actions"><a class="btn primary" href="tel:+79260063922" style="display:grid;place-items:center">Позвонить +7 (926) 006-39-22</a><a class="btn" href="#services" onclick="closeModal('bookingModal')" style="display:grid;place-items:center">Вернуться к услугам</a></div></div>
-  </div>
-
-  <div class="modal" id="roleModal" onclick="closeOnBackdrop(event,'roleModal')">
-    <div class="sheet"><div class="sheet-head"><div><h3 id="roleTitle">Специалист</h3><p class="muted">Персональная информация специалиста будет дополнена после подтверждения салоном.</p></div><button class="close" onclick="closeModal('roleModal')">×</button></div><div class="avatar-placeholder" style="width:78px;height:78px"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M5 21c.4-4.2 2.8-6.5 7-6.5s6.6 2.3 7 6.5" fill="currentColor"/></svg></div><div class="role-services" id="roleServices"></div><div class="sheet-actions"><button class="btn primary" onclick="closeModal('roleModal');openBooking()">Записаться</button></div></div>
-  </div>
-
-  <div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()"><button class="lightbox-close" onclick="closeLightbox()">×</button><img id="lightboxImage" src="" alt="Увеличенная фотография EVA"></div>
-
-  <script>
-    const heroImages=[
-      'salon02.webp',
-      'salon03.webp',
-      'nails00001.webp',
-      'nails00002.webp',
-      'nails00003.webp',
-      'hair00001.webp'
-    ];
-    let heroIndex=0,touchStartX=0;
-    const track=document.getElementById('heroTrack');
-    const counter=document.getElementById('heroCounter');
-    function renderHero(){track.style.transform=`translateX(-${heroIndex*100}%)`;counter.textContent=`${heroIndex+1}/${heroImages.length}`}
-    function moveHero(step){heroIndex=(heroIndex+step+heroImages.length)%heroImages.length;renderHero()}
-    document.querySelector('.hero-gallery').addEventListener('touchstart',e=>touchStartX=e.changedTouches[0].clientX,{passive:true});
-    document.querySelector('.hero-gallery').addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-touchStartX;if(Math.abs(d)>45)moveHero(d<0?1:-1)},{passive:true});
-
-    function openLightbox(src){document.getElementById('lightboxImage').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden'}
-    function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow=''}
-
-    document.querySelectorAll('#portfolioFilters .filter').forEach(btn=>btn.addEventListener('click',()=>{
-      document.querySelectorAll('#portfolioFilters .filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
-      const f=btn.dataset.filter;document.querySelectorAll('.work-card').forEach(card=>card.hidden=f!=='all'&&card.dataset.category!==f);
-    }));
-
-    let servicesExpanded=false;
-    const servicesList=document.getElementById('servicesList'),more=document.getElementById('servicesMore');
-    more.addEventListener('click',()=>{servicesExpanded=!servicesExpanded;servicesList.classList.toggle('expanded',servicesExpanded);more.textContent=servicesExpanded?'Свернуть':'Посмотреть ещё'});
-    document.querySelectorAll('.service-group').forEach(btn=>btn.addEventListener('click',()=>{
-      document.querySelectorAll('.service-group').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
-      const f=btn.dataset.serviceFilter;
-      servicesList.classList.add('expanded');servicesExpanded=true;more.textContent='Свернуть';
-      document.querySelectorAll('.service').forEach(item=>{item.style.display=(f==='all'||item.dataset.serviceCategory===f)?'grid':'none'});
-    }));
-
-    document.querySelectorAll('.nav-chip').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth',block:'start'})}));
-    const watched=['top','portfolio','services','about','team','reviews','visit'];
-    const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){document.querySelectorAll('.nav-chip').forEach(x=>x.classList.toggle('active',x.dataset.target===entry.target.id))}})},{rootMargin:'-25% 0px -65% 0px'});
-    watched.forEach(id=>{const el=document.getElementById(id);if(el)observer.observe(el)});
-
-    function openBooking(service=''){const modal=document.getElementById('bookingModal');document.getElementById('bookingText').textContent=service?`Вы выбрали: ${service}. Онлайн-ссылка салона не указана, поэтому сейчас запись ведём через прямой контакт.`:'Для записи можно позвонить или открыть карточку EVA в Яндекс Картах.';modal.classList.add('open');document.body.style.overflow='hidden'}
-    function openRole(title,services){document.getElementById('roleTitle').textContent=title;document.getElementById('roleServices').innerHTML=services.split('|').map(s=>`<div class="role-service">${s}</div>`).join('');document.getElementById('roleModal').classList.add('open');document.body.style.overflow='hidden'}
-    function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
-    function closeOnBackdrop(e,id){if(e.target.id===id)closeModal(id)}
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();document.querySelectorAll('.modal.open').forEach(x=>x.classList.remove('open'));document.body.style.overflow=''}});
-  </script>
-<script defer src="mobile-eva-current.js?v=20260902-services-exact17"></script>
-<script defer src="mobile-eva-theme-current.js?v=20260902-pavlino-correct"></script>
-<script defer src="mobile-eva-motion.js?v=20260903-motion-v1"></script>
-
-
-
-<script>window.addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.remove('eva-boot'),80));</script>
+<div id="brBootIntro" role="status" aria-label="SALON NAME"><img src="logo-placeholder.svg" alt="Логотип салона" width="220" height="220" decoding="sync" fetchpriority="high"></div>
+<main id="brLoadError" role="alert"><div><strong>SALON NAME</strong><p>Не удалось загрузить страницу. Проверьте подключение к интернету.</p><a href="" onclick="location.reload();return false">Повторить</a></div></main>
+<script>window.SALON_REVIEWS=[];</script>
+<script>
+(()=>{
+ const started=performance.now(),desktop=window.__BR_DESKTOP_DEVICE__===true;
+ const id=desktop?'salon-desktop-v1':'salon-mobile';
+ const intro=document.getElementById('brBootIntro'),error=document.getElementById('brLoadError');
+ const site=window.TANEM_SITE_DATA;
+ if(site?.mode==='production'){
+   const name=(site.salon?.name?.ru||site.salon?.name?.en||site.salon?.name||'TANEM');
+   const logo=intro.querySelector('img');
+   if(site.media?.logo){intro.classList.add('has-client-logo');logo.src=site.media.logo;logo.alt=name;}
+   else if(logo){const text=document.createElement('strong');text.className='br-intro-name '+(desktop?'is-desktop':'is-mobile');text.textContent=name;logo.replaceWith(text);}
+ }
+ let closed=false,shown=false,readyTimer=0;
+ function showApp(){
+   const root=document.getElementById(id);
+   if(!root){error.classList.add('is-visible');return false}
+   if(!shown){
+     shown=true;error.classList.remove('is-visible');
+     if(desktop)root.classList.add('desktop-ready');
+     document.documentElement.classList.remove('br-booting');
+     window.dispatchEvent(new Event('br:intro-done'));
+   }
+   return true;
+ }
+ function finish(){
+   if(closed)return;
+   closed=true;clearTimeout(readyTimer);showApp();
+   intro.classList.add('is-exiting');
+   window.setTimeout(()=>intro.remove(),desktop?420:250);
+ }
+ // The entire splash including its fade is limited to 2 seconds.
+ window.setTimeout(finish,desktop?1560:1730);
+ function loaded(){
+   if(closed){showApp();return}
+   const root=document.getElementById(id);
+   if(!root)return;
+   const img=root.querySelector(desktop?'#stdHeroMedia':'.br-video-media img');
+   const ready=()=>{const ms=Math.max(0,850-(performance.now()-started));readyTimer=window.setTimeout(finish,ms)};
+   if(img&&img.tagName==='IMG'&&!img.complete){
+     img.addEventListener('load',ready,{once:true});
+     img.addEventListener('error',ready,{once:true});
+   }else ready();
+ }
+ const script=document.createElement('script');
+ script.src=desktop?'desktop.js?v=eva-hero-team-final-20261107-v1':'mobile.js?v=eva-profile-close-20261108';
+ script.async=false;script.onload=()=>{
+   const runtime=document.createElement('script');
+   runtime.src='site-runtime.js?v=eva-profile-close-20261108';
+   runtime.async=false;runtime.onload=loaded;
+   runtime.onerror=()=>{if(closed)error.classList.add('is-visible')};
+   document.body.appendChild(runtime);
+ };
+ script.onerror=()=>{if(closed)error.classList.add('is-visible')};
+ document.body.appendChild(script);
+})();
+</script>
+<noscript><p style="padding:32px;text-align:center">Для работы сайта требуется JavaScript.</p></noscript>
 </body>
 </html>
